@@ -1,0 +1,13 @@
+\babel@toc {russian}{}
+\contentsline {chapter}{\numberline {1}Общее описание}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Реализация в УНФ}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Внешняя программма}{3}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Настройки}{4}{chapter.4}%
+\contentsline {section}{\numberline {1}Настройки УНФ}{4}{section.4.1}%
+\contentsline {section}{\numberline {2}Настройки Artix}{4}{section.4.2}%
+\contentsline {subsection}{\numberline {2.1}Работа с сертификатами}{4}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Включение контроля остатков на кассе:}{4}{subsubsection.4.2.1.1}%
+\contentsline {section}{\numberline {3}Порядок внедрения касс в работу с Артикс:}{4}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Marijn’s Answer}{6}{chapter.5}%
+\contentsline {section}{\numberline {1}Pre{}april 2021}{6}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Индексы и таблицы}{7}{chapter.6}%

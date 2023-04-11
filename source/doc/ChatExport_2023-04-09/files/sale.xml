@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Шаблон чека продажи. Объединение одинаковых позиций и группировка по полю артикул. -->
+<report name = "sale" type="document" cached="true" title="Чек продажи">
+    <text align="center" fillsymbol=" " maxwidth="all">ЧЕК ПРОДАЖИ #$document.num$</text><br/>
+    <text align="center" fillsymbol=" " maxwidth="all">КАССИР: $cash.code$ $user.name$</text><br/>
+    <text fillsymbol="-" maxwidth="all"/><br/>
+
+    <select query="select articul dname from documents.goodsitem where documentid = $document.id$ group by 1">
+        <!--<text> </text><br/>
+        <var name="dname" align="center" maxwidth="all"/><br/>
+        <text> </text><br/>-->
+
+        <select query="select case opcode when 52 then text_const.text1 else goodsitem.bcode end bcode, 
+                       CAST((case opcode when 52 then concat(text_const.text2 , goodsitem.deptcode)
+                       else goodsitem.name end) AS CHAR) name, 
+                       dictionaries.units.name unit, sum(if(goodsitem.opcode in (54, 56), -goodsitem.bquant, goodsitem.bquant)) bquant, goodsitem.pricei price, 
+                       sum(if(goodsitem.opcode in (54, 56), -goodsitem.sumi, goodsitem.sumi)) sumn, sum(if(goodsitem.opcode in (54, 56), -goodsitem.sumb, goodsitem.sumb)) sumb, vatcode1, vatcode2, vatcode3, vatcode4, 
+                       vatcode5, vatrate1, vatrate2, vatrate3, vatrate4, vatrate5, sum(vatsum1) vatsum1, 
+                       sum(vatsum2) vatsum2, sum(vatsum3) vatsum3, sum(vatsum4) vatsum4, sum(vatsum5) vatsum5 
+                       from documents.goodsitem left join dictionaries.units on measure = dictionaries.units.code 
+                       left join text_const on text_const.code = 1 
+                       where documentid = $document.id$ and goodsitem.articul='$dname$' 
+                       group by 1, 2, dictionaries.units.name, goodsitem.pricei, vatcode1, 
+                       vatcode2, vatcode3, vatcode4, vatcode5, vatrate1, vatrate2, vatrate3, vatrate4, vatrate5">
+            <var name="bcode" minwidth="13"/><nbsp/><var name="name" minwidth="10"/><br/>
+            <var name="bquant" numberformat="8.3"/><text> </text><var name="unit"/><text> * </text>
+            <var name="price" numberformat="9.2"/><text> = </text><var name="sumn" numberformat=".2" align="right" fillsymbol=" " maxwidth="all"/><br/>
+
+            <select query="select if($sumn$ &gt; $sumb$, 'СО СКИДКОЙ', 'С НАДБАВКОЙ') discname , abs(($sumn$ - $sumb$) / $sumn$ * 100) discval from DUAL where not $sumn$ = $sumb$">
+                <var name="discname" maxwidth="all" align="right"/><text align="right"> </text><var name="discval" numberformat="10.0" align="right"/><text align="right">%</text><var name="sumb" numberformat="10.2" align="right"/><br/>
+            </select>
+
+            <select query="select name vatname from dictionaries.vat where code=$vatcode1$">
+                <text maxwidth="14" align="right">В ТОМ ЧИСЛЕ </text>
+                <var name="vatname"/>
+                <text> (</text>
+                <var name="vatrate1" numberformat=".2"/>
+                <text>%) = </text>
+                <var name="vatsum1" numberformat=".2"/>
+                <br/>
+            </select>
+        </select>
+    </select>
+
+    <text fillsymbol="-" maxwidth="all"/><br/>
+   
+    <select query="select count(*) p from goodsitem where documentid = $document.id$ ">
+        <text align="left">ПОЗИЦИЙ:</text><var align="right" name="p" numberformat="04" maxwidth="all"/><br/>
+    </select>
+    
+    <select query="select sum2, sumb from document where documentid = $document.id$ ">
+        <select query="select if($sum2$ &gt; $sumb$, 'CКИДКА', 'НАДБАВКА') dname , if($sum2$ &gt; $sumb$, $sum2$-$sumb$,$sumb$-$sum2$) dval from DUAL where not $sumb$=$sum2$">
+            <text>СУММА ЧЕКА:</text><var name="sum2" align="right" numberformat=".2" maxwidth="all"/><br/>
+            <var name="dname"/><text>:</text><var name="dval" align="right" numberformat=".2" maxwidth="all"/><br/>
+        </select>
+        <select query="select cardnumber from discitem inner join (select goodsitemid from goodsitem where documentid = $document.id$) as gi on discitem.goodsitemid = gi.goodsitemid and discitem.discmode = 2 group by 1">
+            <text>КАРТА НОМЕР </text><var name="cardnumber"/><br/>
+        </select>
+        <text align="left">ИТОГО:</text><var align="right" name="sumb" numberformat=".2" maxwidth="all"/><br/>
+    </select>
+
+    <select query="SELECT slip FROM moneyitem WHERE documentid = $document.id$ and slip is not null and slip != ''">
+        <text fillsymbol="-" maxwidth="all"/><br/>
+        <var name="slip" align="center" fillsymbol=" " maxwidth="all"/><br/>
+    </select>
+
+    <!-- Рекламный текст для покупателя -->
+    <!-- Печатаем если текст для печати есть -->
+    <select query="SELECT rtext FROM documents.document d where d.documentid = $document.id$ and d.rtext IS NOT NULL AND TRIM(d.rtext) &lt;&gt; ''">
+        <!-- Печатаем если в чеке нет карт с включеной опцией печати информации по карте -->
+        <select query="select 1 from dual where not exists(select coalesce(g.printinfo, 0) d from documents.carditem c left join dictionaries.cardgroup g on c.idcardgroup = g.idcardgroup where c.documentid = $document.id$ and g.printinfo = 1)">
+            <text maxwidth="all" fillsymbol="*"></text><br/>
+            <formattext var="document.rtext" linebreak="\\|#{2}"/>
+            <text maxwidth="all" fillsymbol="*"></text><br/>
+        </select>
+    </select>
+
+
+<select query="SELECT organizationinfo FROM goodsitem, paymentitem 
+    WHERE goodsitem.documentid = $document.id$ AND goodsitem.paymentitemid = paymentitem.paymentitemid  
+        AND goodsitem.opcode = 1000 AND organizationinfo IS NOT NULL GROUP BY 1">
+<br/><text align="center" fillsymbol=" " maxwidth="all" nextline="word">$organizationinfo$</text><br/><br/>
+</select>
+<select query="SELECT providername, providerinfo FROM goodsitem, paymentitem 
+    WHERE goodsitem.documentid = $document.id$ AND goodsitem.paymentitemid = paymentitem.paymentitemid  
+        AND goodsitem.opcode = 1000 AND providerinfo IS NOT NULL GROUP BY 1">
+<text align="center" fillsymbol=" " maxwidth="all">$providername$:</text><br/>
+<text align="center" fillsymbol=" " maxwidth="all" nextline="word">$providerinfo$</text><br/><br/>
+</select>
+<select query="SELECT paymentsysteminfo FROM goodsitem, paymentitem 
+    WHERE goodsitem.documentid = $document.id$ AND goodsitem.paymentitemid = paymentitem.paymentitemid  
+        AND goodsitem.opcode = 1000 AND paymentsysteminfo IS NOT NULL GROUP BY 1">
+<text align="center" fillsymbol=" " maxwidth="all" nextline="word">$paymentsysteminfo$</text><br/><br/>
+</select>
+
+</report>
+ 
