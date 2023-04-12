@@ -891,196 +891,20 @@
 
 \chapter{Внешняя программма}
 \label{\detokenize{prox:id1}}\label{\detokenize{prox::doc}}
-\sphinxAtStartPar
+
 Посмотрим на исходный код:
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{del\PYGZus{}close\PYGZus{}workshift}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{l\PYGZus{}workshift}\PYG{p}{)}\PYG{p}{:}
-    \PYG{n}{saveworkshift\PYGZus{}del} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}all\PYGZus{}db}\PYG{o}{.}\PYG{n}{cursor}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{for} \PYG{n}{wh} \PYG{o+ow}{in} \PYG{n}{l\PYGZus{}workshift}\PYG{p}{:}
-        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{delete \PYGZhy{} }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{wh}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
-        \PYG{n}{saveworkshift\PYGZus{}del}\PYG{o}{.}\PYG{n}{execute}\PYG{p}{(}\PYG{n}{diff\PYGZus{}data}\PYG{o}{.}\PYG{n}{qrDel\PYGZus{}workshift\PYGZus{}close}\PYG{p}{,}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{wh}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}all\PYGZus{}db}\PYG{o}{.}\PYG{n}{commit}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
 
 \fvset{hllines={, 1, 2, 3, 5,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{add\PYGZus{}open\PYGZus{}workshift}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{l\PYGZus{}workshift}\PYG{p}{)}\PYG{p}{:}
-     \PYG{c+c1}{\PYGZsh{} Добавляем открытые смены в БД}
-         \PYG{c+c1}{\PYGZsh{}self.\PYGZus{}mycursor.execute(diff\PYGZus{}data.qrAdd\PYGZus{}workshift\PYGZus{}open, [l\PYGZus{}workshift])}
-         \PYG{k}{for} \PYG{n}{wh} \PYG{o+ow}{in} \PYG{n}{l\PYGZus{}workshift}\PYG{p}{:}
-             \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{open \PYGZhy{} }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{wh}\PYG{p}{)}\PYG{p}{)}
-             \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}cursor}\PYG{o}{.}\PYG{n}{execute}\PYG{p}{(}\PYG{n}{diff\PYGZus{}data}\PYG{o}{.}\PYG{n}{qrAdd\PYGZus{}workshift\PYGZus{}open}\PYG{p}{,} \PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{wh}\PYG{p}{)}\PYG{p}{,}\PYG{p}{]}\PYG{p}{)}
-         \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}all\PYGZus{}db}\PYG{o}{.}\PYG{n}{commit}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
+
 \sphinxresetverbatimhllines
 
 
-\begin{savenotes}\sphinxattablestart
-\sphinxthistablewithglobalstyle
-\centering
-\sphinxcapstartof{table}
-\sphinxthecaptionisattop
-\sphinxcaption{Простая таблица со сложной шапкой}\label{\detokenize{prox:id2}}
-\sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{TTT}
-\sphinxtoprule
-\sphinxstartmulticolumn{2}%
-\begin{varwidth}[t]{\sphinxcolwidth{2}{3}}
-\sphinxstyletheadfamily \sphinxAtStartPar
-Inputs
-\par
-\vskip-\baselineskip\vbox{\hbox{\strut}}\end{varwidth}%
-\sphinxstopmulticolumn
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Output
-\\
-\sphinxhline\sphinxstyletheadfamily 
-\sphinxAtStartPar
-A
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-B
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-A or B
-\\
-\sphinxmidrule
-\sphinxtableatstartofbodyhook
-\sphinxAtStartPar
-False
-&
-\sphinxAtStartPar
-False
-&
-\sphinxAtStartPar
-False
-\\
-\sphinxhline
-\sphinxAtStartPar
-True
-&
-\sphinxAtStartPar
-False
-&
-\sphinxAtStartPar
-True
-\\
-\sphinxhline
-\sphinxAtStartPar
-False
-&
-\sphinxAtStartPar
-True
-&
-\sphinxAtStartPar
-True
-\\
-\sphinxhline
-\sphinxAtStartPar
-True
-&
-\sphinxAtStartPar
-True
-&
-\sphinxAtStartPar
-True
-\\
-\sphinxbottomrule
-\end{tabulary}
-\sphinxtableafterendhook\par
-\sphinxattableend\end{savenotes}
-
-
-\begin{savenotes}\sphinxattablestart
-\sphinxthistablewithglobalstyle
-\centering
-\sphinxcapstartof{table}
-\sphinxthecaptionisattop
-\sphinxcaption{CSV\sphinxhyphen{}таблица}\label{\detokenize{prox:id3}}
-\sphinxaftertopcaption
-\begin{tabular}[t]{\X{15}{55}\X{10}{55}\X{30}{55}}
-\sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Treat
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Quantity
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Description
-\\
-\sphinxmidrule
-\sphinxtableatstartofbodyhook
-\sphinxAtStartPar
-Albatross
-&
-\sphinxAtStartPar
-2.99
-&
-\sphinxAtStartPar
-On a stick!
-\\
-\sphinxhline
-\sphinxAtStartPar
-Crunchy Frog
-&
-\sphinxAtStartPar
-1.49
-&
-\sphinxAtStartPar
-If we took the bones out, it wouldn’t be
-crunchy, now would it?
-\\
-\sphinxhline
-\sphinxAtStartPar
-Gannet Ripple
-&
-\sphinxAtStartPar
-1.99
-&
-\sphinxAtStartPar
-On a stick!
-\\
-\sphinxbottomrule
-\end{tabular}
-\sphinxtableafterendhook\par
-\sphinxattableend\end{savenotes}
-
-\begin{sphinxShadowBox}
-\sphinxstylesidebartitle{Боковая врезка}
-
-\sphinxAtStartPar
-Оформление врезки зависит от используемой HTML\sphinxhyphen{}темы.
-\end{sphinxShadowBox}
-\index{базовая функция@\spxentry{базовая функция}!pyfunc()@\spxentry{pyfunc()}}\index{pyfunc()@\spxentry{pyfunc()}!базовая функция@\spxentry{базовая функция}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{prox:pyfunc}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{pyfunc}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Описание функции Python.
-
-\end{fulllineitems}
-
-
-\begin{sphinxadmonition}{attention}{Внимание:}\begin{quote}
-
-\sphinxAtStartPar
-Блок Внимание, команда:
-\end{quote}
-\end{sphinxadmonition}
-
-\sphinxstepscope
 
 
 \chapter{Настройки}
 \label{\detokenize{setting:id1}}\label{\detokenize{setting::doc}}
-\sphinxstepscope
+
 
 
 \section{Порядок внедрения касс в работу с Артикс:}
@@ -1088,16 +912,11 @@ On a stick!
 
 \subsection{1. Создать магазин + касса на сервере.}
 \label{\detokenize{kass:id2}}\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Создание Магазина \sphinxhyphen{} Вводить Код, Название, Формат справочников (из 1С), метка дисконта (выбор из созданных)
 
-\item {} \begin{description}
-\sphinxlineitem{Создание Кассы \sphinxhyphen{} Вводить Код, Название, Хост (IP), Тип кассы (Рабочее место кассира), Формат выгрузки продаж (с КС в 1С), Категория справочников (если используется), Состояние обмена (рекоменд. Выключен).         При использовании Конфигураций \sphinxhyphen{} Выбрать конфигурацию, и окружение (для рабочей кассы \sphinxhyphen{} Боевое)}\begin{itemize}
 \item {} 
-\sphinxAtStartPar
-Создать структуру Магазин\sphinxhyphen{}Кассы можно/нужно заранее.
+
+Создание Магазина Вводить Код, Название, Формат справочников (из 1С), метка дисконта (выбор из созданных)
+
 
 \end{itemize}
 
