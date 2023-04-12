@@ -18,7 +18,7 @@
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Marijn’s Answer" href="test.html" />
+    <link rel="next" title="Порядок внедрения касс в работу с Артикс:" href="kass.html" />
     <link rel="prev" title="Внешняя программма" href="prox.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
           <a href="genindex.html" title="Алфавитный указатель"
              accesskey="I">указатель</a></li>
         <li class="right" >
-          <a href="test.html" title="Marijn’s Answer"
+          <a href="kass.html" title="Порядок внедрения касс в работу с Артикс:"
              accesskey="N">вперёд</a> |</li>
         <li class="right" >
           <a href="prox.html" title="Внешняя программма"
@@ -49,91 +49,18 @@
             
   <section id="id1">
 <h1>Настройки<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
-<section id="id2">
-<h2>Настройки УНФ<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
-<p>Настройки для работы с Artix хранятся в справочнике  крю_Настройки.</p>
-</section>
-<section id="artix">
-<h2>Настройки Artix<a class="headerlink" href="#artix" title="Permalink to this heading">¶</a></h2>
-<p>Ссылка на скачивание yuki.
-<a class="reference external" href="http://update.artix.su/static/yuki/">http://update.artix.su/static/yuki/</a></p>
-<section id="id3">
-<h3>Работа с сертификатами<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference external" href="https://docs.artix.su/pages/viewpage.action?pageId=27530876">https://docs.artix.su/pages/viewpage.action?pageId=27530876</a></p>
-<p><a class="reference download internal" download="" href="_downloads/d49a8e53bfdf26e16ca430e1017e920a/sert.docx"><code class="xref download docutils literal notranslate"><span class="pre">Добавление</span> <span class="pre">группы</span> <span class="pre">сертификатов</span> <span class="pre">со</span> <span class="pre">сроком</span> <span class="pre">действия</span> <span class="pre">через</span> <span class="pre">REST</span> <span class="pre">API</span></code></a></p>
-<section id="id4">
-<h4>Включение контроля остатков на кассе:<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h4>
-<p>в конфигурационном файле /linuxcash/cash/conf/ncash.ini
-Изменить:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">;</span><span class="n">calculateRemainsOfGoods</span> <span class="o">=</span> <span class="n">false</span>
-<span class="o">.....</span>
-<span class="p">;</span><span class="n">considerRemainsOfGoods</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="n">на</span><span class="p">:</span>
-
-<span class="n">calculateRemainsOfGoods</span> <span class="o">=</span> <span class="n">true</span>
-<span class="o">.....</span>
-<span class="n">considerRemainsOfGoods</span> <span class="o">=</span> <span class="n">true</span>
-</pre></div>
-</div>
-<div class="compound">
-<p>The „rm“ command is very dangerous.  If you are logged
-in as root and enter</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span>
-<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">*</span>
-</pre></div>
-</div>
-<p>you will erase the entire contents of your file system.</p>
-</div>
-<pre>
-<strong id="grammar-token-try_stmt">try_stmt </strong> ::=  try1_stmt | try2_stmt
-<strong id="grammar-token-try1_stmt">try1_stmt</strong> ::=  &quot;try&quot; &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>
-               (&quot;except&quot; [<code class="xref docutils literal notranslate"><span class="pre">expression</span></code> [&quot;,&quot; <code class="xref docutils literal notranslate"><span class="pre">target</span></code>]] &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>)+
-               [&quot;else&quot; &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>]
-               [&quot;finally&quot; &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>]
-<strong id="grammar-token-try2_stmt">try2_stmt</strong> ::=  &quot;try&quot; &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>
-               &quot;finally&quot; &quot;:&quot; <code class="xref docutils literal notranslate"><span class="pre">suite</span></code>
-</pre>
-<figure class="align-default">
-<img alt="_images/set.png" src="_images/set.png" />
-</figure>
-<p>Пароль на сервер по ssh</p>
-<p>Логин: administrator
-Пароль: <a class="reference external" href="mailto:adm&#37;&#52;&#48;#747911ART">adm<span>&#64;</span>#747911ART</a></p>
-</section>
-</section>
-</section>
-<section id="id5">
-<h2>Порядок внедрения касс в работу с Артикс:<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
-<ol class="arabic">
-<li><p>Создать магазин + касса на сервере.</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Создание Магазина - Вводить Код, Название, Формат справочников (из 1С), метка дисконта (выбор из созданных)</p></li>
-<li><p>Создание Кассы - Вводить Код, Название, Хост (IP), Тип кассы (Рабочее место кассира), Формат выгрузки продаж (с КС в 1С), Категория справочников (если используется), Состояние обмена (рекоменд. Выключен). При использовании Конфигураций - Выбрать конфигурацию, и окружение (для рабочей кассы - Боевое)</p></li>
-<li><ul class="simple">
-<li><p>Создать структуру Магазин-Кассы можно/нужно заранее.</p></li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kass.html">Порядок внедрения касс в работу с Артикс:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id2">1. Создать магазин + касса на сервере.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id3">2. Настройка ПОС</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id4">3. Дополнительные материалы:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id5">3.1 Список директорий и файлов  основных настроек.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id6">3.2 Особенности настройки “Сбербанк”</a></li>
 </ul>
 </li>
-</ol>
-</div></blockquote>
-</li>
-<li><p>Настройка ПОС</p></li>
-</ol>
-<p>Полуручной:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Самый простой способ предварительно настроить 1 пос, и сохранить нужные файлы настроек (настройки, оборудование и т.д.). Далее скопировать на другую ПОС в требуемые директории.</p></li>
-</ol>
-</div></blockquote>
-<p>Автоматически:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Использовать менеджер-конфигураций (что есть в КС), одна тонкость - возможно не все настройки можно произвести через него.</p></li>
-<li><p>Включить обмен на сервере и запустить полную выгрузку справочников с сервера. После полной прогрузки справочников - перезапустить кассовую программу на ПОС</p></li>
-</ol>
-</div></blockquote>
-</section>
+</ul>
+</div>
 </section>
 
 
@@ -174,7 +101,7 @@ in as root and enter</p>
           <a href="genindex.html" title="Алфавитный указатель"
              >указатель</a></li>
         <li class="right" >
-          <a href="test.html" title="Marijn’s Answer"
+          <a href="kass.html" title="Порядок внедрения касс в работу с Артикс:"
              >вперёд</a> |</li>
         <li class="right" >
           <a href="prox.html" title="Внешняя программма"
