@@ -121,52 +121,52 @@
 
 \usepackage{geometry} % Простой способ задавать поля
 \geometry{top=15mm}
-\geometry{bottom\setcounter{tocdepth}{1}
-	\setcounter{secnumdepth}{4}
-	
-	\renewcommand{\theenumi}{\arabic{enumi}}
-	\renewcommand{\labelenumi}{\arabic{enumi}}
-	\renewcommand{\theenumii}{.\arabic{enumii}}
-	\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
-	\renewcommand{\theenumiii}{.\arabic{enumiii}}
-	\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
-	
-	
-	\usepackage{titlepic}
-	
-	
-	
-	%\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
-	%\titlespacing{\subsection}{0pt}{\parskip}{-\parskip}
-	
-	\def\capfigure{figure}
-	
-	\def\captable{table}
-	
-	\long\def\@makecaption#1#2{%
-		
-		\vskip\abovecaptionskip
-		
-		\ifx\@captype\capfigure
-		
-		\centering #1~--~#2 \par
-		
-		\else
-		
-		#1~--~#2 \par
-		
-		\fi
-		
-		\vskip\belowcaptionskip}
-	
-	\setlength\abovecaptionskip{2\p@}
-	
-	\setlength\belowcaptionskip{1\p@}
-	
-	
-	=10mm}
+\geometry{bottom=10mm}
 \geometry{left=10mm}
 \geometry{right=10mm}
+
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{4}
+
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi}}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\theenumiii}{.\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+
+
+\usepackage{titlepic}
+
+
+
+%\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+%\titlespacing{\subsection}{0pt}{\parskip}{-\parskip}
+
+\def\capfigure{figure}
+
+\def\captable{table}
+
+\long\def\@makecaption#1#2{%
+	
+	\vskip\abovecaptionskip
+	
+	\ifx\@captype\capfigure
+	
+	\centering #1~--~#2 \par
+	
+	\else
+	
+	#1~--~#2 \par
+	
+	\fi
+	
+	\vskip\belowcaptionskip}
+
+\setlength\abovecaptionskip{2\p@}
+
+\setlength\belowcaptionskip{1\p@}
+
 
 
 
