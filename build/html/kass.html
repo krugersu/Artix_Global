@@ -18,7 +18,7 @@
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
-    <link rel="next" title="Marijn’s Answer" href="test.html" />
+    <link rel="next" title="Добавление группы сертификатов со сроком действия через REST API." href="sert.html" />
     <link rel="prev" title="Настройки" href="setting.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
           <a href="genindex.html" title="Алфавитный указатель"
              accesskey="I">указатель</a></li>
         <li class="right" >
-          <a href="test.html" title="Marijn’s Answer"
+          <a href="sert.html" title="Добавление группы сертификатов со сроком действия через REST API."
              accesskey="N">вперёд</a> |</li>
         <li class="right" >
           <a href="setting.html" title="Настройки"
@@ -75,50 +75,6 @@
 <li><p>Включить обмен на сервере и запустить полную выгрузку справочников с сервера. После полной прогрузки справочников - перезапустить кассовую программу на ПОС</p></li>
 </ol>
 </section>
-<section id="id4">
-<h2>3. Дополнительные материалы:<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
-</section>
-<section id="id5">
-<h2>3.1 Список директорий и файлов  основных настроек.<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt>/linuxcash/cash/conf/</dt><dd><ol class="arabic simple">
-<li><p>ncash.ini - основной файл настроек</p></li>
-<li><p>bcode.ini  - правила разбора ШК</p></li>
-<li><p>frinit.conf - инициализация ФР</p></li>
-<li><p>cliche.txt и tail.txt - Клише/подвал чека</p></li>
-<li><p>artixsb.conf</p></li>
-</ol>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>/linuxcash/cash/conf/ncash.ini.d/</dt><dd><ol class="arabic simple">
-<li><p>artixbonus.ini - работа с бонусным сервером</p></li>
-<li><p>artixcertificate.ini</p></li>
-<li><p>deferredcheck.ini - отложенные чеки</p></li>
-<li><p>fr.ini</p></li>
-<li><p>gui.ini - выбор интерфейса ПО</p></li>
-<li><p>motp.ini - сигареты</p></li>
-<li><p>markedgoods.ini - другая маркировка</p></li>
-</ol>
-</dd>
-</dl>
-</li>
-<li><p>/linuxcash/cash/conf/drivers/ - Настройки подключения оборудования</p></li>
-</ol>
-<p>Сначала настраивается одна ПОС, полученные настройки используем как эталонные. После установки ПО на новую ПОС копируем настройки,
-включая “Подключаемое оборудование”, проверяем и при необходимости вносим правки.</p>
-</section>
-<section id="id6">
-<h2>3.2 Особенности настройки “Сбербанк”<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
-<p>Для работы с процессингом сбербанк необходимо установить пакет - <em>artix45-plugin-sb</em>.
-В директорию <strong>”/linuxcash/cash/paysystems/sb/“</strong> разместить файлы приложения сбербанк полученного от сотрудников банка. Настроить подключение ПинПад согласно инструкции банка (pinpad.ini). Следует обратить внимание что при подключении пинпад через USB, необходимо правильно создать символьную ссылку на устройство:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">serial</span><span class="o">/</span><span class="n">by</span><span class="o">-</span><span class="nb">id</span><span class="o">/</span><span class="p">{</span><span class="n">Имя_Устройства</span><span class="p">}</span> <span class="o">/</span><span class="n">linuxcash</span><span class="o">/</span><span class="n">cash</span><span class="o">/</span><span class="n">paysystems</span><span class="o">/</span><span class="n">sb</span><span class="o">/</span><span class="n">ttyS99</span>
-</pre></div>
-</div>
-<p>Для работы с терминалом PAX SP30 - дополнительно установить пакет <em>ttypos</em></p>
-</section>
 </section>
 
 
@@ -159,7 +115,7 @@
           <a href="genindex.html" title="Алфавитный указатель"
              >указатель</a></li>
         <li class="right" >
-          <a href="test.html" title="Marijn’s Answer"
+          <a href="sert.html" title="Добавление группы сертификатов со сроком действия через REST API."
              >вперёд</a> |</li>
         <li class="right" >
           <a href="setting.html" title="Настройки"
