@@ -14,7 +14,8 @@ release = '0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser','sphinx.ext.todo',]
+extensions = ['myst_parser','sphinx.ext.todo',
+		'sphinx.ext.autosectionlabel',]
 
 
 
@@ -95,32 +96,4 @@ html_show_sphinx = False
 
 
 
-# -- Options for LaTeX output ---------------------------------------------
 
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#
-# 'papersize': 'letterpaper',
-
-# The font size ('10pt', '11pt' or '12pt').
-#
-# 'pointsize': '10pt',
-
-# Additional stuff for the LaTeX preamble.
-#
-# 'preamble': '',
-
-# Latex figure (float) alignment
-#
-# 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-# author, documentclass [howto, manual, or own class]).
-latex_documents = [
-(
-u'Olaya Alvarez', 'manual'),
-]

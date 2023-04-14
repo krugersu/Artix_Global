@@ -1,0 +1,129 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Реализация в УНФ &#8212; документация Интеграция Artix-УНФ 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Внешняя программма" href="prox.html" />
+    <link rel="prev" title="Общее описание" href="description.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="prox.html" title="Внешняя программма"
+             accesskey="N">вперёд</a> |</li>
+        <li class="right" >
+          <a href="description.html" title="Общее описание"
+             accesskey="P">назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Реализация в УНФ</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>Реализация в УНФ<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p class="linemarker linemarker-4">Функционал работы с Artix со стороны УНФ реализован с помощью:</p>
+<ol class="arabic">
+<li><p class="linemarker linemarker-6">Подписки на события для документов товародвижения:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p class="linemarker linemarker-8">Поступление товаров</p></li>
+<li><p class="linemarker linemarker-9">Списание товаров</p></li>
+<li><p class="linemarker linemarker-10">Оприходование товаров</p></li>
+<li><p class="linemarker linemarker-11">Перемещение товаров ?</p></li>
+<li><p class="linemarker linemarker-12">Возврат товаров поставщику</p></li>
+<li><p class="linemarker linemarker-13">Отчет о розничных продажах ?</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="linemarker linemarker-15">Http-сервисов</p></li>
+<li><p class="linemarker linemarker-16">Фоновых заданий и обработок</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p class="linemarker linemarker-20">Подумать о перемещении и Отчете о розничных продажах, нужно ли менять остатки на касссых после их проведения</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">План</p>
+<p class="linemarker linemarker-23">Выгрузка</p>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="prox.html" title="Внешняя программма"
+             >вперёд</a> |</li>
+        <li class="right" >
+          <a href="description.html" title="Общее описание"
+             >назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Реализация в УНФ</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>

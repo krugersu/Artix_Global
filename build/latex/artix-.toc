@@ -1,16 +1,18 @@
 \babel@toc {russian}{}
 \contentsline {chapter}{\numberline {1}Общее описание}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Документация по блоку обмена между Artix и УНФ в части выгрузки остатков из УНФ в кассовый сервер Artix и загрузки кассовых смен и продаж в УНФ.}{1}{section.1.1}%
 \contentsline {chapter}{\numberline {2}Реализация в УНФ}{3}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Внешняя программма}{5}{chapter.3}%
 \contentsline {chapter}{\numberline {4}Настройки}{7}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Порядок внедрения касс в работу с Артикс:}{7}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}1. Создать магазин + касса на сервере.}{7}{subsection.4.1.1}%
 \contentsline {subsection}{\numberline {4.1.2}2. Настройка ПОС}{7}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Добавление группы сертификатов со сроком действия через REST API.}{7}{section.4.2}%
+\contentsline {section}{\numberline {4.2}Добавление группы сертификатов со сроком действия через REST API.}{8}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Дополнительные материалы:}{10}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}1. Список директорий и файлов основных настроек.}{10}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}2. Особенности настройки “Сбербанк”}{11}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}3. Ссылка на скачивание дистрибутива yuki}{11}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}4. Остатки}{11}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}5. Дисконтные карты (создание)}{11}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Индексы и таблицы}{13}{chapter.5}%
+\contentsline {subsection}{\numberline {4.3.5}5. Дисконтные карты (создание)}{12}{subsection.4.3.5}%
+\contentsline {chapter}{\numberline {5}Файлы}{13}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Индексы и таблицы}{15}{chapter.6}%

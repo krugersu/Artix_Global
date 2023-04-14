@@ -1,0 +1,199 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta content="The reStructuredText plaintext markup language" name="description" />
+<meta content="plaintext, markup language" name="keywords" />
+
+    <title>Внешняя программма &#8212; документация Интеграция Artix-УНФ 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Настройки" href="setting.html" />
+    <link rel="prev" title="Реализация в УНФ" href="unf.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="setting.html" title="Настройки"
+             accesskey="N">вперёд</a> |</li>
+        <li class="right" >
+          <a href="unf.html" title="Реализация в УНФ"
+             accesskey="P">назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Внешняя программма</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>Внешняя программма<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p class="linemarker linemarker-4">Посмотрим на исходный код:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">del_close_workshift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">l_workshift</span><span class="p">):</span>
+    <span class="n">saveworkshift_del</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">wh</span> <span class="ow">in</span> <span class="n">l_workshift</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;delete - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">wh</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+        <span class="n">saveworkshift_del</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrDel_workshift_close</span><span class="p">,[</span><span class="nb">str</span><span class="p">(</span><span class="n">wh</span><span class="p">[</span><span class="mi">5</span><span class="p">])])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">def</span> <span class="nf">add_open_workshift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">l_workshift</span><span class="p">):</span>
+</span><span class="hll">     <span class="c1"># Добавляем открытые смены в БД</span>
+</span><span class="hll">         <span class="c1">#self._mycursor.execute(diff_data.qrAdd_workshift_open, [l_workshift])</span>
+</span>         <span class="k">for</span> <span class="n">wh</span> <span class="ow">in</span> <span class="n">l_workshift</span><span class="p">:</span>
+<span class="hll">             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;open - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">wh</span><span class="p">))</span>
+</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAdd_workshift_open</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">wh</span><span class="p">),])</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Простая таблица со сложной шапкой</span><a class="headerlink" href="#id2" title="Постоянная ссылка на таблицу">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p class="linemarker linemarker-31">Inputs</p></th>
+<th class="head"><p class="linemarker linemarker-31">Output</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p class="linemarker linemarker-33">A</p></th>
+<th class="head"><p class="linemarker linemarker-33">B</p></th>
+<th class="head"><p class="linemarker linemarker-33">A or B</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p class="linemarker linemarker-35">False</p></td>
+<td><p class="linemarker linemarker-35">False</p></td>
+<td><p class="linemarker linemarker-35">False</p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-36">True</p></td>
+<td><p class="linemarker linemarker-36">False</p></td>
+<td><p class="linemarker linemarker-36">True</p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-37">False</p></td>
+<td><p class="linemarker linemarker-37">True</p></td>
+<td><p class="linemarker linemarker-37">True</p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-38">True</p></td>
+<td><p class="linemarker linemarker-38">True</p></td>
+<td><p class="linemarker linemarker-38">True</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">CSV-таблица</span><a class="headerlink" href="#id3" title="Постоянная ссылка на таблицу">¶</a></caption>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 18%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p class="linemarker linemarker-1">Treat</p></th>
+<th class="head"><p class="linemarker linemarker-1">Quantity</p></th>
+<th class="head"><p class="linemarker linemarker-1">Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="linemarker linemarker-1">Albatross</p></td>
+<td><p class="linemarker linemarker-1">2.99</p></td>
+<td><p class="linemarker linemarker-1">On a stick!</p></td>
+</tr>
+<tr class="row-odd"><td><p class="linemarker linemarker-1">Crunchy Frog</p></td>
+<td><p class="linemarker linemarker-1">1.49</p></td>
+<td><p class="linemarker linemarker-1">If we took the bones out, it wouldn’t be
+crunchy, now would it?</p></td>
+</tr>
+<tr class="row-even"><td><p class="linemarker linemarker-1">Gannet Ripple</p></td>
+<td><p class="linemarker linemarker-1">1.99</p></td>
+<td><p class="linemarker linemarker-1">On a stick!</p></td>
+</tr>
+</tbody>
+</table>
+<aside class="sidebar">
+<p class="sidebar-title">Боковая врезка</p>
+<p class="linemarker linemarker-54">Оформление врезки зависит от используемой HTML-темы.</p>
+</aside>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyfunc">
+<span class="sig-name descname"><span class="pre">pyfunc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyfunc" title="Ссылка на это определение">¶</a></dt>
+<dd><p class="linemarker linemarker-59">Описание функции Python.</p>
+</dd></dl>
+
+<div class="admonition attention">
+<p class="admonition-title">Внимание</p>
+<blockquote>
+<div><p class="linemarker linemarker-65">Блок Внимание, команда:</p>
+</div></blockquote>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Внешняя программма</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="setting.html" title="Настройки"
+             >вперёд</a> |</li>
+        <li class="right" >
+          <a href="unf.html" title="Реализация в УНФ"
+             >назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Внешняя программма</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>

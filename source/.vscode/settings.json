@@ -1,3 +1,4 @@
 {
-    "needls.pythonPath": "/usr/bin/python"
+    "needls.pythonPath": "/usr/bin/python",
+    "esbonio.sphinx.confDir": "${workspaceFolder}"
 }

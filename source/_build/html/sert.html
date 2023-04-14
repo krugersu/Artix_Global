@@ -1,0 +1,202 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Добавление группы сертификатов со сроком действия через REST API. &#8212; документация Интеграция Artix-УНФ 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Дополнительные материалы:" href="additional.html" />
+    <link rel="prev" title="Порядок внедрения касс в работу с Артикс:" href="kass.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="additional.html" title="Дополнительные материалы:"
+             accesskey="N">вперёд</a> |</li>
+        <li class="right" >
+          <a href="kass.html" title="Порядок внедрения касс в работу с Артикс:"
+             accesskey="P">назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="setting.html" accesskey="U">Настройки</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Добавление группы сертификатов со сроком действия через REST API.</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="rest-api">
+<h1>Добавление группы сертификатов со сроком действия через REST API.<a class="headerlink" href="#rest-api" title="Permalink to this heading">¶</a></h1>
+<p class="linemarker linemarker-4"><strong>1. Добавление группы сертификатов со сроком действия через REST API.</strong></p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p class="linemarker linemarker-6">Добавить группу сертификатов в БД КС, сформировав запрос типа POST на url: <a class="reference external" href="http:/">http:/</a>/&lt;host&gt;:&lt;port&gt;/Csrest/rest/dictionaries/certificates</p></li>
+<li><p class="linemarker linemarker-7">Тело запроса в формате Json должно быть подобного формата:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rangefrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rangeto&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Сертификаты&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;sum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;inputmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;discountcampaign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test campaign&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="linemarker linemarker-21">Атрибут свойства  discountcampaign должен содержать yaml акции, в которой как раз можно указать сроки действия.
+Напрример, если смотреть на уже существующую группу сертификатов, созданную вручную через web-интерфейс LM с указанием срока действия (БД КС ArtixAll, таблица certificateTemp), то в поле discountcampaign увидим запись вида:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="kt">!!python/object:artixds.domain.DiscountCampaign</span>
+<span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">beginBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">beginBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span>
+<span class="nt">beginBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">beginDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">beginDateWithBeginCurrentMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginDateWithBeginNextMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span>
+<span class="nt">beginTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">checkedTags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">daysOfWeek</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="nt">discounts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="nt">endBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">endBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span>
+<span class="nt">endBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">endBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">endDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">endRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span>
+<span class="nt">endTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">57026161735168</span>
+<span class="nt">interactionType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">manualActivate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">parentGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">qualifiers</span><span class="p">:</span><span class="w"> </span><span class="kt">!!set</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nt">tagsIsAllowed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-61">То есть в этом случае срок действия для группы сертификатов определен свойствами beginRangeDate и endRangeDate (от 2022-02-17 до 2022-02-17).</p>
+<p class="linemarker linemarker-63">Берем этот Yaml как шаблон и изменияем даты beginRangeDate и endRangeDate на нужные.</p>
+</div></blockquote>
+</li>
+<li><p class="linemarker linemarker-66">Далее  этот Yaml необходимо переделать в однострочный формат. Для этого после каждой строки добавляем rn, и переносим все строки в одну. В итоге должна получиться строка следующего вида:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!python/object:artixds.domain.DiscountCampaign\r\nactive: true\r\nbeginBonusesDateCalculate: null\r\nbeginBonusesIntervalCondition: !!python/unicode &#39;date&#39;\r\nbeginBonusesIntervalMetric: !!python/unicode &#39;day&#39;\r\nbeginBonusesIntervalValue: 0\r\nbeginDate: null\r\nbeginDateWithBeginCurrentMetric: !!python/unicode &#39;day&#39;\r\nbeginDateWithBeginNextMetric: !!python/unicode &#39;day&#39;\r\nbeginRangeDate: 2022-02-17\r\nbeginTime: null\r\ncheckedTags: null\r\ndaysOfWeek: []\r\ndiscounts: []\r\nendBonusesDateCalculate: null\r\nendBonusesIntervalCondition: !!python/unicode &#39;date&#39;\r\nendBonusesIntervalMetric: !!python/unicode &#39;day&#39;\r\nendBonusesIntervalValue: 0\r\nendDate: null\r\nendRangeDate: 2022-02-17\r\nendTime: null\r\nid: 62331387691573\r\ninteractionType: all\r\nlabels: null\r\nmanualActivate: null\r\nname: !!python/unicode &#39;&#39;\r\nparent: null\r\nparentGroup: null\r\npriority: null\r\nqualifiers: !!set {}\r\ntagsIsAllowed: false\r\nweight: 300
+</pre></div>
+</div>
+<p class="linemarker linemarker-73">И в таком виде эту строку можно добавить в тело POST-запроса (пункт 1.1) вместо записи  test campaign.</p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p class="linemarker linemarker-75"><strong>2. Отправляем POST-запрос, указав данные для авторизации (как от  WEB  КЦ)</strong></p>
+<blockquote>
+<div><figure class="align-default">
+<img alt="_images/1.png" src="_images/1.png" />
+</figure>
+</div></blockquote>
+<p class="linemarker linemarker-80">Далее убеждаемся что запрос прошел без ошибок и проверяем в web-интерфейсе LM, что создалась группа сертификатов. Открываем эту группу на редактирование и убеждаемся, что сроки действия прописаны корректно.</p>
+<blockquote>
+<div><figure class="align-default">
+<img alt="_images/2.png" src="_images/2.png" />
+</figure>
+</div></blockquote>
+<p class="linemarker linemarker-85"><strong>3. Затем добавляем сертификат на сервер POST-запросом http://&lt;хост&gt;:&lt;порт бонусного сервера/сервера сертификатов&gt;/ACC/rest/v1/cards.</strong></p>
+<blockquote>
+<div><p class="linemarker linemarker-87">Тело запроса должно быть вида:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;accountNumber&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;EARN_PAY&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p class="linemarker linemarker-98">Важно, чтобы значения  number и  accountNumber входили в диапозон номеров созданной группы сертификатов.</p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="setting.html">Настройки</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="additional.html" title="Дополнительные материалы:"
+             >вперёд</a> |</li>
+        <li class="right" >
+          <a href="kass.html" title="Порядок внедрения касс в работу с Артикс:"
+             >назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="setting.html" >Настройки</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Добавление группы сертификатов со сроком действия через REST API.</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>

@@ -57,6 +57,17 @@
 <figure class="align-default">
 <img alt="_images/gl.png" src="_images/gl.png" />
 </figure>
+<p>Работа происходит следующим образом:
+В УНФ в справочнике «крю_Настройки» в предопределенном реквизите «КаталогКонтроляОбменаArtix» хранится путь до каталога интеграции
+с Artix, который имеет следующую структуру -</p>
+<figure class="align-default">
+<img alt="_images/cat.png" src="_images/cat.png" />
+</figure>
+<p>При проведении документа товародвижения срабатывает подписка на событие и в каталоге соответствующем номеру магазина создается файл-флаг
+вида:  «1681466893_chg», где число это псевдослучайное число образованное разностью дат, для достижения уникальности имени файла.</p>
+<p>Далле программа прокси с указанной настройкой сервера переодичнойстью отправляет запрос («GetChangeShop») в УНФ для получения номеров магазинов по которым были изменения остатков в ту
+или иную сторону. УНФ «просматривает» каталоги в папке интеграции и возвращает список номеров магазинов в каталогах которых, были обнаружены
+файлы флаги.</p>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">План</p>
 <p>Fix this</p>
@@ -78,6 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
