@@ -5,9 +5,9 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Общее описание &#8212; документация Интеграция Artix-УНФ 0.1</title>
+    <title>Общее описание &#8212; документация Интеграция Artix-УНФ 0.2</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="index.html" title="Интеграция Artix-УНФ!"
              accesskey="P">назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.2</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Общее описание</a></li> 
       </ul>
     </div>  
@@ -72,15 +72,17 @@
 документу статус «Закрыта (чеки заархивированы)».
 Далее согласно созданному в УНФ расписанию запускается обработка по формированию «ОРП». Данные для заполнения табличных частей «ОРП» берутся запросом из
 кассового сервера, таблицы которого подключены в 1С в качестве внешнего источника данных.</p>
-<p>Далле программа прокси  отправляет запрос («GetChangeShop») в УНФ для получения номеров магазинов по которым были изменения остатков в ту
+<p>Далeе программа прокси  отправляет запрос («GetChangeShop») в УНФ для получения номеров магазинов по которым были изменения остатков в ту
 или иную сторону. <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> «просматривает» каталоги в папке интеграции и возвращает список номеров магазинов в каталогах которых, были обнаружены
 файлы флаги.
-Затем программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> перебирая номера магазинов формирует в УНФ запрос остатков по каждому. Получив остатки, Brocker обрабатывает данные -
+Затем программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> перебирая номера магазинов формирует в УНФ запрос остатков по каждому. Получив остатки, <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> обрабатывает данные -
 для номенклатуры с аналогами переносит суммируя все остатки на головную номенклатуру, а аналоги удаляет из выгрузки, таким образом на кассы падает в остатках, только
-головная номенклатура.</p>
+головная номенклатура.
+После формирования остатков, на основе этих данных формируется файл формата <a class="reference internal" href="gloss.html#term-aif"><span class="xref std std-term">aif</span></a> и выгружается в соответствующи каталог магазина.
+Кассовый сервер через определенное время «забирает» файл и формирует номенклатуру с остатками на магазине.</p>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">План</p>
-<p>Fix this</p>
+<p>Планируется добавить модуль контроля товаро-остатков пришедших из <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> и выгруженных в кассовый сервер</p>
 </div>
 </section>
 </section>
@@ -128,7 +130,7 @@
         <li class="right" >
           <a href="index.html" title="Интеграция Artix-УНФ!"
              >назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.2</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Общее описание</a></li> 
       </ul>
     </div>
