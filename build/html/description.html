@@ -5,7 +5,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Общее описание &#8212; документация Интеграция Artix-УНФ 0.2</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -65,11 +65,11 @@
 </figure>
 <p>При проведении документа товародвижения срабатывает подписка на событие и в каталоге соответствующем номеру магазина создается файл-флаг
 вида:  «1681466893_chg», где число это псевдослучайное число образованное разностью дат, для достижения уникальности имени файла.</p>
-<p>Программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> запускаясь с указанной настройкой сервера переодичнойстью начинает обрабатывать кассовые смены.
-Вначале в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> передаются данные по вновь открытым сманам в Artix. <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получая информацию создает новые документы «Кассовая смена» со статусом
+<p>Программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> запускаясь с указанной настройкой сервера периодичностью начинает обрабатывать кассовые смены.
+Вначале в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> передаются данные по вновь открытым сменам в Artix. <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получая информацию создает новые документы «Кассовая смена» со статусом
 «Открытая» и автоматом создается документ «ОРП» у которого заполнена только шапка и имеется ссылка на кассовую смену.
 После этого <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> отправляет информацию по закрытым кассовым сменам. УНФ заполняет оставшиеся реквизиты в документе «Кассовая смены» и присваевает
-документу статус «Закрыта (чеки заархивированы)».
+документу статус «Закрыта (чеки за архивированы)».
 Далее согласно созданному в УНФ расписанию запускается обработка по формированию «ОРП». Данные для заполнения табличных частей «ОРП» берутся запросом из
 кассового сервера, таблицы которого подключены в 1С в качестве внешнего источника данных.</p>
 <p>Далeе программа прокси  отправляет запрос («GetChangeShop») в УНФ для получения номеров магазинов по которым были изменения остатков в ту
@@ -78,7 +78,7 @@
 Затем программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> перебирая номера магазинов формирует в УНФ запрос остатков по каждому. Получив остатки, <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> обрабатывает данные -
 для номенклатуры с аналогами переносит суммируя все остатки на головную номенклатуру, а аналоги удаляет из выгрузки, таким образом на кассы падает в остатках, только
 головная номенклатура.
-После формирования остатков, на основе этих данных формируется файл формата <a class="reference internal" href="gloss.html#term-aif"><span class="xref std std-term">aif</span></a> и выгружается в соответствующи каталог магазина.
+После формирования остатков, на основе этих данных формируется файл формата <a class="reference internal" href="gloss.html#term-aif"><span class="xref std std-term">aif</span></a> и выгружается в соответствующим каталог магазина.
 Кассовый сервер через определенное время «забирает» файл и формирует номенклатуру с остатками на магазине.</p>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">План</p>
