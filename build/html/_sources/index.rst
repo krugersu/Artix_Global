@@ -7,13 +7,18 @@
 ================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Содержание:
 
 
    description
    unf
    prox
+   setting
+   files
+
+
+
 
 Индексы и таблицы
 =================
@@ -21,3 +26,8 @@
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+Что реализовать:
+
+.. todolist::   
