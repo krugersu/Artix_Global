@@ -94,20 +94,29 @@
 </pre></div>
 </div>
 <p>где</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="s2">&quot;номер смены ккт&quot;</span><span class="p">,</span> <span class="s2">&quot;код кассы&quot;</span><span class="p">,</span> <span class="s2">&quot;дата время открытия смены&quot;</span><span class="p">,</span> <span class="s2">&quot;код магазина&quot;</span><span class="p">,</span> <span class="s2">&quot;id кассовой смены&quot;</span><span class="p">]]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="s2">&quot;номер смены ккт&quot;</span><span class="p">,</span> <span class="s2">&quot;код кассы&quot;</span><span class="p">,</span> <span class="s2">&quot;дата время закрытия смены&quot;</span><span class="p">,</span> <span class="s2">&quot;код магазина&quot;</span><span class="p">,</span>
+<span class="s2">&quot;дата время открытия смены&quot;</span><span class="p">,</span> <span class="s2">&quot;id кассовой смены&quot;</span><span class="p">,</span> <span class="s2">&quot;id магазина&quot;</span><span class="p">,</span> <span class="s2">&quot;id кассы&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Код кассира&quot;</span><span class="p">,</span> <span class="s2">&quot;Номер первого чека в смене&quot;</span><span class="p">,</span> <span class="s2">&quot;Номер последнего чека в смене&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Сумма продажи&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма выручки&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма в денежном ящике&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Дата и время открытия первого чека в смене&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма продажи (наличные)&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Сумма продажи (безналичные)&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма продажи (прочие)&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма выручки (наличные)&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Сумма выручки (безналичные)&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма возвратов&quot;</span><span class="p">,</span> <span class="s2">&quot;Сумма возвратов (наличные)&quot;</span><span class="p">,</span>
+<span class="s2">&quot;Сумма возвратов (безналичные)&quot;</span><span class="p">,</span> <span class="s2">&quot;Количество чеков продажи&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получает запрос, преобразует тело запроса в массив и вызывает процедуру</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">ОткрытьКассовыеСмены</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ДанныеСменККМ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ЗакрытьКассовыеСмены</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ДанныеСменККМ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Ссылка на это определение">¶</a></dt>
 <dd><p>передавая в нее данные полученные в запросе.В процедуре массив разбирается на составляющие и вызывается процедура</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">СоздатьКассовуюСмену</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">тНомерСмены</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тНомерМагазина</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаОткрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКассаАртикс</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workshiftid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Ссылка на это определение">¶</a></dt>
-<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a href="#id7"><span class="problematic" id="id8"><span id="id5"></span>[#]_</span></a> и если нет, то создается новая касоовая смена со статусом «Открыта».</p>
+<span class="sig-name descname"><span class="pre">ЗакрытьСмену</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">тНомерСмены</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тНомерМагазина</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаЗакрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКасса</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаОткрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКассаАртикс</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workshiftid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Ссылка на это определение">¶</a></dt>
+<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a class="footnote-reference brackets" href="#id6" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> и найденный документ заполняется переданными данными,
+если нет, то она создается  со статусом «Открыта».
+Затем кассовая смена закрывается.</p>
 </dd></dl>
 
 <p>В случае удачного завершения работы сервис возвращает код «200», в противном варианте вернется код ошибки.</p>
@@ -115,7 +124,8 @@
 <hr class="docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id6" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
 <p>Поиск производится по уникальному идентификатору смены «workshiftid». Этот реквизит был добавлен в документ «Кассовая смена».</p>
 </aside>
 </aside>
