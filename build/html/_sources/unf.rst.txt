@@ -19,7 +19,7 @@
 
      :ref:`2. GetChangeShop`
 
-     :ref:`3. test_s`
+     :ref:`3. GetProductRemains`
 
 
 #. Фоновых заданий и обработок
