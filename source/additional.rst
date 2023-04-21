@@ -88,3 +88,7 @@
 	https://docs.artix.su/pages/viewpage.action?pageId=27530936
 
 
+6. Настройка действий и контекста клавиш
+""""""""""""""""""""""""""""""""""""""""
+
+.. figure:: images/key.jpg

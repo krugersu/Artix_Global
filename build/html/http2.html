@@ -5,13 +5,16 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>2. GetChangeShop &#8212; документация Интеграция Artix-УНФ 0.2</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -41,6 +44,45 @@
             
   <section id="getchangeshop">
 <h1>2. GetChangeShop<a class="headerlink" href="#getchangeshop" title="Permalink to this heading">¶</a></h1>
+<p>Сервис предназначен для получения информации по каким магазинам было изменение остатков в ту иили иную стророну.</p>
+<p><strong>Пример запроса</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.252.250</span><span class="p">:</span><span class="mi">8082</span><span class="o">/</span><span class="n">unf_vz_const</span><span class="o">/</span><span class="n">hs</span><span class="o">/</span><span class="n">GetChangeShop</span><span class="o">/</span><span class="n">V1</span><span class="o">/</span><span class="n">GetShop</span>
+</pre></div>
+</div>
+<p><strong>Структура запроса</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="p">{</span><span class="n">Адрес</span> <span class="n">сервера</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">Имя</span> <span class="n">БД</span><span class="p">}</span><span class="o">/</span><span class="n">hs</span><span class="o">/</span><span class="p">{</span><span class="n">Имя</span><span class="p">}</span><span class="o">/</span><span class="n">V1</span><span class="o">/</span><span class="p">{</span><span class="n">Параметр</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Где:</p>
+<blockquote>
+<div><p>Адрес сервера - адрес сервера где опубликована база</p>
+<p>Имя БД - Имя опубликованной базы</p>
+<p>Имя - Имя запроса</p>
+<p>Параметр - Параметр запроса</p>
+</div></blockquote>
+<p>Параметр:</p>
+<ol class="arabic simple">
+<li><p>«GetShop» - получить изменения по магазинам</p></li>
+</ol>
+<p><strong>Описание</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Запрос</span> <span class="pre">с</span> <span class="pre">параметром</span> <span class="pre">&quot;GetShop&quot;</span></code></p>
+<p><a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получает запрос и вызывает функцию</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">ИзмененныеМагазины</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Формирует массив с номерами магазинов, в которых были изменения количества. Формирование происходит путем обхода каталогов в глобальнгом каталоге обена с Artix.
+Если в каталоге присутствует один или несколько файлов вида «1681466893_chg»<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, то номер этого магазина добавляется в итоговый массив, а файлы удаляются.</p>
+</dd></dl>
+
+<p>В случае удачного завершения работы сервис возвращает массив содержащий номера магазинов.</p>
+<p>В случае удачного завершения работы сервис возвращает код «200», в противном варианте вернется код ошибки.</p>
+<hr class="docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Имя файла  это псевдослучайное число образованное разностью дат, для достижения уникальности имени файла.</p>
+</aside>
+</aside>
 </section>
 
 
