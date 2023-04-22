@@ -44,9 +44,9 @@
             
   <section id="getproductremains">
 <h1>3. GetProductRemains<a class="headerlink" href="#getproductremains" title="Permalink to this heading">¶</a></h1>
-<p>Сервис предназначен для обработки данных по кассовым сменам. С его помощью открываются и закрываются кассовые смены.</p>
+<p>Сервис возвращает номенклатуру и остатки если это предусмотрено настройками номенклатуры, по номеру магазина переданному в параметре.</p>
 <p><strong>Пример запроса</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.252.250</span><span class="p">:</span><span class="mi">8082</span><span class="o">/</span><span class="n">unf_vz_const</span><span class="o">/</span><span class="n">hs</span><span class="o">/</span><span class="n">Workshift</span><span class="o">/</span><span class="n">V1</span><span class="o">/</span><span class="n">post_workshop_open</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://192.168.252.250:8082/unf_vz_const/hs/test_s/V1/GetProductRemains?number=test
 </pre></div>
 </div>
 <p><strong>Структура запроса</strong></p>
@@ -58,34 +58,27 @@
 <div><p>Адрес сервера - адрес сервера где опубликована база</p>
 <p>Имя БД - Имя опубликованной базы</p>
 <p>Имя - Имя запроса</p>
-<p>Параметр - Параметр запроса</p>
+<p>Параметр - Параметр запроса (номер магазина)</p>
 </div></blockquote>
-<p>Запрос может принимать два параметра:</p>
 <ol class="arabic simple">
-<li><p>«post_workshop_open» - открытие смены</p></li>
-<li><p>«post_workshop» - закрытие смены</p></li>
+<li><p>«number=» - номер магазина</p></li>
 </ol>
 <p><strong>Описание</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">Запрос</span> <span class="pre">с</span> <span class="pre">параметром</span> <span class="pre">&quot;post_workshop_open&quot;</span></code></p>
-<p>В теле запроса передаются данные открытой в Artix смены вида:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">195</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-04-20 11:47:29&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="mi">291</span><span class="p">]]</span>
-</pre></div>
-</div>
-<p>где</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="s2">&quot;номер смены ккт&quot;</span><span class="p">,</span> <span class="s2">&quot;код кассы&quot;</span><span class="p">,</span> <span class="s2">&quot;дата время открытия смены&quot;</span><span class="p">,</span> <span class="s2">&quot;код магазина&quot;</span><span class="p">,</span> <span class="s2">&quot;id кассовой смены&quot;</span><span class="p">]]</span>
-</pre></div>
-</div>
-<p><a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получает запрос, преобразует тело запроса в массив и вызывает процедуру</p>
+<p><code class="docutils literal notranslate"><span class="pre">Запрос</span> <span class="pre">с</span> <span class="pre">параметром</span> <span class="pre">&quot;number=&quot;</span></code></p>
+<p><a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> По переданному номеру получает ссылку на магазин вызывая функцию:</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">ОткрытьКассовыеСмены</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ДанныеСменККМ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Ссылка на это определение">¶</a></dt>
-<dd><p>передавая в нее данные полученные в запросе.В процедуре массив разбирается на составляющие и вызывается процедура</p>
+<dt class="sig sig-object py" id="Artix.">
+<span class="sig-prename descclassname"><span class="pre">крюОбменСArtixСервер.</span></span><span class="sig-name descname"><span class="pre">ПолучитьМагазинПоНомеруНовый</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Номер</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Artix." title="Ссылка на это определение">¶</a></dt>
+<dd><p>В функцию передается номер магазина, возвращается ссылка на магазин либо если магазин не найден - <strong>Неопределено</strong>
+Если магазин не найден, то возвращается код возврата «405», в теле ответа сообщение вида «Отсутствует магазин test22 GetProductRemains»
+и сервис завершает свою работу.
+Если ссылка на магазин получена, вызывается функцмя</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">СоздатьКассовуюСмену</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">тНомерСмены</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тНомерМагазина</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаОткрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКассаАртикс</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workshiftid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Ссылка на это определение">¶</a></dt>
-<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> и если нет, то создается новая касоовая смена со статусом «Открыта».</p>
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">ВернутьОстатки</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">текМагазин</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Номер</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Ссылка на это определение">¶</a></dt>
+<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a class="footnote-reference brackets" href="#id5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> и если нет, то создается новая касоовая смена со статусом «Открыта».</p>
 </dd></dl>
 
 <p><code class="docutils literal notranslate"><span class="pre">Запрос</span> <span class="pre">с</span> <span class="pre">параметром</span> <span class="pre">&quot;post_workshop&quot;</span></code></p>
@@ -109,15 +102,15 @@
 </div>
 <p><a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получает запрос, преобразует тело запроса в массив и вызывает процедуру</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">ЗакрытьКассовыеСмены</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ДанныеСменККМ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">ЗакрытьКассовыеСмены</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ДанныеСменККМ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Ссылка на это определение">¶</a></dt>
 <dd><p>передавая в нее данные полученные в запросе.В процедуре массив разбирается на составляющие и вызывается процедура</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">ЗакрытьСмену</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">тНомерСмены</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тНомерМагазина</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаЗакрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКасса</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаОткрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКассаАртикс</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workshiftid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Ссылка на это определение">¶</a></dt>
-<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a class="footnote-reference brackets" href="#id6" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> и найденный документ заполняется переданными данными,
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">ЗакрытьСмену</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">тНомерСмены</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тНомерМагазина</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаЗакрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКасса</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тДатаОткрытия</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">тКассаАртикс</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workshiftid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Ссылка на это определение">¶</a></dt>
+<dd><p>с данными кассовой смены. В этой процедуре выполняется проверка на то что смена с такими параметрами уже существует <a class="footnote-reference brackets" href="#id5" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> и найденный документ заполняется переданными данными,
 если нет, то она создается  со статусом «Открыта».
 Затем кассовая смена закрывается.</p>
 </dd></dl>
@@ -126,9 +119,9 @@
 <p>В случае удачного завершения работы сервис возвращает код «200», в противном варианте вернется код ошибки.</p>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="note">
+<aside class="footnote brackets" id="id5" role="note">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
 <p>Поиск производится по уникальному идентификатору смены «workshiftid». Этот реквизит был добавлен в документ «Кассовая смена».</p>
 </aside>
 </aside>
