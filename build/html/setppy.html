@@ -1,0 +1,155 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Установка и настройка &#8212; документация Интеграция Artix-УНФ 0.2</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.2</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">1. Установка и настройка</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>1. Установка и настройка<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<section id="webmin">
+<h2>Установка Webmin (панель управления сервером)<a class="headerlink" href="#webmin" title="Permalink to this heading">¶</a></h2>
+<p>Ссылка на сайт с полной инструкцией по <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-webmin-on-ubuntu-22-04">установке</a> (англ.)</p>
+<p>Webmin - это современная веб-панель управления, которая позволяет вам администрировать ваш Linux-сервер через интерфейс на основе браузера.
+С помощью Webmin вы можете управлять учетными записями пользователей, настраивать параметры DNS и изменять параметры для обычных пакетов «на лету».
+В этом руководстве вы установите и настроите Webmin на своем сервере и обеспечите доступ к интерфейсу с помощью действительного сертификата от Let’s Encrypt.
+Затем вы будете использовать Webmin для добавления новых учетных записей пользователей и обновления всех пакетов на вашем сервере с панели мониторинга.</p>
+<p>Требования:</p>
+<ol class="arabic simple">
+<li><p>One Ubuntu 22.04 server</p></li>
+<li><p>Apache</p></li>
+</ol>
+<p>Инсталяция</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="linenos">2</span>$<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.webmin.com/jcameron-key.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/webmin.gpg
+<span class="linenos">3</span>$<span class="w"> </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/apt/sources.list
+<span class="linenos">4</span>$<span class="w"> </span>deb<span class="w"> </span><span class="o">[</span>signed-by<span class="o">=</span>/usr/share/keyrings/webmin.gpg<span class="o">]</span><span class="w"> </span>http://download.webmin.com/download/repository<span class="w"> </span>sarge<span class="w"> </span>contrib
+<span class="linenos">5</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="linenos">6</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>webmin
+</pre></div>
+</div>
+<p>Webmin доступен по адресу  - <a class="reference external" href="https://your_server:10000">https://your_server:10000</a></p>
+</section>
+<section id="neofetch">
+<h2>Установка Neofetch<a class="headerlink" href="#neofetch" title="Permalink to this heading">¶</a></h2>
+<p>Neofetch - это очень простая в использовании и кроссплатформенная утилита которая позволяет отображать информацию о системе в терминале</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+<span class="linenos">2</span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>neofetch
+</pre></div>
+</div>
+</section>
+<section id="python">
+<h2>Установка Python<a class="headerlink" href="#python" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="linenos">2</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3.10
+<span class="linenos">3</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-venv
+</pre></div>
+</div>
+</section>
+<section id="git">
+<h2>Установка Git<a class="headerlink" href="#git" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="linenos">2</span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+<span class="linenos">3</span>$<span class="w"> </span>git<span class="w"> </span>--version
+<span class="linenos">4</span>
+<span class="linenos">5</span>$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+<span class="linenos">6</span>$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;youremail@domain.com&quot;</span>
+<span class="linenos">7</span>$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--list
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>Установка программы<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/krugersu/Global
+<span class="linenos">2</span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Global/
+<span class="linenos">3</span>$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="linenos">4</span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+<span class="linenos">5</span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pysqlite3-binary
+<span class="linenos">6</span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="linenos">7</span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>src/
+<span class="linenos">8</span>$<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>main.py
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.2</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">1. Установка и настройка</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>
