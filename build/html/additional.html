@@ -136,6 +136,121 @@
 <img alt="_images/key.jpg" src="_images/key.jpg" />
 </figure>
 </section>
+<section id="id7">
+<h2>7. Конфигурирование дистконтной системы<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<p>Ссылка на сайт с полной <a class="reference external" href="https://docs.artix.su/pages/viewpage.action?pageId=27531279#id-Встроеннаядисконтнаяподсистема-Конфигурирование">инструкцией</a></p>
+<p>Дисконтная система поставляется отдельным пакетом artix45-discountsystem.</p>
+<p>Наличие минимальной цены влияет на методы распределения скидок на чек и наборы.
+Минимальные цены не учитываются на этапе расчета скидок, дополнительное ограничение минимальной цены накладывается на этапе применения.</p>
+<p>Сумма скидки на чек распределяется в два этапа:</p>
+<ul class="simple">
+<li><p>распределение по позициям пропорционально стоимости каждой позиции,</p></li>
+<li><p>размещение остатка максимально возможными суммами начиная с первой позиции.</p></li>
+</ul>
+<p>Правила распределения остатка определяется параметром <strong>distributeReceiptDiscountFully</strong> в конфигурационном файле <em>/linuxcash/cash/conf/ncash.ini в секции [Discount]:</em></p>
+<ul class="simple">
+<li><p>при значении параметра true остаток скидки распределяется максимально возможными суммами, учитывая ограничения минимальной ценой товара. Выполняется только первый этап распределения скидки;</p></li>
+<li><p>при значении параметра false сумма скидки на чек распределяется по позициям пропорционально их стоимости.</p></li>
+</ul>
+<p>Размер скидки на позицию ограничивается минимальной ценой товара. В случае предоставления скидок на наборы минимальную цену
+на товары можно игнорировать для того, чтобы иметь возможность задавать акции вида «купи две штуки и одну получи в подарок»,
+когда скидка назначается только на один из товаров. Возможность игнорирования минимальной цены при предоставлении скидки
+на наборы задается параметром <strong>ignoreMinimalPriceForKit</strong> в конфигурационном файле <em>/linuxcash/cash/conf/ncash.ini в секции [Discount]:</em></p>
+<ul class="simple">
+<li><p>при значении параметра true минимальная цена при применении скидки на набор игнорируется,</p></li>
+<li><p>при значении параметра false скидка на комплект будет предоставлена с учетом минимальной цены на товар.</p></li>
+</ul>
+<p>В основе дисконтной системы заложена идея использования любых доступных элементов чека (товарная позиция, дисконтная карта и т.д.)
+для проверки условий и вычисления ставок. Так как условия скидок могут быть сложными, то после изменения состава чека выполняется
+отмена ранее примененных скидок, последующий пересчет и применение новых. Пересчет скидок может занимать продолжительное время,
+это может происходить из-за недостатка ресурсов машины, на которой осуществляется работа, или из-за сложности самих скидок.
+Кассовое ПО Artix может быть настроено таким образом, чтобы расчет скидок происходил как в процессе формирования чека,
+так и только при переходе к оплате документа. Момент расчета скидок задается параметром <strong>recalcDiscInFormingMode</strong>
+в конфигурационном файле <em>/linuxcash/cash/conf/ncash.ini в секции [Check]:</em></p>
+<ul class="simple">
+<li><p>при значении параметра true скидки пересчитываются в режиме формирования документа,</p></li>
+<li><p>при значении параметра false скидки пересчитываются при переходе в подитог.</p></li>
+</ul>
+<p>Если расчет скидок происходит в режиме формирования документа, то пересчет скидок выполняется после:</p>
+<ul class="simple">
+<li><p>добавления или сторнирования товарной позиции,</p></li>
+<li><p>добавления или удаления карты,</p></li>
+<li><p>изменения модификаторов (цена, количество и т.п.) товарной позиции.</p></li>
+</ul>
+<p>При использовании акций со ставкой 0% (например, рекламных) можно контролировать запись информации о сработавшем дисконтном
+воздействии на позицию в БД <em>Documents</em> таблицу <em>Discitem</em>. Возможность сохранения скидки 0% на позицию
+в БД задается параметром <strong>saveNullDiscountForPosition</strong> в конфигурационном файле <em>/linuxcash/cash/conf/ncash.ini в секции [Discount]:</em></p>
+<ul class="simple">
+<li><p>при значении параметра true скидки 0% на позицию сохраняются в БД,</p></li>
+<li><p>при значении параметра false скидки 0% на позицию не сохраняются в БД.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 35%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Наименование</p></th>
+<th class="head"><p>Тип данных</p></th>
+<th class="head"><p>Возможные значения</p></th>
+<th class="head"><p>Описание</p></th>
+<th class="head"><p>Примечания</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>distributeReceiptDiscountFully</p></td>
+<td><p>логический</p></td>
+<td><p>true, false</p></td>
+<td><p>Полностью распределять по позициям сумму скидки на чек</p></td>
+<td><p>По умолчанию true</p></td>
+</tr>
+<tr class="row-odd"><td><p>ignoreMinimalPriceForKit</p></td>
+<td><p>логический</p></td>
+<td><p>true, false</p></td>
+<td><p>Игнорировать минимальную цену при применении скидки на комплект</p></td>
+<td><p>По умолчанию true</p></td>
+</tr>
+<tr class="row-even"><td><p>recalcDiscInFormingMode</p></td>
+<td><p>логический</p></td>
+<td><p>true, false</p></td>
+<td><p>Пересчитывать скидки в режиме формирования чека</p></td>
+<td><p>По умолчанию true</p></td>
+</tr>
+<tr class="row-odd"><td><p>saveNullDiscountForPosition</p></td>
+<td><p>логический</p></td>
+<td><p>true, false</p></td>
+<td><p>Сохранять скидку 0% на позицию в базу данных</p></td>
+<td><p>По умолчанию false</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Пример настроек</strong></p>
+<div class="highlight-ini notranslate" id="id9"><div class="highlight"><pre><span></span><span class="k">[Discounts]</span>
+<span class="c1">;</span>
+<span class="c1">; Скидки</span>
+<span class="c1">;</span>
+<span class="na">...</span>
+<span class="c1">; Полностью распределять по позициям сумму скидки на чек</span>
+<span class="na">distributeReceiptDiscountFully</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+<span class="na">...</span>
+<span class="c1">; Сохранять скидку 0% на позицию в базу данных</span>
+<span class="na">saveNullDiscountForPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+<span class="c1">; Игнорировать минимальную цену при применении скидки на комплект</span>
+<span class="na">ignoreMinimalPriceForKit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+
+<span class="k">[Check]</span>
+<span class="c1">;</span>
+<span class="c1">; Настройки чека</span>
+<span class="c1">;</span>
+<span class="na">...</span>
+<span class="c1">; Пересчитывать скидки в режиме формирования чека, по-умолчанию true.</span>
+<span class="na">recalcDiscInFormingMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
