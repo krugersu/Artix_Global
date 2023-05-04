@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Сайт с документацией &#8212; документация Интеграция Artix-УНФ 0.3</title>
+    <title>Сайт с документацией &#8212; документация Интеграция Artix-УНФ 0.35</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="additional.html" title="Дополнительные материалы:"
              accesskey="P">назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.3</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.35</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Сайт с документацией</a></li> 
       </ul>
     </div>  
@@ -62,9 +62,10 @@ $<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span
 </section>
 <section id="apache">
 <h3>2. Установка Apache.<a class="headerlink" href="#apache" title="Permalink to this heading">¶</a></h3>
+<p>Ссылка на сайт с полной <a class="reference external" href="https://www.8host.com/blog/ustanovka-veb-servera-apache-v-ubuntu-22-04/">инструкцией</a></p>
 <p>Установка без настройки брандмауэра.</p>
-<section id="id3">
-<h4>Установка:<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h4>
+<section id="id4">
+<h4>Установка:<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 $<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2
 $<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>apache2
@@ -87,8 +88,8 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 <p>Согласно этому выводу сервис успешно запустился. Но лучше ещё запросить страницу Apache, чтобы убедиться, что веб-сервер работает правильно.</p>
 </section>
 </section>
-<section id="id4">
-<h3>3. Управление процессами Apache.<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<section id="id5">
+<h3>3. Управление процессами Apache.<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <p>Чтобы остановить веб-сервер, введите:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>apache2
 </pre></div>
@@ -103,8 +104,8 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 </div>
 <p>По умолчанию Apache добавлен в автозагрузку.</p>
 </section>
-<section id="id5">
-<h3>4. Настройка виртуальных хостов.<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<section id="id6">
+<h3>4. Настройка виртуальных хостов.<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
 <p>На веб-сервере Apache вы можете использовать виртуальные хосты (в Nginx это блоки server) для изоляции настроек и
 размещения нескольких доменов на одном сервере. Здесь используется условный домен example.com, который нужно заменить доменом вашего сайта.</p>
 <p>В Ubuntu 22.04 веб-сервер Apache по умолчанию предоставляет один включенный виртуальный хост,
@@ -174,6 +175,69 @@ $<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w">
 </div>
 <p>Теперь Apache должен обслуживать ваше доменное имя. Для проверки перейдите по адресу <a class="reference external" href="http://krudoc">http://krudoc</a>, вы должны увидеть что-то вроде этого:</p>
 </section>
+<section id="id7">
+<h3>5. Важные файлы и каталоги Apache.<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<p>Контент</p>
+<p>#. <cite>/var/www/html</cite>: Фактический веб-контент, который по умолчанию состоит только из стандартной
+страницы Apache (ранее вы её уже видели), обслуживается из каталога <cite>/var/www/html</cite>. Это можно изменить,
+внеся корректировки в файлы конфигурации Apache.</p>
+<p>Настройка сервера</p>
+<ol class="arabic simple">
+<li><p><cite>/etc/apache2</cite>: каталог конфигурации Apache. Все файлы настроек Apache находятся здесь.</p></li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/apache2.conf</cite>: основной файл настройки Apache. Его можно корректировать</dt><dd><p>для внесения изменений в глобальную конфигурацию Apache. Этот файл отвечает за загрузку
+многих других файлов в каталоге конфигурации.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/ports.conf</cite>: В этом файле указаны порты, которые прослушивает Apache.</dt><dd><p>По умолчанию Apache прослушивает порт 80 и дополнительно порт 443, если включен SSL.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/sites-available/</cite>: каталог, в котором могут храниться виртуальные хосты</dt><dd><p>для каждого сайта. Apache не будет использовать файлы настроек из этого каталога,
+если они не связаны с каталогом sites-enabled. Обычно вся конфигурация блока выполняется
+в этом каталоге, а затем включается путем ссылки на другой каталог с помощью команды a2ensite.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/sites-enabled/</cite>: каталог, в котором хранятся включенные виртуальные хосты</dt><dd><p>для каждого сайта. Обычно они создаются по ссылке на файлы настроек из каталога sites-available
+с помощью команды <em>a2ensite</em>. Apache считывает конфигурационные файлы и ссылки, находящиеся
+в этом каталоге, при запуске или перезагрузке для компиляции полной настройки.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/conf-available/</cite>, <cite>/etc/apache2/conf-enabled/</cite>: Эти каталоги имеют те же отношения,</dt><dd><p>что и каталоги <cite>sites-available`и `ites-enabled`</cite> но используются для хранения фрагментов настроек,
+которые не принадлежат виртуальному хосту. Файлы в каталоге <cite>conf-available</cite> можно включить
+с помощью команды <em>a2enconf</em>, а отключить – <em>a2disconf</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/etc/apache2/mods-available/</cite>, <cite>/etc/apache2/mods-enabled/</cite>: эти каталоги содержат доступные</dt><dd><p>и включенные модули соответственно. Файлы, заканчивающиеся на .load, содержат фрагменты для
+загрузки определенных модулей, а которые заканчиваются на .conf, содержат настройки этих модулей.
+Модули можно включать и отключать с помощью команд <em>a2enmod</em> и <em>a2dismod</em>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Логи сервера</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><cite>/var/log/apache2/access.log</cite>: каждый запрос к вашему веб-серверу записывается в этот лог по умолчанию,</dt><dd><p>если Apache не настроен иначе.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>/var/log/apache2/error.log</cite>: по умолчанию все ошибки записываются в этот файл.</dt><dd><p>Директива LogLevel в конфигурации Apache определяет, насколько подробную информацию будут содержать журналы ошибок.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
 </section>
 </section>
 
@@ -221,7 +285,7 @@ $<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w">
         <li class="right" >
           <a href="additional.html" title="Дополнительные материалы:"
              >назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.3</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.35</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Сайт с документацией</a></li> 
       </ul>
     </div>
