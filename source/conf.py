@@ -9,7 +9,7 @@
 project = 'Интеграция Artix-УНФ'
 copyright = '2023, PashkovKV'
 author = 'PashkovKV'
-release = '0.40'
+release = '0.41'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
