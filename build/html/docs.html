@@ -157,6 +157,7 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 </div>
 <p>Отключите сайт по умолчанию, определенный в 000-default.conf:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>a2dissite<span class="w"> </span><span class="m">000</span>-default.conf
+$<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
 </pre></div>
 </div>
 <p>Далее проверим ошибки настроек:</p>
