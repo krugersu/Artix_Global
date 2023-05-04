@@ -1,0 +1,263 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Установка и настройка Gitea &#8212; документация Интеграция Artix-УНФ 0.35</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Файлы" href="files.html" />
+    <link rel="prev" title="Сайт с документацией" href="docs.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="files.html" title="Файлы"
+             accesskey="N">вперёд</a> |</li>
+        <li class="right" >
+          <a href="docs.html" title="Сайт с документацией"
+             accesskey="P">назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.35</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Установка и настройка Gitea</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="gitea">
+<h1>Установка и настройка Gitea<a class="headerlink" href="#gitea" title="Permalink to this heading">¶</a></h1>
+<p>Git должен уже быть установлен в системе -  <a class="reference internal" href="setppy.html#gitinst"><span class="std std-ref">Установка Git</span></a></p>
+<p>Ссылка на сайт с полной <a class="reference external" href="https://routerus.com/how-to-install-gitea-on-ubuntu-18-04/#Настроить_Gitea">инструкцией</a></p>
+<section id="id2">
+<h2>1. Подготовка<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>Gitea поддерживает SQLite, PostgreSQL и MySQL / MariaDB в качестве серверной части базы данных.</p>
+<p>Мы будем использовать SQLite в качестве базы данных для Gitea. Если SQLite не установлен в вашей
+системе Ubuntu, вы можете установить его, введя следующие команды от имени пользователя sudo :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>sqlite3
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>2. Установка Gitea<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<p>Проверьте установку, отобразив версию Git:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>version<span class="w"> </span><span class="m">2</span>.34.1
+</pre></div>
+</div>
+</section>
+<section id="git">
+<h2>3. Создайте пользователя Git<a class="headerlink" href="#git" title="Permalink to this heading">¶</a></h2>
+<p>Создайте нового системного пользователя, который будет запускать приложение Gitea, набрав:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>adduser<span class="w"> </span>--system<span class="w"> </span>--group<span class="w"> </span>--disabled-password<span class="w"> </span>--shell<span class="w"> </span>/bin/bash<span class="w"> </span>--home<span class="w"> </span>/home/git<span class="w"> </span>--gecos<span class="w"> </span><span class="s1">&#39;Git Version Control&#39;</span><span class="w"> </span>git
+</pre></div>
+</div>
+<p>Команда создаст нового пользователя и группу с именем git и установит домашний каталог в /home/git . Результат будет выглядеть примерно так:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Adding system user `git&#39; (UID 111) ...
+Adding new group `git&#39; (GID 116) ...
+Adding new user `git&#39; (UID 111) with group `git&#39; ...
+Creating home directory `/home/git&#39; ...
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>4. Скачать бинарный файл Gitea<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<p>Посетите страницу загрузки Gitea и загрузите последнюю версию двоичного файла для вашей архитектуры.
+На момент написания последняя версия — 1.19.3. Если доступна новая версия, измените переменную VERSION в приведенной ниже команде.</p>
+<p>Загрузите двоичный файл Gitea в каталог /tmp используя следующую команду wget :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>sudo<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/tmp/gitea<span class="w"> </span>https://dl.gitea.com/gitea/1.19.3/gitea-1.19.3-linux-amd64
+</pre></div>
+</div>
+<p>gitea файл gitea можно запускать из любого места. Мы будем следовать соглашению и переместим двоичный файл в каталог <cite>/usr/local/bin</cite> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/gitea<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>Сделайте двоичный исполняемый файл:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/gitea
+</pre></div>
+</div>
+<p>Выполните следующие команды, чтобы создать каталоги и установить необходимые разрешения и владение :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/gitea/<span class="o">{</span>custom,data,indexers,public,log<span class="o">}</span>
+$<span class="w"> </span>sudo<span class="w"> </span>chown<span class="w"> </span>git:<span class="w"> </span>/var/lib/gitea/<span class="o">{</span>data,indexers,log<span class="o">}</span>
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/lib/gitea/<span class="o">{</span>data,indexers,log<span class="o">}</span>
+$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/gitea
+$<span class="w"> </span>sudo<span class="w"> </span>chown<span class="w"> </span>root:git<span class="w"> </span>/etc/gitea
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">770</span><span class="w"> </span>/etc/gitea
+</pre></div>
+</div>
+<p>Указанная выше структура каталогов рекомендована официальной документацией Gitea.
+Разрешения для каталога <cite>/etc/gitea</cite> установлены на 770 чтобы мастер установки мог создать файл конфигурации.</p>
+</section>
+<section id="systemd">
+<h2>5. Создайте файл модуля Systemd<a class="headerlink" href="#systemd" title="Permalink to this heading">¶</a></h2>
+<p>Gitea предоставляет файл модуля Systemd, который уже настроен в соответствии с нашей настройкой.
+Загрузите файл в каталог <cite>/etc/systemd/system/</cite> , набрав:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/go-gitea/gitea/master/contrib/systemd/gitea.service<span class="w"> </span>-P<span class="w"> </span>/etc/systemd/system/
+</pre></div>
+</div>
+<p>После этого включите и запустите службу Gitea:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>gitea
+</pre></div>
+</div>
+<p>Убедитесь, что служба запущена успешно:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>gitea
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>gitea.service<span class="w"> </span>-<span class="w"> </span>Gitea<span class="w"> </span><span class="o">(</span>Git<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>cup<span class="w"> </span>of<span class="w"> </span>tea<span class="o">)</span>
+<span class="w">    </span>Loaded:<span class="w"> </span>loaded<span class="w"> </span><span class="o">(</span>/etc/systemd/system/gitea.service<span class="p">;</span><span class="w"> </span>enabled<span class="p">;</span><span class="w"> </span>vendor<span class="w"> </span>preset:<span class="w"> </span>enabled<span class="o">)</span>
+<span class="w">    </span>Active:<span class="w"> </span>active<span class="w"> </span><span class="o">(</span>running<span class="o">)</span><span class="w"> </span>since<span class="w"> </span>Sat<span class="w"> </span><span class="m">2020</span>-01-04<span class="w"> </span><span class="m">21</span>:27:23<span class="w"> </span>UTC<span class="p">;</span><span class="w"> </span>3s<span class="w"> </span>ago
+Main<span class="w"> </span>PID:<span class="w"> </span><span class="m">14804</span><span class="w"> </span><span class="o">(</span>gitea<span class="o">)</span>
+<span class="w">    </span>Tasks:<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">(</span>limit:<span class="w"> </span><span class="m">1152</span><span class="o">)</span>
+<span class="w">    </span>CGroup:<span class="w"> </span>/system.slice/gitea.service
+<span class="w">            </span>└─14804<span class="w"> </span>/usr/local/bin/gitea<span class="w"> </span>web<span class="w"> </span>--config<span class="w"> </span>/etc/gitea/app.ini
+...
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>6. Настроить Gitea<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
+<p>Теперь, когда Gitea загружена и запущена, пора завершить установку через веб-интерфейс.
+По умолчанию Gitea прослушивает подключения через порт 3000 на всех сетевых интерфейсах.
+Если на вашем сервере работает брандмауэр UFW , вам нужно открыть порт Gitea:</p>
+<p>Откройте браузер, введите <a class="reference external" href="http://YOUR_DOMAIN_IR_IP:3000">http://YOUR_DOMAIN_IR_IP:3000</a></p>
+<p>Настройки базы данных:</p>
+<ol class="arabic simple">
+<li><p>Тип базы данных: SQLite3</p></li>
+<li><p>Путь: используйте абсолютный путь, <cite>/var/lib/gitea/data/gitea.db</cite></p></li>
+</ol>
+<p>Общие настройки приложения:</p>
+<ol class="arabic simple">
+<li><p>Заголовок сайта: введите название вашей организации.</p></li>
+<li><p>Корневой путь репозитория: оставьте значение по умолчанию <cite>/home/git/gitea-repositories</cite> .</p></li>
+<li><p>Корневой путь Git LFS: оставьте значение по умолчанию <cite>/var/lib/gitea/data/lfs</cite> .</p></li>
+<li><p>Запуск от имени пользователя: git</p></li>
+<li><p>Домен SSH-сервера: введите IP-адрес вашего домена или сервера.</p></li>
+<li><p>Порт SSH: 22, измените его, если SSH прослушивает другой порт</p></li>
+<li><p>Порт прослушивания HTTP Gitea: 3000</p></li>
+<li><p>Базовый URL Gitea: используйте http и IP-адрес вашего домена или сервера.</p></li>
+<li><p>Путь к <cite>/var/lib/gitea/log</cite> : оставьте значение по умолчанию <cite>/var/lib/gitea/log</cite></p></li>
+</ol>
+<p>Вы можете изменить настройки в любое время, отредактировав файл конфигурации Gitea.
+После этого нажмите кнопку «Установить Gitea». Установка происходит мгновенно.
+По завершении вы будете перенаправлены на страницу входа.
+Щелкните ссылку «Зарегистрироваться сейчас». Первый зарегистрированный пользователь
+автоматически добавляется в группу администратора.</p>
+<p>Измените разрешения файла конфигурации Gitea на доступ только для чтения, используя:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/etc/gitea
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">640</span><span class="w"> </span>/etc/gitea/app.ini
+</pre></div>
+</div>
+<p>Вот и все. Gitea установлена на вашем компьютере с Ubuntu.</p>
+</section>
+<section id="id6">
+<h2>7. Обновление Gitea<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<p>Чтобы обновить Gitea до последней версии, просто скачайте и замените двоичный файл.</p>
+<ol class="arabic simple">
+<li><p>Остановите сервис Gitea:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>gitea
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Загрузите последнюю версию Gitea и переместите ее в каталог /usr/local/bin :</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">VERSION</span><span class="o">=</span>&lt;THE_LATEST_GITEA_VERSION&gt;
+$<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/tmp/gitea<span class="w"> </span>https://dl.gitea.io/gitea/<span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>/gitea-<span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>-linux-amd64
+$<span class="w"> </span>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/gitea<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Сделайте двоичный исполняемый файл:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/gitea
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Перезапустите сервис Gitea:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>gitea
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Установка и настройка Gitea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="files.html" title="Файлы"
+             >вперёд</a> |</li>
+        <li class="right" >
+          <a href="docs.html" title="Сайт с документацией"
+             >назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.35</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Установка и настройка Gitea</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>

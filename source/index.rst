@@ -16,6 +16,7 @@
    prox
    setting
    docs
+   git
    files
 
 
