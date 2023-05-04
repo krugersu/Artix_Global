@@ -153,6 +153,7 @@ Git должен уже быть установлен в системе -  :ref:
 .. code-block:: bash
 
     $ sudo a2dissite 000-default.conf
+    $ systemctl reload apache2
 
 
 Далее проверим ошибки настроек:
