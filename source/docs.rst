@@ -153,3 +153,25 @@ Git должен уже быть установлен в системе -  :ref:
 .. code-block:: bash
 
     $ sudo a2dissite 000-default.conf
+
+
+Далее проверим ошибки настроек:
+
+.. code-block:: bash
+
+    $ sudo apache2ctl configtest
+
+Вывод должен быть следующим:
+
+.. code-block:: bash
+
+    $ Syntax OK
+
+
+Перезапустите Apache, чтобы изменения вступили в силу:
+
+.. code-block:: bash
+
+    $ sudo systemctl restart apache2
+
+Теперь Apache должен обслуживать ваше доменное имя. Для проверки перейдите по адресу http://krudoc, вы должны увидеть что-то вроде этого:    

@@ -103,6 +103,76 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 </div>
 <p>По умолчанию Apache добавлен в автозагрузку.</p>
 </section>
+<section id="id5">
+<h3>4. Настройка виртуальных хостов.<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<p>На веб-сервере Apache вы можете использовать виртуальные хосты (в Nginx это блоки server) для изоляции настроек и
+размещения нескольких доменов на одном сервере. Здесь используется условный домен example.com, который нужно заменить доменом вашего сайта.</p>
+<p>В Ubuntu 22.04 веб-сервер Apache по умолчанию предоставляет один включенный виртуальный хост,
+который обслуживает каталог /var/www/html. Этого хватит для работы одного сайта, но если вы хотите
+разместить несколько сайтов, вам нужно создать новые виртуальные хосты. Создайте структуру каталогов
+в /var/www для сайта example.com, а /var/www/html оставьте как каталог по умолчанию, который будет
+обслуживаться, если запрос клиента не соответствует другим сайтам.</p>
+<p>Создайте каталог для your_domain:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/var/www/krudoc
+</pre></div>
+</div>
+<p>Затем укажите права на каталог с помощью переменной $USER:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>/var/www/krudoc
+</pre></div>
+</div>
+<p>Права должны быть предоставлены, если вы не меняли значение umask, которое устанавливает права файлов по умолчанию. Чтобы убедиться,
+что права предоставлены и пользователь может работать с файлами, нужно ввести команду:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>/var/www/krudoc
+</pre></div>
+</div>
+<p>Далее копируем содержимое каталога  <cite>~/Doc/Artix_Global/build/html</cite> в  <cite>/var/www/krudoc</cite></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>~/Doc/Artix_Global/build/html/.<span class="w">  </span>/var/www/krudoc
+</pre></div>
+</div>
+<p>Нужно создать файл виртуального хоста с правильными директивами, чтобы Apache мог обслуживать этот контент.
+Чтобы напрямую не изменять файл конфигурации по умолчанию, расположенный
+в <cite>/etc/apache2/sites-available/000-default.conf</cite>, мы создадим новый в <cite>/etc/apache2/sites-available/your_domain.conf`</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/apache2/sites-available/krudoc.conf
+</pre></div>
+</div>
+<p>Вставьте в файл следующий блок настроек. Он похож на конфигурации по умолчанию, но содержит правильный домен и каталог:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost<span class="w"> </span>*:80&gt;
+<span class="w">    </span>ServerAdmin<span class="w"> </span>pk69@kruger.su
+<span class="w">    </span>ServerName<span class="w"> </span>krudoc
+<span class="w">    </span>ServerAlias<span class="w"> </span>www.krudoc
+<span class="w">    </span>DocumentRoot<span class="w"> </span>/var/www/krudoc
+<span class="w">    </span>ErrorLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/error.log
+<span class="w">    </span>CustomLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/access.log<span class="w"> </span>combined
+&lt;/VirtualHost&gt;
+</pre></div>
+</div>
+<p>Обратите внимание, мы обновили DocumentRoot на наш новый каталог, а ServerAdmin на адрес электронной почты,
+к которому может получить доступ администратор сайта your_domain. Также мы добавили две директивы: ServerName,
+которая устанавливает базовый домен, который должен соответствовать этому определению виртуального хоста,
+и ServerAlias – определяет дополнительные имена, которые должны соответствовать базовому имени.</p>
+<p>После того, как закончите, сохраните и закройте файл.</p>
+<p>Включим файл с помощью a2ensite:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>a2ensite<span class="w"> </span>krudoc.conf
+</pre></div>
+</div>
+<p>Отключите сайт по умолчанию, определенный в 000-default.conf:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>a2dissite<span class="w"> </span><span class="m">000</span>-default.conf
+</pre></div>
+</div>
+<p>Далее проверим ошибки настроек:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest
+</pre></div>
+</div>
+<p>Вывод должен быть следующим:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>Syntax<span class="w"> </span>OK
+</pre></div>
+</div>
+<p>Перезапустите Apache, чтобы изменения вступили в силу:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+</pre></div>
+</div>
+<p>Теперь Apache должен обслуживать ваше доменное имя. Для проверки перейдите по адресу <a class="reference external" href="http://krudoc">http://krudoc</a>, вы должны увидеть что-то вроде этого:</p>
+</section>
 </section>
 </section>
 
