@@ -1,0 +1,74 @@
+Сайт с документацией
+====================
+
+Разворачивание сайта:
+---------------------
+
+Git должен уже быть установлен в системе -  :ref:`gitinst`
+
+1. Копирование Git репозитория.
+"""""""""""""""""""""""""""""""
+
+.. code-block:: bash
+
+    $ mkdir ~/Doc
+    $ cd Doc/
+    $ git clone https://github.com/krugersu/Artix_Global
+
+
+2. Установка Apache.
+""""""""""""""""""""
+Установка без настройки брандмауэра.
+
+Установка:
+~~~~~~~~~
+
+.. code-block:: bash
+
+    $ sudo apt update
+    $ sudo apt install apache2
+    $ sudo systemctl status apache2
+
+Получаем вывод вида:    
+
+
+.. code-block:: bash
+
+    apache2.service - The Apache HTTP Server
+    Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+    Active: active (running) since Thu 2020-04-23 22:36:30 UTC; 20h ago
+        Docs: https://httpd.apache.org/docs/2.4/
+    Main PID: 29435 (apache2)
+        Tasks: 55 (limit: 1137)
+    Memory: 8.0M
+    CGroup: /system.slice/apache2.service
+            ├─29435 /usr/sbin/apache2 -k start
+            ├─29437 /usr/sbin/apache2 -k start
+            └─29438 /usr/sbin/apache2 -k start
+
+Согласно этому выводу сервис успешно запустился. Но лучше ещё запросить страницу Apache, чтобы убедиться, что веб-сервер работает правильно.
+
+
+3. Управление процессами Apache.
+""""""""""""""""""""""""""""""""
+
+Чтобы остановить веб-сервер, введите:
+
+.. code-block:: bash
+
+    $ sudo systemctl stop apache2
+
+Запустить:
+
+.. code-block:: bash
+
+    $ sudo systemctl start apache2
+
+Перезапуск:
+
+.. code-block:: bash
+
+    $ sudo systemctl restart apache2
+
+По умолчанию Apache добавлен в автозагрузку.
+

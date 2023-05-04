@@ -167,6 +167,8 @@
     "recalcDiscInFormingMode", "логический", "true, false","Пересчитывать скидки в режиме формирования чека", "По умолчанию true" 
     "saveNullDiscountForPosition", "логический", "true, false","Сохранять скидку 0% на позицию в базу данных", "По умолчанию false" 
     
+S
+
 **Пример настроек**
 
 .. code-block:: ini

@@ -15,6 +15,7 @@
    unf
    prox
    setting
+   docs
    files
 
 
