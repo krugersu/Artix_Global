@@ -14,5 +14,23 @@
 \contentsline {subsection}{\numberline {4.3.3}3. Ссылка на скачивание дистрибутива yuki}{11}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}4. Остатки}{11}{subsection.4.3.4}%
 \contentsline {subsection}{\numberline {4.3.5}5. Дисконтные карты (создание)}{12}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Файлы}{13}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Индексы и таблицы}{15}{chapter.6}%
+\contentsline {subsection}{\numberline {4.3.6}6. Настройка действий и контекста клавиш}{12}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}7. Конфигурирование дистконтной системы}{12}{subsection.4.3.7}%
+\contentsline {chapter}{\numberline {5}Сайт с документацией}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Разворачивание сайта:}{17}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}1. Копирование Git репозитория.}{17}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}2. Установка Apache.}{17}{subsection.5.1.2}%
+\contentsline {subsubsection}{Установка:}{17}{subsubsection*.4}%
+\contentsline {subsection}{\numberline {5.1.3}3. Управление процессами Apache.}{18}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}4. Настройка виртуальных хостов.}{18}{subsection.5.1.4}%
+\contentsline {subsection}{\numberline {5.1.5}5. Важные файлы и каталоги Apache.}{20}{subsection.5.1.5}%
+\contentsline {chapter}{\numberline {6}Установка и настройка Gitea}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}1. Подготовка}{21}{section.6.1}%
+\contentsline {section}{\numberline {6.2}2. Установка Gitea}{21}{section.6.2}%
+\contentsline {section}{\numberline {6.3}3. Создайте пользователя Git}{22}{section.6.3}%
+\contentsline {section}{\numberline {6.4}4. Скачать бинарный файл Gitea}{22}{section.6.4}%
+\contentsline {section}{\numberline {6.5}5. Создайте файл модуля Systemd}{23}{section.6.5}%
+\contentsline {section}{\numberline {6.6}6. Настроить Gitea}{23}{section.6.6}%
+\contentsline {section}{\numberline {6.7}7. Обновление Gitea}{24}{section.6.7}%
+\contentsline {chapter}{\numberline {7}Файлы}{25}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Индексы и таблицы}{27}{chapter.8}%
