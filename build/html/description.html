@@ -5,13 +5,16 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Общее описание &#8212; документация Интеграция Artix-УНФ 0.41</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -63,8 +66,16 @@
 <figure class="align-default">
 <img alt="_images/cat.png" src="_images/cat.png" />
 </figure>
-<p>При проведении документа товародвижения срабатывает подписка на событие и в каталоге соответствующем номеру магазина создается файл-флаг
+<p>При проведении документа товародвижения срабатывает расширение «крюВыгрузкаАртикс», которое проверяет интерактивоное проведение документа или нет и в случае
+интерактивного проведения в каталоге соответствующем номеру магазина создается файл-флаг
 вида:  «1681466893_chg», где число это псевдослучайное число образованное разностью дат, для достижения уникальности имени файла.</p>
+<p>Номенклатура относящаяся к кулинарии (категория номенклатуры «Кулинария»), выгружается с <strong>пустым</strong> полем остатка, так как всегда продается в минус. Устанавливать
+поле остатка в «0» нельзя, так Artix считает это за остаток равный «0» и соответственно не дает продавать.</p>
+<div class="admonition important">
+<p class="admonition-title">Важно</p>
+<p>У номенклатуры для выгрузки в Artix должна быть установлена цена, остаток больше нуля или пустой (для кулинарии), штрихкод с установленной единицой измерения,
+единица измерения упаковки. При отсутствии какого-то из перечисленных свойств, позиция номенклатуры не выгрузится в Artix/</p>
+</div>
 <p>Программа <a class="reference internal" href="gloss.html#term-Brocker"><span class="xref std std-term">Brocker</span></a> запускаясь с указанной настройкой сервера периодичностью начинает обрабатывать кассовые смены.
 Вначале в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> передаются данные по вновь открытым сменам в Artix. <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получая информацию создает новые документы «Кассовая смена» со статусом
 «Открытая» и автоматом создается документ «ОРП» у которого заполнена только шапка и имеется ссылка на кассовую смену.

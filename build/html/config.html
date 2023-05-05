@@ -5,13 +5,16 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Структура файла &#8212; документация Интеграция Artix-УНФ 0.41</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -44,34 +47,34 @@
 <blockquote>
 <div><p>Файл настроек, это простой «ini» файл с двумя секциями</p>
 </div></blockquote>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">[one_C]</span>
-<span class="linenos"> 2</span><span class="na">queryNumberX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/test_s/V1/GetProductRemains</span>
-<span class="linenos"> 3</span><span class="na">lquery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">[one_C]</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="na">queryNumberX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/test_s/V1/GetProductRemains</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="na">lquery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/</span><span class="w"></span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="na">shopquery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/GetChangeShop/V1/GetShop</span>
-<span class="linenos"> 6</span><span class="na">workshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/Workshift/V1/post_workshop</span>
-<span class="linenos"> 7</span><span class="na">workshift_open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/Workshift/V1/post_workshop_open</span>
+<span class="linenos"> 5</span><span class="na">shopquery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/GetChangeShop/V1/GetShop</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="na">workshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/Workshift/V1/post_workshop</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="na">workshift_open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/unf_vz_const/hs/Workshift/V1/post_workshop_open</span><span class="w"></span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="na">cat_skl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">\\192.168.252.250\unf_teleport</span>
-<span class="linenos">10</span><span class="na">server_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">192.168.252.250</span>
-<span class="linenos">11</span><span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">80</span>
+<span class="linenos"> 9</span><span class="na">cat_skl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">\\192.168.252.250\unf_teleport</span><span class="w"></span>
+<span class="linenos">10</span><span class="na">server_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">192.168.252.250</span><span class="w"></span>
+<span class="linenos">11</span><span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">80</span><span class="w"></span>
 <span class="linenos">12</span>
-<span class="linenos">13</span><span class="k">[artix]</span>
-<span class="linenos">14</span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">world</span>
-<span class="linenos">15</span><span class="na">tPriceQR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
-<span class="linenos">16</span><span class="na">server_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.239</span>
-<span class="linenos">17</span><span class="na">exchange_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">//10.0.0.239/obmen/dict/</span>
-<span class="linenos">18</span><span class="na">enablepricemanual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
-<span class="linenos">19</span><span class="na">database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">documentsAll</span>
-<span class="linenos">20</span><span class="na">user</span><span class="o">=</span><span class="w"> </span><span class="s">netroot</span>
-<span class="linenos">21</span><span class="na">passwd</span><span class="o">=</span><span class="w"> </span><span class="s">netroot</span>
+<span class="linenos">13</span><span class="k">[artix]</span><span class="w"></span>
+<span class="linenos">14</span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">world</span><span class="w"></span>
+<span class="linenos">15</span><span class="na">tPriceQR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span><span class="w"></span>
+<span class="linenos">16</span><span class="na">server_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.239</span><span class="w"></span>
+<span class="linenos">17</span><span class="na">exchange_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">//10.0.0.239/obmen/dict/</span><span class="w"></span>
+<span class="linenos">18</span><span class="na">enablepricemanual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span><span class="w"></span>
+<span class="linenos">19</span><span class="na">database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">documentsAll</span><span class="w"></span>
+<span class="linenos">20</span><span class="na">user</span><span class="o">=</span><span class="w"> </span><span class="s">netroot</span><span class="w"></span>
+<span class="linenos">21</span><span class="na">passwd</span><span class="o">=</span><span class="w"> </span><span class="s">netroot</span><span class="w"></span>
 </pre></div>
 </div>
 <table class="docutils align-default" id="id2">
 <caption><span class="caption-text"><strong>Значение параметров</strong></span><a class="headerlink" href="#id2" title="Постоянная ссылка на таблицу">¶</a></caption>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 67%" />
+<col style="width: 33.3%" />
+<col style="width: 66.7%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Параметр</p></th>

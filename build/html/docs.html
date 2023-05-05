@@ -5,13 +5,16 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Сайт с документацией &#8212; документация Интеграция Artix-УНФ 0.41</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -54,9 +57,9 @@
 <p>Git должен уже быть установлен в системе -  <a class="reference internal" href="setppy.html#gitinst"><span class="std std-ref">Установка Git</span></a></p>
 <section id="git">
 <h3>1. Копирование Git репозитория.<a class="headerlink" href="#git" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>~/Doc
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Doc/
-$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/krugersu/Artix_Global
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir ~/Doc
+$ <span class="nb">cd</span> Doc/
+$ git clone https://github.com/krugersu/Artix_Global
 </pre></div>
 </div>
 </section>
@@ -66,23 +69,23 @@ $<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span
 <p>Установка без настройки брандмауэра.</p>
 <section id="id4">
 <h4>Установка:<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2
-$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
+$ sudo apt install apache2
+$ sudo systemctl status apache2
 </pre></div>
 </div>
 <p>Получаем вывод вида:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apache2.service<span class="w"> </span>-<span class="w"> </span>The<span class="w"> </span>Apache<span class="w"> </span>HTTP<span class="w"> </span>Server
-Loaded:<span class="w"> </span>loaded<span class="w"> </span><span class="o">(</span>/lib/systemd/system/apache2.service<span class="p">;</span><span class="w"> </span>enabled<span class="p">;</span><span class="w"> </span>vendor<span class="w"> </span>preset:<span class="w"> </span>enabled<span class="o">)</span>
-Active:<span class="w"> </span>active<span class="w"> </span><span class="o">(</span>running<span class="o">)</span><span class="w"> </span>since<span class="w"> </span>Thu<span class="w"> </span><span class="m">2020</span>-04-23<span class="w"> </span><span class="m">22</span>:36:30<span class="w"> </span>UTC<span class="p">;</span><span class="w"> </span>20h<span class="w"> </span>ago
-<span class="w">    </span>Docs:<span class="w"> </span>https://httpd.apache.org/docs/2.4/
-Main<span class="w"> </span>PID:<span class="w"> </span><span class="m">29435</span><span class="w"> </span><span class="o">(</span>apache2<span class="o">)</span>
-<span class="w">    </span>Tasks:<span class="w"> </span><span class="m">55</span><span class="w"> </span><span class="o">(</span>limit:<span class="w"> </span><span class="m">1137</span><span class="o">)</span>
-Memory:<span class="w"> </span><span class="m">8</span>.0M
-CGroup:<span class="w"> </span>/system.slice/apache2.service
-<span class="w">        </span>├─29435<span class="w"> </span>/usr/sbin/apache2<span class="w"> </span>-k<span class="w"> </span>start
-<span class="w">        </span>├─29437<span class="w"> </span>/usr/sbin/apache2<span class="w"> </span>-k<span class="w"> </span>start
-<span class="w">        </span>└─29438<span class="w"> </span>/usr/sbin/apache2<span class="w"> </span>-k<span class="w"> </span>start
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apache2.service - The Apache HTTP Server
+Loaded: loaded <span class="o">(</span>/lib/systemd/system/apache2.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+Active: active <span class="o">(</span>running<span class="o">)</span> since Thu <span class="m">2020</span>-04-23 <span class="m">22</span>:36:30 UTC<span class="p">;</span> 20h ago
+    Docs: https://httpd.apache.org/docs/2.4/
+Main PID: <span class="m">29435</span> <span class="o">(</span>apache2<span class="o">)</span>
+    Tasks: <span class="m">55</span> <span class="o">(</span>limit: <span class="m">1137</span><span class="o">)</span>
+Memory: <span class="m">8</span>.0M
+CGroup: /system.slice/apache2.service
+        ├─29435 /usr/sbin/apache2 -k start
+        ├─29437 /usr/sbin/apache2 -k start
+        └─29438 /usr/sbin/apache2 -k start
 </pre></div>
 </div>
 <p>Согласно этому выводу сервис успешно запустился. Но лучше ещё запросить страницу Apache, чтобы убедиться, что веб-сервер работает правильно.</p>
@@ -91,15 +94,15 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 <section id="id5">
 <h3>3. Управление процессами Apache.<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <p>Чтобы остановить веб-сервер, введите:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl stop apache2
 </pre></div>
 </div>
 <p>Запустить:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl start apache2
 </pre></div>
 </div>
 <p>Перезапуск:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl restart apache2
 </pre></div>
 </div>
 <p>По умолчанию Apache добавлен в автозагрузку.</p>
@@ -114,36 +117,36 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 в /var/www для сайта example.com, а /var/www/html оставьте как каталог по умолчанию, который будет
 обслуживаться, если запрос клиента не соответствует другим сайтам.</p>
 <p>Создайте каталог для your_domain:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/var/www/krudoc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo mkdir /var/www/krudoc
 </pre></div>
 </div>
 <p>Затем укажите права на каталог с помощью переменной $USER:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>/var/www/krudoc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo chown -R <span class="nv">$USER</span>:<span class="nv">$USER</span> /var/www/krudoc
 </pre></div>
 </div>
 <p>Права должны быть предоставлены, если вы не меняли значение umask, которое устанавливает права файлов по умолчанию. Чтобы убедиться,
 что права предоставлены и пользователь может работать с файлами, нужно ввести команду:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>/var/www/krudoc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo chmod -R <span class="m">755</span> /var/www/krudoc
 </pre></div>
 </div>
 <p>Далее копируем содержимое каталога  <cite>~/Doc/Artix_Global/build/html</cite> в  <cite>/var/www/krudoc</cite></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>~/Doc/Artix_Global/build/html/.<span class="w">  </span>/var/www/krudoc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp -r ~/Doc/Artix_Global/build/html/.  /var/www/krudoc
 </pre></div>
 </div>
 <p>Нужно создать файл виртуального хоста с правильными директивами, чтобы Apache мог обслуживать этот контент.
 Чтобы напрямую не изменять файл конфигурации по умолчанию, расположенный
 в <cite>/etc/apache2/sites-available/000-default.conf</cite>, мы создадим новый в <cite>/etc/apache2/sites-available/your_domain.conf`</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/apache2/sites-available/krudoc.conf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo nano /etc/apache2/sites-available/krudoc.conf
 </pre></div>
 </div>
 <p>Вставьте в файл следующий блок настроек. Он похож на конфигурации по умолчанию, но содержит правильный домен и каталог:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost<span class="w"> </span>*:80&gt;
-<span class="w">    </span>ServerAdmin<span class="w"> </span>pk69@kruger.su
-<span class="w">    </span>ServerName<span class="w"> </span>krudoc
-<span class="w">    </span>ServerAlias<span class="w"> </span>www.krudoc
-<span class="w">    </span>DocumentRoot<span class="w"> </span>/var/www/krudoc
-<span class="w">    </span>ErrorLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/error.log
-<span class="w">    </span>CustomLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/access.log<span class="w"> </span>combined
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
+    ServerAdmin pk69@kruger.su
+    ServerName krudoc
+    ServerAlias www.krudoc
+    DocumentRoot /var/www/krudoc
+    ErrorLog <span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/error.log
+    CustomLog <span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/access.log combined
 &lt;/VirtualHost&gt;
 </pre></div>
 </div>
@@ -153,24 +156,24 @@ CGroup:<span class="w"> </span>/system.slice/apache2.service
 и ServerAlias – определяет дополнительные имена, которые должны соответствовать базовому имени.</p>
 <p>После того, как закончите, сохраните и закройте файл.</p>
 <p>Включим файл с помощью a2ensite:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>a2ensite<span class="w"> </span>krudoc.conf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo a2ensite krudoc.conf
 </pre></div>
 </div>
 <p>Отключите сайт по умолчанию, определенный в 000-default.conf:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>a2dissite<span class="w"> </span><span class="m">000</span>-default.conf
-$<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo a2dissite <span class="m">000</span>-default.conf
+$ systemctl reload apache2
 </pre></div>
 </div>
 <p>Далее проверим ошибки настроек:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apache2ctl configtest
 </pre></div>
 </div>
 <p>Вывод должен быть следующим:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>Syntax<span class="w"> </span>OK
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ Syntax OK
 </pre></div>
 </div>
 <p>Перезапустите Apache, чтобы изменения вступили в силу:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl restart apache2
 </pre></div>
 </div>
 <p>Теперь Apache должен обслуживать ваше доменное имя. Для проверки перейдите по адресу <a class="reference external" href="http://krudoc">http://krudoc</a>, вы должны увидеть что-то вроде этого:</p>
