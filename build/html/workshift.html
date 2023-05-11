@@ -5,7 +5,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. Кассовые смены &#8212; документация Интеграция Artix-УНФ 0.41</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -41,6 +41,25 @@
             
   <section id="id1">
 <h1>2. Кассовые смены<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p>При первом запуске программы происходит инициализация счетчиков кассовых смен.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">План</p>
+<p>Проверить насколько это актуально в связи с переходом учета кассовых смен в БД</p>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Main program entry. &quot;&quot;&quot;</span>
+<span class="c1"># Если это первый запуск системы</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fileinit</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;First start programs&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileinit</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">init_pr</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Инициализируется объект для работы с БД MySQL.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tData</span> <span class="o">=</span> <span class="n">dbMysql</span><span class="o">.</span><span class="n">workDb</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>В момент инициализации создается</p>
 </section>
 
 
