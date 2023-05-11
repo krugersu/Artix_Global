@@ -12,9 +12,6 @@
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -57,9 +54,22 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-69-generic x86_64)</p>
 <p>Программа состоит из двух блоков, первый отвечает за получение остатков товаров из обработки и передачи на кассовый сервер Artix,
 второй за отслеживание открытия и закрытия смен на кассах и переодической передачи этих данных в УНФ.</p>
 <p><strong>Общее описание</strong></p>
-<p>Работа программы начинается с чтения  файла с настройками <a class="reference internal" href="config.html#strset"><span class="std std-ref">Структура файла</span></a></p>
 <p><a class="reference internal" href="setppy.html#id1"><span class="std std-ref">1. Установка и настройка</span></a></p>
+<p>Программа стартует с блока «main». При старте проверяется наличие конфигурационного файла <a class="reference internal" href="config.html#strset"><span class="std std-ref">Структура файла</span></a> и
+в случае его отсутствия прошрамма завершает свою работу выводя соообщения в файл логов. Если
+файл настроек прочитан, то вызывается функция «main» и программа начинает работу.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_conf</span> <span class="o">=</span> <span class="n">m_config</span><span class="o">.</span><span class="n">m_Config</span><span class="p">()</span>
+<span class="n">rc</span> <span class="o">=</span>  <span class="n">m_conf</span><span class="o">.</span><span class="n">loadConfig</span><span class="p">()</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">rc</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Configuration file not found&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;The program has finished its work&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Вначале происходит работа с кассовыми сменами</p>
 <p><a class="reference internal" href="workshift.html#id1"><span class="std std-ref">2. Кассовые смены</span></a></p>
+<p>После обработки кассовых смен, выполняется проверка и при необходимости загрузка остатков.</p>
 <p><a class="reference internal" href="remains.html#id1"><span class="std std-ref">3. Работа с остатками</span></a></p>
 </section>
 

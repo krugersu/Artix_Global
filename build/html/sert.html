@@ -12,9 +12,6 @@
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/translations.js"></script>
@@ -59,15 +56,15 @@
 <li><p>Добавить группу сертификатов в БД КС, сформировав запрос типа POST на url: <a class="reference external" href="http:/">http:/</a>/&lt;host&gt;:&lt;port&gt;/Csrest/rest/dictionaries/certificates</p></li>
 <li><p>Тело запроса в формате Json должно быть подобного формата:</p>
 <blockquote>
-<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;rangefrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;rangeto&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Сертификаты&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;sum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;inputmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;discountcampaign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test campaign&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rangefrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rangeto&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Сертификаты&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;sum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;inputmask&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;discountcampaign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test campaign&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -75,38 +72,38 @@
 <li><p>Атрибут свойства  discountcampaign должен содержать yaml акции, в которой как раз можно указать сроки действия.
 Напрример, если смотреть на уже существующую группу сертификатов, созданную вручную через web-интерфейс LM с указанием срока действия (БД КС ArtixAll, таблица certificateTemp), то в поле discountcampaign увидим запись вида:</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="kt">!!python/object:artixds.domain.DiscountCampaign</span><span class="w"></span>
-<span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="nt">beginBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">beginBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span><span class="w"></span>
-<span class="nt">beginBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span><span class="w"></span>
-<span class="nt">beginBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
-<span class="nt">beginDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">beginDateWithBeginCurrentMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span><span class="w"></span>
-<span class="nt">beginDateWithBeginNextMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span><span class="w"></span>
-<span class="nt">beginRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span><span class="w"></span>
-<span class="nt">beginTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">checkedTags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">daysOfWeek</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<span class="nt">discounts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<span class="nt">endBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">endBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span><span class="w"></span>
-<span class="nt">endBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span><span class="w"></span>
-<span class="nt">endBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
-<span class="nt">endDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">endRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span><span class="w"></span>
-<span class="nt">endTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">57026161735168</span><span class="w"></span>
-<span class="nt">interactionType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
-<span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">manualActivate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"></span>
-<span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">parentGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"></span>
-<span class="nt">qualifiers</span><span class="p">:</span><span class="w"> </span><span class="kt">!!set</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<span class="nt">tagsIsAllowed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="kt">!!python/object:artixds.domain.DiscountCampaign</span>
+<span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">beginBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">beginBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span>
+<span class="nt">beginBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">beginDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">beginDateWithBeginCurrentMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginDateWithBeginNextMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">beginRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span>
+<span class="nt">beginTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">checkedTags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">daysOfWeek</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="nt">discounts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="nt">endBonusesDateCalculate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">endBonusesIntervalCondition</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;date&#39;</span>
+<span class="nt">endBonusesIntervalMetric</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;day&#39;</span>
+<span class="nt">endBonusesIntervalValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">endDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">endRangeDate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-02-17</span>
+<span class="nt">endTime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">57026161735168</span>
+<span class="nt">interactionType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">manualActivate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/unicode</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">parentGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">qualifiers</span><span class="p">:</span><span class="w"> </span><span class="kt">!!set</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nt">tagsIsAllowed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
 </pre></div>
 </div>
 <p>То есть в этом случае срок действия для группы сертификатов определен свойствами beginRangeDate и endRangeDate (от 2022-02-17 до 2022-02-17).</p>
@@ -139,11 +136,11 @@
 <blockquote>
 <div><p>Тело запроса должно быть вида:</p>
 <blockquote>
-<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;accountNumber&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;EARN_PAY&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;accountNumber&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;EARN_PAY&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
