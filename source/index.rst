@@ -18,6 +18,7 @@
    docs
    git
    files
+   primer
 
 
 
