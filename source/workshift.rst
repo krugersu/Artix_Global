@@ -13,6 +13,7 @@
     Проверить насколько это актуально в связи с переходом учета кассовых смен в БД
 
 .. code-block:: Python
+    :linenos:
 
     """ Main program entry. """
     # Если это первый запуск системы
@@ -28,4 +29,19 @@
 
     tData = dbMysql.workDb(rc)
 
-В момент инициализации создается    
+В момент инициализации открывается соединение с базой данных (1)  MySQL кассового сервера и создается
+курсор (5), так же инициализируется соединение со служебной базой данных SQlite (6).
+
+
+
+.. code-block:: Python
+    :linenos:
+    :caption: module: dbMysql.py
+
+    self.mydb = pymysql.connect(host=rc._sections.artix.server_ip,
+                                    database=rc._sections.artix.database,
+                                    user=rc._sections.artix.user,
+                                    passwd=rc._sections.artix.passwd)
+        self._mycursor = self.mydb.cursor()  # cursor created
+        self.tData = db.workDb(rc)
+
