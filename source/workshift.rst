@@ -34,7 +34,6 @@
 
 
 
-
 .. code-block:: Python
     :linenos:
     :caption: module: dbMysql.py

@@ -348,6 +348,7 @@ floating-point numbers (without exponents).
 
 -----
 
+
 .. function:: foo(x)
             foo(y, z)
     :module: some.module.name
