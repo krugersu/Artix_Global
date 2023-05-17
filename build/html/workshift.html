@@ -1,0 +1,168 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Кассовые смены &#8212; документация Интеграция Artix-УНФ 0.41</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2. Кассовые смены</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>2. Кассовые смены<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p>При первом запуске программы происходит инициализация счетчиков кассовых смен.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">План</p>
+<p>Проверить насколько это актуально в связи с переходом учета кассовых смен в БД</p>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="sd">&quot;&quot;&quot; Main program entry. &quot;&quot;&quot;</span>
+<span class="linenos">2</span><span class="c1"># Если это первый запуск системы</span>
+<span class="linenos">3</span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fileinit</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;First start programs&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileinit</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">7</span>        <span class="n">init_pr</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Инициализируется объект для работы с БД MySQL.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tData</span> <span class="o">=</span> <span class="n">dbMysql</span><span class="o">.</span><span class="n">workDb</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>В момент инициализации открывается соединение с базой данных (1)  MySQL кассового сервера и создается
+курсор (5), так же инициализируется соединение со служебной базой данных SQlite (6).</p>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">План</p>
+<p>Убрать второе соедение с MySQL в процедуру инициализации в модуле  db.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">module: dbMysql.py</span><a class="headerlink" href="#id4" title="Постоянная ссылка на код">¶</a></div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="bp">self</span><span class="o">.</span><span class="n">mydb</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">server_ip</span><span class="p">,</span>
+<span class="linenos">2</span>                                <span class="n">database</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">database</span><span class="p">,</span>
+<span class="linenos">3</span>                                <span class="n">user</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+<span class="linenos">4</span>                                <span class="n">passwd</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">passwd</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mydb</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>  <span class="c1"># cursor created</span>
+<span class="linenos">6</span>    <span class="bp">self</span><span class="o">.</span><span class="n">tData</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">workDb</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Создается объект «запрос» для работы с http-запросами.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rec_con</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">req1C</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Возвращается список открытых смен с последнего зафиксированого ID смены.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">l_workshift_open</span> <span class="o">=</span> <span class="n">tData</span><span class="o">.</span><span class="n">get_last_workshift_open</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Запросом ка БД кассового сервера возвращается таблица содержащая данные открытых кассовых смен,
+у которых ID больше зафиксированного.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">module: dbMysql.py</span><a class="headerlink" href="#id5" title="Постоянная ссылка на код">¶</a></div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_last_workshift_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rc</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">l_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_last_date_open</span><span class="p">()</span>
+<span class="linenos"> 3</span>    <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrSelect_workshift_open</span><span class="p">,</span> <span class="p">[</span><span class="n">l_date</span><span class="p">])</span>
+<span class="linenos"> 4</span>    <span class="n">l_workshift</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="bp">self</span><span class="o">.</span><span class="n">tData</span><span class="o">.</span><span class="n">get_workshiftid</span><span class="p">(</span><span class="n">l_workshift</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data_open.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">l_workshift</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="linenos"> 9</span>                <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">l_workshift</span>
+</pre></div>
+</div>
+</div>
+<p>ID открытых кассовых смен из таблицы с данными добавляются в БД SQlite для дальнейшего анализа.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">module: db.py</span><a class="headerlink" href="#id6" title="Постоянная ссылка на код">¶</a></div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">get_workshiftid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">l_workshift</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="c1"># Формируем список номеров открытых кассовых смен для добавление в БД</span>
+<span class="linenos">3</span>    <span class="n">l_wsh</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">l_workshift</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="n">l_wsh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="n">l_wsh</span><span class="p">)</span>
+<span class="linenos">7</span>    <span class="bp">self</span><span class="o">.</span><span class="n">add_open_workshift</span><span class="p">(</span><span class="n">l_wsh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Установка и настройка Gitea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primer.html">Примеры</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2. Кассовые смены</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>
