@@ -34,6 +34,10 @@
 
 .. ////
 
+.. todo:: 
+
+    Убрать второе соедение с MySQL в процедуру инициализации в модуле  db.
+
 .. code-block:: Python
     :linenos:
     :caption: module: dbMysql.py
