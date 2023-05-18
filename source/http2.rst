@@ -1,5 +1,7 @@
 :orphan:
 
+.. _GetChangeShop:
+
 2. GetChangeShop
 ----------------
 
