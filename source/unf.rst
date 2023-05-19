@@ -15,11 +15,11 @@
 #. Http-сервисы:
      
      
-     :ref:`1. Http-сервис Workshift`
+     :ref:`Http-сервис Workshift`
 
-     :ref:`2. GetChangeShop`
+     :ref:`GetChangeShop`
 
-     :ref:`3. GetProductRemains`
+     :ref:`GetProductRemains`
 
 
 #. Фоновых заданий и обработок
