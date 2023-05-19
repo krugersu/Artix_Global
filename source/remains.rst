@@ -89,7 +89,7 @@
         self.test_db(shop_Number)     
 
 В функции :ref:`uploadData <uploadData>` в строке (**2**) пересоздается БД SQLite. Структура БД максимально соответствует структуре 
-файла **".aif"** для выгрузки на кассовый сервер.
+файла :term:`aif` для выгрузки на кассовый сервер.
 
 .. code-block:: Python
    
@@ -204,4 +204,137 @@
 	    INVENT.INVENTCODE = SUMITOG.CODE
 
 
+В функции :ref:`uploadData <uploadData>` в строке (**16**) Запускается процедура "test_db", которая
+формирует файлы: ".flz" - файл флаг и  :term:`aif` файл с данными для загрузки в кассовый сервер.    
+
+
+.. code-block:: Python
+
+    def test_db(self,shop_Number):
+        if sys.platform.startswith("linux"):  # could be "linux", "linux2", "linux3", ...
+                self._all_db.row_factory = pysqlite3.Row # Позволяет работать с возвращаемым результатам с обращением к столбцам по имени
+        elif sys.platform == "darwin":
+            pass
+        elif sys.platform == "win32":
+            self._all_db.row_factory = sqlite3.Row
         
+        curFileName = 'pos' + str(shop_Number) + '.aif'
+        curFlagName = 'pos' + str(shop_Number) + '.flz'
+        
+        pathAif = Path("/home/administrator/Global/upload/", curFileName) 
+        pathFlz = Path("/home/administrator/Global/upload/", curFlagName) 
+        
+        outfileFlz = open(pathFlz, 'w',encoding='utf-8')  
+        outfileFlz.close
+        with open(pathAif, 'w',encoding='utf-8') as outfile:
+        
+            outfile.writelines(diff_data.header+ '\n')
+            outfile.writelines(json.dumps(diff_data.clearInventory)+ '\n')
+        
+            outfile.writelines(diff_data.separator+ '\n')
+            outfile.writelines(json.dumps(diff_data.clearTmcScale)+ '\n')    
+            outfile.writelines(diff_data.separator+ '\n')
+        
+            dictForArtix = {}
+            c = self._all_db.cursor()
+            c.execute('SELECT * FROM invent')                          
+            
+            while True:
+                invent=c.fetchone()
+                if invent:
+
+            # Add Barcodes
+                    cBar = self._all_db.cursor()
+                    nDict = (dict(invent))
+                    tCode = ((nDict['inventcode']))
+
+                    cBar.execute(diff_data.qrBarcodes,(tCode,))
+                                            
+                    tBarcodes = dict(invent)
+                    barcodes = cBar.fetchall()  
+                    allBarcodes = []
+                    for itm in barcodes:
+                        allBarcodes.append((dict(itm)) )
+                    
+                    #nDict['barcodes'] = allBarcodes
+                    
+                    # Add sellrestrictperiods Массив ограничений продаж по времени, пока не заполняем, нам без надобности
+                    cSellPeriod = self._all_db.cursor()       
+                    cSellPeriod.execute(diff_data.qrsellrestrictperiods,(tCode,))
+                    sellrestrictperiods = cSellPeriod.fetchall()  
+                    allSellrestrictperiods = []
+                    for itm in sellrestrictperiods:
+                        allSellrestrictperiods.append((dict(itm)) )
+
+                    # Add Additionalprices  Массив дополнительных цен
+                    cAdditionalprices = self._all_db.cursor()       
+                    cAdditionalprices.execute(diff_data.qrAdditionalprices,(tCode,))
+                    additionalpricesid = cAdditionalprices.fetchall()  
+                    alladditionalpricesid = []
+                    for itm in additionalpricesid:
+                        alladditionalpricesid.append((dict(itm)) )
+
+                    # Add inventitemoptions Опции товара
+                    cinventitemoptions = self._all_db.cursor()       
+                    cinventitemoptions.execute(diff_data.qrinventitemoptions,(tCode,))
+                    inventitemoptions = cinventitemoptions.fetchall()  
+                    for itm in inventitemoptions:
+                        # allinventitemoptions.append((dict(itm)) )
+                        allinventitemoptions = (dict(itm))
+
+                    # Add priceoptions Опции цены
+                    cpriceoptions = self._all_db.cursor()       
+                    cpriceoptions.execute(diff_data.qrpriceoptions,(tCode,))
+                    priceoptions = cpriceoptions.fetchall()  
+                    for itm in priceoptions:
+                        allpriceoptions = (dict(itm)) 
+            
+                    # Add quantityoptions Опции количества
+                    cquantityoptions = self._all_db.cursor()       
+                    cquantityoptions.execute(diff_data.qrquantityoptions,(tCode,))
+                    quantityoptions = cquantityoptions.fetchall()  
+                    for itm in quantityoptions:
+                        allquantityoptions = (dict(itm))
+
+                    # Add quantityoptions Опции количества
+                    cremainsoptions = self._all_db.cursor()       
+                    cremainsoptions.execute(diff_data.qrremainsoptions,(tCode,))
+                    remainsoptions = cremainsoptions.fetchall()  
+                    for itm in remainsoptions:
+                        allremainsoptions = (dict(itm))
+  
+    ##########################################################################################
+                    # Add options Опции товара
+                    alloptions = {}
+                    alloptions['inventitemoptions'] = allinventitemoptions
+                    alloptions['priceoptions'] = allpriceoptions
+                    alloptions['quantityoptions'] = allquantityoptions   
+                    #alloptions['remainsoptions'] = allremainsoptions   Опции учета остатков, пока ни как не реализованы, оставлены на будущее          
+    ###########################################################################################
+                        
+                    nDict['options'] = alloptions                        
+                    nDict['sellrestrictperiods'] = allSellrestrictperiods                    
+                    nDict['additionalprices'] = alladditionalpricesid                    
+                    nDict['barcodes'] = allBarcodes
+                    
+                    tCommand = diff_data.addInventItem      
+                    comDict = (dict(tCommand))
+                    nCommand = {}
+                    nCommand['invent'] = nDict
+                    comDict.update(nCommand)
+ 
+                    dictForArtix.update(comDict)
+
+                    json.dump(dictForArtix, outfile,  indent=2,  ensure_ascii=False )
+                    
+                    outfile.write('\n' + diff_data.separator + '\n')    
+                else:
+                    break    
+            
+            outfile.writelines(diff_data.separator+ '\n')
+            outfile.writelines(json.dumps(diff_data.clearAspectValueSet)+ '\n')    
+            outfile.writelines(diff_data.separator+ '\n')
+            
+            outfile.write(diff_data.footer)  
+        sendFile.sendFile(pathAif,shop_Number,True)
+        sendFile.sendFile(pathFlz,shop_Number,False)
