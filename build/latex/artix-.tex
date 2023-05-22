@@ -62,8 +62,8 @@
 
 
 \title{Интеграция Artix\sphinxhyphen{}УНФ}
-\date{мая 04, 2023}
-\release{0.41}
+\date{мая 22, 2023}
+\release{0.85}
 \author{PashkovKV}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Выпуск}
@@ -114,8 +114,19 @@
 \end{figure}
 
 \sphinxAtStartPar
-При проведении документа товародвижения срабатывает подписка на событие и в каталоге соответствующем номеру магазина создается файл\sphinxhyphen{}флаг
+При проведении документа товародвижения срабатывает расширение «крюВыгрузкаАртикс», которое проверяет интерактивоное проведение документа или нет и в случае
+интерактивного проведения в каталоге соответствующем номеру магазина создается файл\sphinxhyphen{}флаг
 вида:  «1681466893\_chg», где число это псевдослучайное число образованное разностью дат, для достижения уникальности имени файла.
+
+\sphinxAtStartPar
+Номенклатура относящаяся к кулинарии (категория номенклатуры «Кулинария»), выгружается с \sphinxstylestrong{пустым} полем остатка, так как всегда продается в минус. Устанавливать
+поле остатка в «0» нельзя, так Artix считает это за остаток равный «0» и соответственно не дает продавать.
+
+\begin{sphinxadmonition}{important}{Важно:}
+\sphinxAtStartPar
+У номенклатуры для выгрузки в Artix должна быть установлена цена, остаток больше нуля или пустой (для кулинарии), штрихкод с установленной единицой измерения,
+единица измерения упаковки. При отсутствии какого\sphinxhyphen{}то из перечисленных свойств, позиция номенклатуры не выгрузится в Artix
+\end{sphinxadmonition}
 
 \sphinxAtStartPar
 Программа \DUrole{xref,std,std-term}{Brocker} запускаясь с указанной настройкой сервера периодичностью начинает обрабатывать кассовые смены.
@@ -152,7 +163,7 @@
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
-Подписки на события для документов товародвижения:
+Расширения \sphinxstylestrong{«крюВыгрузкаАртикс»}. Расширение учитывает следующие виды документов
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumii}{enumiii}{}{)}%
 \item {} 
@@ -169,7 +180,7 @@
 
 \item {} 
 \sphinxAtStartPar
-Перемещение товаров ?
+Перемещение товаров
 
 \item {} 
 \sphinxAtStartPar
@@ -177,23 +188,71 @@
 
 \item {} 
 \sphinxAtStartPar
-Отчет о розничных продажах ?
+Отчет о розничных продажах
 
 \end{enumerate}
 
+\end{enumerate}
+
+\sphinxAtStartPar
+В расширении для формы документа реализована процедура «ПослеЗаписиНаСервере»  с аннотацией \sphinxstylestrong{«\&После»},
+что позволяет выполниться коду из расширения, после выполнения основного кода данной процедуры формы.
+Реализовано для того, что бы изменения остатков фиксировались только при интерактивном проведении документа и
+не и не отрабатывались при проведении программном.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{крюОбменСArtixСервер}\PYG{o}{.}\PYG{n}{БылоИзменениеУчетногоКоличества}\PYG{p}{(}\PYG{n}{ТекущийОбъект}\PYG{p}{,} \PYG{n}{ПараметрыЗаписи}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Вызывается процедура \sphinxstylestrong{«БылоИзменениеУчетногоКоличества»} общего модуля \sphinxstylestrong{«крюОбменСArtixСервер»}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Процедура} \PYG{n}{БылоИзменениеУчетногоКоличества}\PYG{p}{(}\PYG{n}{ТекущийОбъект}\PYG{p}{,} \PYG{n}{ПараметрыЗаписи}\PYG{p}{)} \PYG{n}{Экспорт}
+   \PYG{n}{Если} \PYG{n}{ПараметрыЗаписи}\PYG{o}{.}\PYG{n}{РежимЗаписи} \PYG{o}{=} \PYG{n}{РежимЗаписиДокумента}\PYG{o}{.}\PYG{n}{Проведение} \PYG{n}{ИЛИ} \PYG{n}{ПараметрыЗаписи}\PYG{o}{.}\PYG{n}{РежимЗаписи} \PYG{o}{=} \PYG{n}{РежимЗаписиДокумента}\PYG{o}{.}\PYG{n}{ОтменаПроведения} \PYG{n}{Тогда}
+           \PYG{n}{Если} \PYG{n}{ТекущийОбъект}\PYG{o}{.}\PYG{n}{Ссылка}\PYG{o}{.}\PYG{n}{Метаданные}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{Имя} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ПеремещениеЗапасов}\PYG{l+s+s2}{\PYGZdq{}} \PYG{n}{Тогда}
+                   \PYG{n}{ЗаписатьФлагИзменений}\PYG{p}{(}\PYG{n}{ТекущийОбъект}\PYG{o}{.}\PYG{n}{СтруктурнаяЕдиница}\PYG{p}{)}\PYG{p}{;}
+                   \PYG{n}{ЗаписатьФлагИзменений}\PYG{p}{(}\PYG{n}{ТекущийОбъект}\PYG{o}{.}\PYG{n}{СтруктурнаяЕдиницаПолучатель}\PYG{p}{)}\PYG{p}{;}
+                \PYG{n}{Иначе}
+                        \PYG{n}{ЗаписатьФлагИзменений}\PYG{p}{(}\PYG{n}{ТекущийОбъект}\PYG{o}{.}\PYG{n}{СтруктурнаяЕдиница}\PYG{p}{)}\PYG{p}{;}
+                \PYG{n}{КонецЕсли}\PYG{p}{;}
+        \PYG{n}{КонецЕсли}\PYG{p}{;}
+\PYG{n}{КонецПроцедуры}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Процедура проверяет режим записи документа и тип и вызывает функцию \sphinxstylestrong{«ЗаписатьФлагИзменений»}, для
+записи файла флага в каталог с имя которого совпадает с номером магазина переданного документа.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Функция} \PYG{n}{ЗаписатьФлагИзменений}\PYG{p}{(}\PYG{n}{Магазин}\PYG{p}{)} \PYG{n}{Экспорт}
+   \PYG{n}{НомерМагазина} \PYG{o}{=} \PYG{n}{ПолучитьНомерМагазина}\PYG{p}{(}\PYG{n}{Магазин}\PYG{p}{)}\PYG{p}{;}
+   \PYG{n}{ПутьКФайлам}     \PYG{o}{=} \PYG{n}{Справочники}\PYG{o}{.}\PYG{n}{крю\PYGZus{}Настройки}\PYG{o}{.}\PYG{n}{ВернутьЗначениеНастройки}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{КаталогКонтроляОбменаArtix}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+   \PYG{n}{ПрефиксФайла} \PYG{o}{=} \PYG{n}{Формат}\PYG{p}{(}\PYG{n}{ТекущаяДата}\PYG{p}{(}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{дата}\PYG{p}{(}\PYG{l+m+mi}{1970}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ЧГ=0}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+   \PYG{n}{ИмяФайлаВыгрузки} \PYG{o}{=}\PYG{n}{ПутьКФайлам}\PYG{o}{+} \PYG{n}{НомерМагазина} \PYG{o}{+}  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZdq{}}\PYG{l+s+s2}{ + ПрефиксФайла + }\PYG{l+s+s2}{\PYGZdq{}}\PYG{n}{\PYGZus{}chg}\PYG{o}{.}\PYG{n}{flg}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{;}
+   \PYG{n}{ТекстовыйФайл} \PYG{o}{=} \PYG{n}{Новый} \PYG{n}{ТекстовыйДокумент}\PYG{p}{;}
+   \PYG{n}{ТекстовыйФайл}\PYG{o}{.}\PYG{n}{Записать}\PYG{p}{(}
+           \PYG{n}{ИмяФайлаВыгрузки} \PYG{o}{/}\PYG{o}{/} \PYG{n}{путь} \PYG{n}{для} \PYG{n}{сохранения}
+   \PYG{p}{)}\PYG{p}{;}
+   \PYG{n}{Возврат} \PYG{n}{Неопределено}\PYG{p}{;}
+\PYG{n}{КонецФункции}
+\end{sphinxVerbatim}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
 \item {} 
 \sphinxAtStartPar
 Http\sphinxhyphen{}сервисы:
 \begin{quote}
 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{1. Http\sphinxhyphen{}сервис Workshift}
+\DUrole{xref,std,std-ref}{Http\sphinxhyphen{}сервис Workshift}
 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{2. GetChangeShop}
+\DUrole{xref,std,std-ref}{GetChangeShop}
 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{3. GetProductRemains}
+\DUrole{xref,std,std-ref}{GetProductRemains}
 \end{quote}
 
 \item {} 
@@ -234,15 +293,35 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0\sphinxhyphen{}69\sphinxhyphen{}generic x86\
 
 \sphinxAtStartPar
 \sphinxstylestrong{Общее описание}
-
-\sphinxAtStartPar
-Работа программы начинается с чтения  файла с настройками \DUrole{xref,std,std-ref}{strset}
+\begin{quote}
 
 \sphinxAtStartPar
 \DUrole{xref,std,std-ref}{1. Установка и настройка}
+\end{quote}
+
+\sphinxAtStartPar
+Программа стартует с блока «main». При старте проверяется наличие конфигурационного файла \DUrole{xref,std,std-ref}{strset} и
+в случае его отсутствия прошрамма завершает свою работу выводя соообщения в файл логов. Если
+файл настроек прочитан, то вызывается функция «main» и программа начинает работу.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{m\PYGZus{}conf} \PYG{o}{=} \PYG{n}{m\PYGZus{}config}\PYG{o}{.}\PYG{n}{m\PYGZus{}Config}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{rc} \PYG{o}{=}  \PYG{n}{m\PYGZus{}conf}\PYG{o}{.}\PYG{n}{loadConfig}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{rc} \PYG{o}{==} \PYG{k+kc}{None}\PYG{p}{:}
+    \PYG{n}{main}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{n}{logger}\PYG{o}{.}\PYG{n}{error}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Configuration file not found}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{logger}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The program has finished its work}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Вначале происходит работа с кассовыми сменами
 
 \sphinxAtStartPar
 \DUrole{xref,std,std-ref}{2. Кассовые смены}
+
+\sphinxAtStartPar
+После обработки кассовых смен, выполняется проверка и при необходимости загрузка остатков.
 
 \sphinxAtStartPar
 \DUrole{xref,std,std-ref}{3. Работа с остатками}
@@ -1416,10 +1495,7 @@ Main\PYG{+w}{ }PID:\PYG{+w}{ }\PYG{l+m}{14804}\PYG{+w}{ }\PYG{o}{(}gitea\PYG{o}{
 
 
 \chapter{Файлы}
-\label{\detokenize{files:id1}}\label{\detokenize{files::doc}}
-\sphinxAtStartPar
-Это тест
-\begin{quote}
+\label{\detokenize{files:id1}}\label{\detokenize{files::doc}}\begin{quote}
 
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{Скачать эту документацию в pdf}}.
@@ -1451,7 +1527,7 @@ Main\PYG{+w}{ }PID:\PYG{+w}{ }\PYG{l+m}{14804}\PYG{+w}{ }\PYG{o}{(}gitea\PYG{o}{
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
-({\hyperref[\detokenize{description:id2}]{\sphinxcrossref{\sphinxstyleemphasis{исходный элемент}}}} находится в /home/bat/Project/docs/Artix\_Global/source/description.rst, строка 44.)
+({\hyperref[\detokenize{description:id2}]{\sphinxcrossref{\sphinxstyleemphasis{исходный элемент}}}} находится в /home/bat/Project/docs/Artix\_Global/source/description.rst, строка 52.)
 
 
 

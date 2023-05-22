@@ -132,20 +132,6 @@
 <p class="rubric">Закрытые кассовые смены</p>
 <p>Для получения последних закрытых смен,
 используется функция <code class="docutils literal notranslate"><span class="pre">bMysql.get_last_workshift(self)</span></code>:</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-prename descclassname"><span class="pre">dbMysql.</span></span><span class="sig-name descname"><span class="pre">get_last_workshift_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Возвращает таблицу с данными последних закрытых кассовых смен.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Результат запроса (список строк данных).</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>Список</p>
-</dd>
-</dl>
-</dd></dl>
-
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_last_workshift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span>    <span class="n">l_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_last_date</span><span class="p">()</span>

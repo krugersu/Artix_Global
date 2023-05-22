@@ -15,7 +15,8 @@ release = '0.85'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['myst_parser','sphinx.ext.todo',
-		'sphinx.ext.autosectionlabel',]
+		'sphinx.ext.autosectionlabel',
+              'sphinx.ext.githubpages',]
 
 
 

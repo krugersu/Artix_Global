@@ -2,35 +2,35 @@
 \contentsline {chapter}{\numberline {1}Общее описание}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Документация по блоку обмена между Artix и УНФ в части выгрузки остатков из УНФ в кассовый сервер Artix и загрузки кассовых смен и продаж в УНФ.}{1}{section.1.1}%
 \contentsline {chapter}{\numberline {2}Реализация в УНФ}{3}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Внешняя программма}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Настройки}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Порядок внедрения касс в работу с Артикс:}{7}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}1. Создать магазин + касса на сервере.}{7}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}2. Настройка ПОС}{7}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Добавление группы сертификатов со сроком действия через REST API.}{8}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Дополнительные материалы:}{10}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}1. Список директорий и файлов основных настроек.}{10}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}2. Особенности настройки “Сбербанк”}{11}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}3. Ссылка на скачивание дистрибутива yuki}{11}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}4. Остатки}{11}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}5. Дисконтные карты (создание)}{12}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}6. Настройка действий и контекста клавиш}{12}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}7. Конфигурирование дистконтной системы}{12}{subsection.4.3.7}%
-\contentsline {chapter}{\numberline {5}Сайт с документацией}{17}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Разворачивание сайта:}{17}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}1. Копирование Git репозитория.}{17}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}2. Установка Apache.}{17}{subsection.5.1.2}%
-\contentsline {subsubsection}{Установка:}{17}{subsubsection*.4}%
-\contentsline {subsection}{\numberline {5.1.3}3. Управление процессами Apache.}{18}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}4. Настройка виртуальных хостов.}{18}{subsection.5.1.4}%
-\contentsline {subsection}{\numberline {5.1.5}5. Важные файлы и каталоги Apache.}{20}{subsection.5.1.5}%
-\contentsline {chapter}{\numberline {6}Установка и настройка Gitea}{21}{chapter.6}%
-\contentsline {section}{\numberline {6.1}1. Подготовка}{21}{section.6.1}%
-\contentsline {section}{\numberline {6.2}2. Установка Gitea}{21}{section.6.2}%
-\contentsline {section}{\numberline {6.3}3. Создайте пользователя Git}{22}{section.6.3}%
-\contentsline {section}{\numberline {6.4}4. Скачать бинарный файл Gitea}{22}{section.6.4}%
-\contentsline {section}{\numberline {6.5}5. Создайте файл модуля Systemd}{23}{section.6.5}%
-\contentsline {section}{\numberline {6.6}6. Настроить Gitea}{23}{section.6.6}%
-\contentsline {section}{\numberline {6.7}7. Обновление Gitea}{24}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Файлы}{25}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Индексы и таблицы}{27}{chapter.8}%
+\contentsline {chapter}{\numberline {3}Внешняя программма}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Настройки}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Порядок внедрения касс в работу с Артикс:}{9}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}1. Создать магазин + касса на сервере.}{9}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}2. Настройка ПОС}{9}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Добавление группы сертификатов со сроком действия через REST API.}{10}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Дополнительные материалы:}{12}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}1. Список директорий и файлов основных настроек.}{12}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}2. Особенности настройки “Сбербанк”}{13}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}3. Ссылка на скачивание дистрибутива yuki}{13}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}4. Остатки}{13}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}5. Дисконтные карты (создание)}{14}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}6. Настройка действий и контекста клавиш}{14}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}7. Конфигурирование дистконтной системы}{14}{subsection.4.3.7}%
+\contentsline {chapter}{\numberline {5}Сайт с документацией}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Разворачивание сайта:}{19}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}1. Копирование Git репозитория.}{19}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}2. Установка Apache.}{19}{subsection.5.1.2}%
+\contentsline {subsubsection}{Установка:}{19}{subsubsection*.4}%
+\contentsline {subsection}{\numberline {5.1.3}3. Управление процессами Apache.}{20}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}4. Настройка виртуальных хостов.}{20}{subsection.5.1.4}%
+\contentsline {subsection}{\numberline {5.1.5}5. Важные файлы и каталоги Apache.}{22}{subsection.5.1.5}%
+\contentsline {chapter}{\numberline {6}Установка и настройка Gitea}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}1. Подготовка}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}2. Установка Gitea}{23}{section.6.2}%
+\contentsline {section}{\numberline {6.3}3. Создайте пользователя Git}{24}{section.6.3}%
+\contentsline {section}{\numberline {6.4}4. Скачать бинарный файл Gitea}{24}{section.6.4}%
+\contentsline {section}{\numberline {6.5}5. Создайте файл модуля Systemd}{25}{section.6.5}%
+\contentsline {section}{\numberline {6.6}6. Настроить Gitea}{25}{section.6.6}%
+\contentsline {section}{\numberline {6.7}7. Обновление Gitea}{26}{section.6.7}%
+\contentsline {chapter}{\numberline {7}Файлы}{27}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Индексы и таблицы}{29}{chapter.8}%
