@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Кассовые смены &#8212; документация Интеграция Artix-УНФ 0.41</title>
+    <title>2. Кассовые смены &#8212; документация Интеграция Artix-УНФ 0.7</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -29,7 +29,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Алфавитный указатель"
              accesskey="I">указатель</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">2. Кассовые смены</a></li> 
       </ul>
     </div>  
@@ -41,11 +41,8 @@
             
   <section id="id1">
 <h1>2. Кассовые смены<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p class="rubric">Старт программы</p>
 <p>При первом запуске программы происходит инициализация счетчиков кассовых смен.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">План</p>
-<p>Проверить насколько это актуально в связи с переходом учета кассовых смен в БД</p>
-</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="sd">&quot;&quot;&quot; Main program entry. &quot;&quot;&quot;</span>
 <span class="linenos">2</span><span class="c1"># Если это первый запуск системы</span>
 <span class="linenos">3</span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fileinit</span><span class="p">):</span>
@@ -55,18 +52,16 @@
 <span class="linenos">7</span>        <span class="n">init_pr</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Инициализируется объект для работы с БД MySQL.</p>
+<p class="rubric">Подготовительные процедуры</p>
+<p>Далее происходит непосредственно работа  с касоовыми сменами.
+Инициализируется объект для работы с БД MySQL.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tData</span> <span class="o">=</span> <span class="n">dbMysql</span><span class="o">.</span><span class="n">workDb</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>В момент инициализации открывается соединение с базой данных (1)  MySQL кассового сервера и создается
 курсор (5), так же инициализируется соединение со служебной базой данных SQlite (6).</p>
-<div class="admonition-todo admonition" id="id3">
-<p class="admonition-title">План</p>
-<p>Убрать второе соедение с MySQL в процедуру инициализации в модуле  db.</p>
-</div>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">module: dbMysql.py</span><a class="headerlink" href="#id4" title="Постоянная ссылка на код">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">module: dbMysql.py</span><a class="headerlink" href="#id2" title="Постоянная ссылка на код">¶</a></div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="bp">self</span><span class="o">.</span><span class="n">mydb</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">server_ip</span><span class="p">,</span>
 <span class="linenos">2</span>                                <span class="n">database</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">database</span><span class="p">,</span>
 <span class="linenos">3</span>                                <span class="n">user</span><span class="o">=</span><span class="n">rc</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">artix</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
@@ -80,14 +75,32 @@
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rec_con</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">req1C</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
 </pre></div>
 </div>
+<p class="rubric">Открытые кассовые смены</p>
 <p>Возвращается список открытых смен с последнего зафиксированого ID смены.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">l_workshift_open</span> <span class="o">=</span> <span class="n">tData</span><span class="o">.</span><span class="n">get_last_workshift_open</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Запросом ка БД кассового сервера возвращается таблица содержащая данные открытых кассовых смен,
 у которых ID больше зафиксированного.</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">module: dbMysql.py</span><a class="headerlink" href="#id5" title="Постоянная ссылка на код">¶</a></div>
+<p>Для получения последних открытых смен,
+используется функция <code class="docutils literal notranslate"><span class="pre">bMysql.get_last_workshift_open(self,rc)</span></code>:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dbMysql.get_last_workshift_open">
+<span class="sig-prename descclassname"><span class="pre">dbMysql.</span></span><span class="sig-name descname"><span class="pre">get_last_workshift_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dbMysql.get_last_workshift_open" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Возвращает таблицу с данными последних открытых кассовых смен.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rc</strong> – Объект с данными настроек программы.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Результат запроса (список строк данных).</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список</p>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_last_workshift_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rc</span><span class="p">):</span>
 <span class="linenos"> 2</span>    <span class="n">l_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_last_date_open</span><span class="p">()</span>
 <span class="linenos"> 3</span>    <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrSelect_workshift_open</span><span class="p">,</span> <span class="p">[</span><span class="n">l_date</span><span class="p">])</span>
@@ -101,10 +114,9 @@
 <span class="linenos">11</span>    <span class="k">return</span> <span class="n">l_workshift</span>
 </pre></div>
 </div>
-</div>
 <p>ID открытых кассовых смен из таблицы с данными добавляются в БД SQlite для дальнейшего анализа.</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">module: db.py</span><a class="headerlink" href="#id6" title="Постоянная ссылка на код">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">module: db.py</span><a class="headerlink" href="#id3" title="Постоянная ссылка на код">¶</a></div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">get_workshiftid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">l_workshift</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="c1"># Формируем список номеров открытых кассовых смен для добавление в БД</span>
 <span class="linenos">3</span>    <span class="n">l_wsh</span> <span class="o">=</span> <span class="p">[]</span>
@@ -115,6 +127,56 @@
 </pre></div>
 </div>
 </div>
+<p>Если количество новых открытых кассовых смен больше ноля, то отправляем post запрос в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> с данными по открытым сменам.
+в 1С создаются документы «Кассовая смена», со статусом «открыта» и заполняются переданными данными.</p>
+<p class="rubric">Закрытые кассовые смены</p>
+<p>Для получения последних закрытых смен,
+используется функция <code class="docutils literal notranslate"><span class="pre">bMysql.get_last_workshift(self)</span></code>:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">dbMysql.</span></span><span class="sig-name descname"><span class="pre">get_last_workshift_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Возвращает таблицу с данными последних закрытых кассовых смен.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Результат запроса (список строк данных).</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>Список</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_last_workshift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>    <span class="n">l_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_last_date</span><span class="p">()</span>
+<span class="linenos"> 4</span>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Date of the last closed cash shift - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">l_date</span><span class="p">))</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="c1"># Номера открытых смен в БД</span>
+<span class="linenos"> 7</span>    <span class="n">l_close_workshift</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tData</span><span class="o">.</span><span class="n">get_close_workshift</span><span class="p">()</span>
+<span class="linenos"> 8</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_close_workshift</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrSelect_workshiftnew</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l_close_workshift</span><span class="p">])))</span>
+<span class="linenos">12</span>            <span class="c1">#self._mycursor.execute(diff_data.qrSelect_workshiftnew, [wh],)</span>
+<span class="linenos">13</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Get date from DB - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">l_date</span><span class="p">))</span>
+<span class="linenos">15</span>        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="n">l_workshift</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="linenos">18</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">19</span>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Writing a new date for closed shifts to a file&#39;</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">l_workshift</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="linenos">21</span>                <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>    <span class="bp">self</span><span class="o">.</span><span class="n">tData</span><span class="o">.</span><span class="n">del_close_workshift</span><span class="p">(</span><span class="n">l_workshift</span><span class="p">)</span>
+<span class="linenos">24</span>    <span class="k">return</span> <span class="n">l_workshift</span>
+</pre></div>
+</div>
+<p>Данные по открытым сменам берутся из БД SQLite, и запрос к кассовому серверу возвращает
+данные по сменам из списока открытых смен,  у которых появилась дата закрытия.</p>
+<p>Если количество закрытых кассовых смен больше ноля, то отправляем post запрос в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> с данными по закрытым сменам.
+в 1С  документы «Кассовая смена» по списку изменяют  статус на «закрыта» и заполняются переданными данными.
+После чего курсор БД закрывается.</p>
 </section>
 
 
@@ -157,7 +219,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Алфавитный указатель"
              >указатель</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">2. Кассовые смены</a></li> 
       </ul>
     </div>

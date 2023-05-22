@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Реализация в УНФ &#8212; документация Интеграция Artix-УНФ 0.41</title>
+    <title>Реализация в УНФ &#8212; документация Интеграция Artix-УНФ 0.7</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="description.html" title="Общее описание"
              accesskey="P">назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Реализация в УНФ</a></li> 
       </ul>
     </div>  
@@ -51,23 +51,60 @@
 <h1>Реализация в УНФ<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
 <p>Функционал работы с Artix со стороны УНФ реализован с помощью:</p>
 <ol class="arabic">
-<li><p>Подписки на события для документов товародвижения:</p>
+<li><p>Расширения <strong>«крюВыгрузкаАртикс»</strong>. Расширение учитывает следующие виды документов</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Поступление товаров</p></li>
 <li><p>Списание товаров</p></li>
 <li><p>Оприходование товаров</p></li>
-<li><p>Перемещение товаров ?</p></li>
+<li><p>Перемещение товаров</p></li>
 <li><p>Возврат товаров поставщику</p></li>
-<li><p>Отчет о розничных продажах ?</p></li>
+<li><p>Отчет о розничных продажах</p></li>
 </ol>
 </div></blockquote>
 </li>
+</ol>
+<p>В расширении для формы документа реализована процедура «ПослеЗаписиНаСервере»  с аннотацией <strong>«&amp;После»</strong>,
+что позволяет выполниться коду из расширения, после выполнения основного кода данной процедуры формы.
+Реализовано для того, что бы изменения остатков фиксировались только при интерактивном проведении документа и
+не и не отрабатывались при проведении программном.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">крюОбменСArtixСервер</span><span class="o">.</span><span class="n">БылоИзменениеУчетногоКоличества</span><span class="p">(</span><span class="n">ТекущийОбъект</span><span class="p">,</span> <span class="n">ПараметрыЗаписи</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Вызывается процедура <strong>«БылоИзменениеУчетногоКоличества»</strong> общего модуля <strong>«крюОбменСArtixСервер»</strong></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Процедура</span> <span class="n">БылоИзменениеУчетногоКоличества</span><span class="p">(</span><span class="n">ТекущийОбъект</span><span class="p">,</span> <span class="n">ПараметрыЗаписи</span><span class="p">)</span> <span class="n">Экспорт</span>
+   <span class="n">Если</span> <span class="n">ПараметрыЗаписи</span><span class="o">.</span><span class="n">РежимЗаписи</span> <span class="o">=</span> <span class="n">РежимЗаписиДокумента</span><span class="o">.</span><span class="n">Проведение</span> <span class="n">ИЛИ</span> <span class="n">ПараметрыЗаписи</span><span class="o">.</span><span class="n">РежимЗаписи</span> <span class="o">=</span> <span class="n">РежимЗаписиДокумента</span><span class="o">.</span><span class="n">ОтменаПроведения</span> <span class="n">Тогда</span>
+           <span class="n">Если</span> <span class="n">ТекущийОбъект</span><span class="o">.</span><span class="n">Ссылка</span><span class="o">.</span><span class="n">Метаданные</span><span class="p">()</span><span class="o">.</span><span class="n">Имя</span> <span class="o">=</span> <span class="s2">&quot;ПеремещениеЗапасов&quot;</span> <span class="n">Тогда</span>
+                   <span class="n">ЗаписатьФлагИзменений</span><span class="p">(</span><span class="n">ТекущийОбъект</span><span class="o">.</span><span class="n">СтруктурнаяЕдиница</span><span class="p">);</span>
+                   <span class="n">ЗаписатьФлагИзменений</span><span class="p">(</span><span class="n">ТекущийОбъект</span><span class="o">.</span><span class="n">СтруктурнаяЕдиницаПолучатель</span><span class="p">);</span>
+                <span class="n">Иначе</span>
+                        <span class="n">ЗаписатьФлагИзменений</span><span class="p">(</span><span class="n">ТекущийОбъект</span><span class="o">.</span><span class="n">СтруктурнаяЕдиница</span><span class="p">);</span>
+                <span class="n">КонецЕсли</span><span class="p">;</span>
+        <span class="n">КонецЕсли</span><span class="p">;</span>
+<span class="n">КонецПроцедуры</span>
+</pre></div>
+</div>
+<p>Процедура проверяет режим записи документа и тип и вызывает функцию <strong>«ЗаписатьФлагИзменений»</strong>, для
+записи файла флага в каталог с имя которого совпадает с номером магазина переданного документа.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Функция</span> <span class="n">ЗаписатьФлагИзменений</span><span class="p">(</span><span class="n">Магазин</span><span class="p">)</span> <span class="n">Экспорт</span>
+   <span class="n">НомерМагазина</span> <span class="o">=</span> <span class="n">ПолучитьНомерМагазина</span><span class="p">(</span><span class="n">Магазин</span><span class="p">);</span>
+   <span class="n">ПутьКФайлам</span>     <span class="o">=</span> <span class="n">Справочники</span><span class="o">.</span><span class="n">крю_Настройки</span><span class="o">.</span><span class="n">ВернутьЗначениеНастройки</span><span class="p">(</span><span class="s2">&quot;КаталогКонтроляОбменаArtix&quot;</span><span class="p">);</span>
+   <span class="n">ПрефиксФайла</span> <span class="o">=</span> <span class="n">Формат</span><span class="p">(</span><span class="n">ТекущаяДата</span><span class="p">()</span> <span class="o">-</span> <span class="n">дата</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;ЧГ=0&quot;</span><span class="p">);</span>
+   <span class="n">ИмяФайлаВыгрузки</span> <span class="o">=</span><span class="n">ПутьКФайлам</span><span class="o">+</span> <span class="n">НомерМагазина</span> <span class="o">+</span>  <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> + ПрефиксФайла + &quot;</span><span class="n">_chg</span><span class="o">.</span><span class="n">flg</span><span class="s2">&quot;;</span>
+   <span class="n">ТекстовыйФайл</span> <span class="o">=</span> <span class="n">Новый</span> <span class="n">ТекстовыйДокумент</span><span class="p">;</span>
+   <span class="n">ТекстовыйФайл</span><span class="o">.</span><span class="n">Записать</span><span class="p">(</span>
+           <span class="n">ИмяФайлаВыгрузки</span> <span class="o">//</span> <span class="n">путь</span> <span class="n">для</span> <span class="n">сохранения</span>
+   <span class="p">);</span>
+   <span class="n">Возврат</span> <span class="n">Неопределено</span><span class="p">;</span>
+<span class="n">КонецФункции</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
 <li><p>Http-сервисы:</p>
 <blockquote>
-<div><p><a class="reference internal" href="http1.html#http-workshift"><span class="std std-ref">1. Http-сервис Workshift</span></a></p>
-<p><a class="reference internal" href="http2.html#getchangeshop"><span class="std std-ref">2. GetChangeShop</span></a></p>
-<p><a class="reference internal" href="http3.html#getproductremains"><span class="std std-ref">3. GetProductRemains</span></a></p>
+<div><p><a class="reference internal" href="http1.html#http-workshift"><span class="std std-ref">Http-сервис Workshift</span></a></p>
+<p><a class="reference internal" href="http2.html#getchangeshop"><span class="std std-ref">GetChangeShop</span></a></p>
+<p><a class="reference internal" href="http3.html#getproductremains"><span class="std std-ref">GetProductRemains</span></a></p>
 </div></blockquote>
 </li>
 <li><p>Фоновых заданий и обработок</p>
@@ -102,6 +139,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git.html">Установка и настройка Gitea</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primer.html">Примеры</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -130,7 +168,7 @@
         <li class="right" >
           <a href="description.html" title="Общее описание"
              >назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Реализация в УНФ</a></li> 
       </ul>
     </div>

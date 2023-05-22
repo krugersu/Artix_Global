@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Работа с остатками &#8212; документация Интеграция Artix-УНФ 0.41</title>
+    <title>3. Работа с остатками &#8212; документация Интеграция Artix-УНФ 0.7</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -29,7 +29,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Алфавитный указатель"
              accesskey="I">указатель</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">3. Работа с остатками</a></li> 
       </ul>
     </div>  
@@ -41,6 +41,301 @@
             
   <section id="id1">
 <h1>3. Работа с остатками<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p>Работа с остатками товара начинается с http-запроса <a class="reference internal" href="http2.html#getchangeshop"><span class="std std-ref">GetChangeShop</span></a> к <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> с именем метода <strong>«GetShop»</strong></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">c_shop</span> <span class="o">=</span> <span class="n">rec_con</span><span class="o">.</span><span class="n">getQueryShop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Запрос возвращает список с номерами магазинов, по которым со времени последнего запроса было изменение остатков.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getQueryShop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">server_ip</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">port</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">shopquery</span><span class="p">,</span>  <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Adm&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>  <span class="c1">#  ,auth=(&#39;Adm&#39;, &#39;&#39;))</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+        <span class="n">c_count</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">listShop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getDirM</span><span class="p">(</span><span class="n">c_count</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">listShop</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>После получения списка магазинов, если этот список не пустой, начинается обработка данных по каждому магазину.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">curShop</span> <span class="ow">in</span> <span class="n">c_shop</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="n">c_count</span> <span class="o">=</span> <span class="n">rec_con</span><span class="o">.</span><span class="n">shopForNumber</span><span class="p">(</span><span class="n">curShop</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">c_count</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">4</span>        <span class="n">tData</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">workDb</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+<span class="linenos">5</span>        <span class="n">tData</span><span class="o">.</span><span class="n">uploadData</span><span class="p">(</span><span class="n">c_count</span><span class="p">,</span> <span class="n">curShop</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Отправляется (<strong>2</strong>) http-запрос <a class="reference internal" href="http3.html#getproductremains"><span class="std std-ref">GetProductRemains</span></a> к <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> для получения списка номенклатуры с отстатками
+по магазину с номером указанном в параметре <strong>«number»</strong>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">shopForNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c_shop</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">mPar</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;number&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">c_shop</span><span class="p">)}</span>
+<span class="linenos"> 3</span>    <span class="nb">print</span><span class="p">(</span><span class="n">mPar</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">n_shop</span> <span class="o">=</span> <span class="n">tortilla</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">server_ip</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
+<span class="linenos"> 6</span>                            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">port</span>
+<span class="linenos"> 7</span>                            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mConfig</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">one_C</span><span class="o">.</span><span class="n">lquery</span><span class="p">,</span>  <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Adm&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="c1">#,  auth=(&#39;Adm&#39;, &#39;&#39;)</span>
+<span class="linenos"> 8</span>        <span class="n">c_count</span> <span class="o">=</span> <span class="n">n_shop</span><span class="o">.</span><span class="n">test_s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;V1/GetProductRemains?number=&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_shop</span><span class="p">))</span>
+<span class="linenos"> 9</span>        <span class="k">return</span> <span class="n">c_count</span>
+<span class="linenos">10</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Если в результате выполнения http-запроса <a class="reference internal" href="http2.html#getchangeshop"><span class="std std-ref">GetChangeShop</span></a> к <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> получены не нулевые остатки, то
+создается объект БД SQLite и вызывается функция по заполнению БД SQLite товарами и остатками.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tData</span><span class="o">.</span><span class="n">uploadData</span><span class="p">(</span><span class="n">c_count</span><span class="p">,</span> <span class="n">curShop</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate" id="uploaddata"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">uploadData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c_count</span><span class="p">,</span> <span class="n">shop_Number</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="bp">self</span><span class="o">.</span><span class="n">createDB</span><span class="p">()</span>
+<span class="linenos"> 3</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - recursive_items(c_count)&#39;</span> <span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="bp">self</span><span class="o">.</span><span class="n">recursive_items</span><span class="p">(</span><span class="n">c_count</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - calculating_the_amount()&#39;</span> <span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="bp">self</span><span class="o">.</span><span class="n">calculating_the_amount</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - delete_analog()&#39;</span> <span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="bp">self</span><span class="o">.</span><span class="n">delete_analog</span><span class="p">()</span>
+<span class="linenos"> 9</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - delete_null_parent()&#39;</span> <span class="p">)</span>
+<span class="linenos">10</span>    <span class="bp">self</span><span class="o">.</span><span class="n">delete_null_parent</span><span class="p">()</span>
+<span class="linenos">11</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - querySales()&#39;</span> <span class="p">)</span>
+<span class="linenos">12</span>    <span class="bp">self</span><span class="o">.</span><span class="n">querySales</span><span class="p">()</span>
+<span class="linenos">13</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - calculateSales()&#39;</span> <span class="p">)</span>
+<span class="linenos">14</span>    <span class="bp">self</span><span class="o">.</span><span class="n">calculateSales</span><span class="p">()</span>
+<span class="linenos">15</span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Function call - ctest_db(shop_Number)&#39;</span> <span class="p">)</span>
+<span class="linenos">16</span>    <span class="bp">self</span><span class="o">.</span><span class="n">test_db</span><span class="p">(</span><span class="n">shop_Number</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>2</strong>) пересоздается БД SQLite. Структура БД максимально соответствует структуре
+файла <a class="reference internal" href="gloss.html#term-aif"><span class="xref std std-term">aif</span></a> для выгрузки на кассовый сервер.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createDB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pathScript</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sql_file</span><span class="p">:</span>
+        <span class="n">sql_script</span> <span class="o">=</span> <span class="n">sql_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="n">sql_script</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>4</strong>) данные полученные из <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a> записываются в соответствующие таблицы БД SQLite для последующей
+обработки.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recursive_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Start add DB from 1C&#39;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddinvent</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">invent</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">invent</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddadditionalprices</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">additionalprices</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">additionalprices</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddBarcodes</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">barcodes</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">barcodes</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddinventitemoptions</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">inventitemoptions</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">inventitemoptions</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddPriceoptions</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">priceoptions</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">priceoptions</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddquantityoptions</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">quantityoptions</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">quantityoptions</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddSellrestrictperiods</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">sellrestrictperiods</span><span class="p">,)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">sellrestrictperiods</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAddOptions</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Текущие закрытые кассовые смены по данному обрабатываемому магазину</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sale_dict</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">wsunf</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;workshift from UNF - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">wsunf</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;End add DB from UNF&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;added - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; records&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>6</strong>)   Запускается скрипт <strong>«upd.sql»</strong>, который переносит количество товара с аналогов на
+головную номенклатуру.</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">invent</span>
+<span class="k">set</span><span class="w"> </span><span class="n">remain</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">sumItog</span><span class="p">.</span><span class="n">summItog</span>
+<span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">invent</span><span class="p">.</span><span class="n">inventcode</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">SummIsParent</span><span class="p">.</span><span class="n">remain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">invent</span><span class="p">.</span><span class="n">remain</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">summItog</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SummIsParent</span>
+<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="n">invent</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SummIsParent</span><span class="p">.</span><span class="n">isParent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">invent</span><span class="p">.</span><span class="n">inventcode</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sumItog</span>
+<span class="k">WHERE</span><span class="w">  </span><span class="n">invent</span><span class="p">.</span><span class="n">inventcode</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">sumItog</span><span class="p">.</span><span class="n">inventcode</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>8</strong>)  Запускается скрипт <strong>«del_a.sql»</strong>, который удаляет из БД SQLite аналоги
+номенклатуры, после перенесения остаков на головную номенклатуру.</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w">   </span><span class="k">FROM</span><span class="w"> </span><span class="n">invent</span><span class="w"> </span><span class="k">WHERE</span><span class="w">  </span><span class="n">isParent</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>10</strong>) Запускается скрипт <strong>«del_a.sql»</strong>, который удаляет из БД SQLite
+головную наменклатуру, с нулевым количеством.</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w">   </span><span class="k">FROM</span><span class="w"> </span><span class="n">invent</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">remain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>12</strong>)  Осуществляется запрос в БД MySQL кассового сервера для получения текущих
+продаж, которые еще не были отражены в <a class="reference internal" href="gloss.html#term-0"><span class="xref std std-term">УНФ</span></a>. (т.е. смена не была закрыта)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">querySales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span>  <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sale_dict</span><span class="p">:</span>    <span class="c1">#</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;cashcode - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;cashcode&#39;</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;shiftnum - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;shiftnum&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrSimpleSelectSale</span><span class="p">,(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;cashcode&#39;</span><span class="p">],(</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;shiftnum&#39;</span><span class="p">])),)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;rows - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s1">&#39;INSERT INTO goodsitem VALUES(?,?,?)&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>14</strong>) Запускается скрипт <strong>«updateprod.sql»</strong>, который минусует
+текущие продажи от полученных остатков.</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">UPDATE</span>
+<span class="w">        </span><span class="n">INVENT</span>
+<span class="k">SET</span>
+<span class="w">        </span><span class="n">REMAIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SUMITOG</span><span class="p">.</span><span class="n">ITOG</span>
+<span class="k">FROM</span>
+<span class="w">        </span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span>
+<span class="w">                </span><span class="o">*</span><span class="w"> </span><span class="p">,</span>
+<span class="w">        </span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">opcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50&#39;</span>
+<span class="w">        </span><span class="k">THEN</span><span class="w"> </span><span class="p">(</span><span class="n">REMAIN</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="ss">&quot;SUM(CQUANT)&quot;</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="p">(</span><span class="n">REMAIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot;SUM(CQUANT)&quot;</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ITOG</span>
+<span class="w">        </span><span class="k">FROM</span>
+<span class="w">                </span><span class="n">SUMMPROD</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">SUMITOG</span>
+<span class="k">WHERE</span>
+<span class="w">        </span><span class="n">INVENT</span><span class="p">.</span><span class="n">INVENTCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SUMITOG</span><span class="p">.</span><span class="n">CODE</span>
+</pre></div>
+</div>
+<p>В функции <a class="reference internal" href="#uploaddata"><span class="std std-ref">uploadData</span></a> в строке (<strong>16</strong>) Запускается процедура «test_db», которая
+формирует файлы: «.flz» - файл флаг и  <a class="reference internal" href="gloss.html#term-aif"><span class="xref std std-term">aif</span></a> файл с данными для загрузки в кассовый сервер.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">shop_Number</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;linux&quot;</span><span class="p">):</span>  <span class="c1"># could be &quot;linux&quot;, &quot;linux2&quot;, &quot;linux3&quot;, ...</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">pysqlite3</span><span class="o">.</span><span class="n">Row</span> <span class="c1"># Позволяет работать с возвращаемым результатам с обращением к столбцам по имени</span>
+    <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="n">curFileName</span> <span class="o">=</span> <span class="s1">&#39;pos&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shop_Number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.aif&#39;</span>
+    <span class="n">curFlagName</span> <span class="o">=</span> <span class="s1">&#39;pos&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shop_Number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.flz&#39;</span>
+
+    <span class="n">pathAif</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/home/administrator/Global/upload/&quot;</span><span class="p">,</span> <span class="n">curFileName</span><span class="p">)</span>
+    <span class="n">pathFlz</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/home/administrator/Global/upload/&quot;</span><span class="p">,</span> <span class="n">curFlagName</span><span class="p">)</span>
+
+    <span class="n">outfileFlz</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">pathFlz</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">outfileFlz</span><span class="o">.</span><span class="n">close</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pathAif</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">header</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">clearInventory</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">separator</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">clearTmcScale</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">separator</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">dictForArtix</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM invent&#39;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">invent</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">invent</span><span class="p">:</span>
+
+        <span class="c1"># Add Barcodes</span>
+                <span class="n">cBar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">nDict</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">invent</span><span class="p">))</span>
+                <span class="n">tCode</span> <span class="o">=</span> <span class="p">((</span><span class="n">nDict</span><span class="p">[</span><span class="s1">&#39;inventcode&#39;</span><span class="p">]))</span>
+
+                <span class="n">cBar</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrBarcodes</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+
+                <span class="n">tBarcodes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">invent</span><span class="p">)</span>
+                <span class="n">barcodes</span> <span class="o">=</span> <span class="n">cBar</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">allBarcodes</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">barcodes</span><span class="p">:</span>
+                    <span class="n">allBarcodes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span> <span class="p">)</span>
+
+                <span class="c1">#nDict[&#39;barcodes&#39;] = allBarcodes</span>
+
+                <span class="c1"># Add sellrestrictperiods Массив ограничений продаж по времени, пока не заполняем, нам без надобности</span>
+                <span class="n">cSellPeriod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cSellPeriod</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrsellrestrictperiods</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">sellrestrictperiods</span> <span class="o">=</span> <span class="n">cSellPeriod</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">allSellrestrictperiods</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">sellrestrictperiods</span><span class="p">:</span>
+                    <span class="n">allSellrestrictperiods</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span> <span class="p">)</span>
+
+                <span class="c1"># Add Additionalprices  Массив дополнительных цен</span>
+                <span class="n">cAdditionalprices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cAdditionalprices</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrAdditionalprices</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">additionalpricesid</span> <span class="o">=</span> <span class="n">cAdditionalprices</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="n">alladditionalpricesid</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">additionalpricesid</span><span class="p">:</span>
+                    <span class="n">alladditionalpricesid</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span> <span class="p">)</span>
+
+                <span class="c1"># Add inventitemoptions Опции товара</span>
+                <span class="n">cinventitemoptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cinventitemoptions</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrinventitemoptions</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">inventitemoptions</span> <span class="o">=</span> <span class="n">cinventitemoptions</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">inventitemoptions</span><span class="p">:</span>
+                    <span class="c1"># allinventitemoptions.append((dict(itm)) )</span>
+                    <span class="n">allinventitemoptions</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span>
+
+                <span class="c1"># Add priceoptions Опции цены</span>
+                <span class="n">cpriceoptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cpriceoptions</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrpriceoptions</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">priceoptions</span> <span class="o">=</span> <span class="n">cpriceoptions</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">priceoptions</span><span class="p">:</span>
+                    <span class="n">allpriceoptions</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span>
+
+                <span class="c1"># Add quantityoptions Опции количества</span>
+                <span class="n">cquantityoptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cquantityoptions</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrquantityoptions</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">quantityoptions</span> <span class="o">=</span> <span class="n">cquantityoptions</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">quantityoptions</span><span class="p">:</span>
+                    <span class="n">allquantityoptions</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span>
+
+                <span class="c1"># Add quantityoptions Опции количества</span>
+                <span class="n">cremainsoptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                <span class="n">cremainsoptions</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">qrremainsoptions</span><span class="p">,(</span><span class="n">tCode</span><span class="p">,))</span>
+                <span class="n">remainsoptions</span> <span class="o">=</span> <span class="n">cremainsoptions</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">itm</span> <span class="ow">in</span> <span class="n">remainsoptions</span><span class="p">:</span>
+                    <span class="n">allremainsoptions</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">itm</span><span class="p">))</span>
+
+<span class="c1">##########################################################################################</span>
+                <span class="c1"># Add options Опции товара</span>
+                <span class="n">alloptions</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">alloptions</span><span class="p">[</span><span class="s1">&#39;inventitemoptions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">allinventitemoptions</span>
+                <span class="n">alloptions</span><span class="p">[</span><span class="s1">&#39;priceoptions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">allpriceoptions</span>
+                <span class="n">alloptions</span><span class="p">[</span><span class="s1">&#39;quantityoptions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">allquantityoptions</span>
+                <span class="c1">#alloptions[&#39;remainsoptions&#39;] = allremainsoptions   Опции учета остатков, пока ни как не реализованы, оставлены на будущее</span>
+<span class="c1">###########################################################################################</span>
+
+                <span class="n">nDict</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alloptions</span>
+                <span class="n">nDict</span><span class="p">[</span><span class="s1">&#39;sellrestrictperiods&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">allSellrestrictperiods</span>
+                <span class="n">nDict</span><span class="p">[</span><span class="s1">&#39;additionalprices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alladditionalpricesid</span>
+                <span class="n">nDict</span><span class="p">[</span><span class="s1">&#39;barcodes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">allBarcodes</span>
+
+                <span class="n">tCommand</span> <span class="o">=</span> <span class="n">diff_data</span><span class="o">.</span><span class="n">addInventItem</span>
+                <span class="n">comDict</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">tCommand</span><span class="p">))</span>
+                <span class="n">nCommand</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">nCommand</span><span class="p">[</span><span class="s1">&#39;invent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nDict</span>
+                <span class="n">comDict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nCommand</span><span class="p">)</span>
+
+                <span class="n">dictForArtix</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">comDict</span><span class="p">)</span>
+
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dictForArtix</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span>  <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span> <span class="p">)</span>
+
+                <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">diff_data</span><span class="o">.</span><span class="n">separator</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">separator</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">clearAspectValueSet</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">separator</span><span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">diff_data</span><span class="o">.</span><span class="n">footer</span><span class="p">)</span>
+    <span class="n">sendFile</span><span class="o">.</span><span class="n">sendFile</span><span class="p">(</span><span class="n">pathAif</span><span class="p">,</span><span class="n">shop_Number</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sendFile</span><span class="o">.</span><span class="n">sendFile</span><span class="p">(</span><span class="n">pathFlz</span><span class="p">,</span><span class="n">shop_Number</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 
 
@@ -60,6 +355,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git.html">Установка и настройка Gitea</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primer.html">Примеры</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -82,7 +378,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Алфавитный указатель"
              >указатель</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.41</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.7</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">3. Работа с остатками</a></li> 
       </ul>
     </div>
