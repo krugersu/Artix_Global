@@ -22,7 +22,6 @@
    :maxdepth: 2
    :caption: Настройки
 
-
    kass
    sert
    scal   

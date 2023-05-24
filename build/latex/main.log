@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.27)  22 MAY 2023 15:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.27)  24 MAY 2023 21:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1162,28 +1162,29 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-
-])
+))
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [2] (./main.lof)
+ [1
+
+
+] (./main.lof)
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [3
+
+[2
 
 ] (./main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [4
+ [3
 
 ]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 1.
-<gl.png, id=229, 583.42969pt x 301.8778pt>
+<gl.png, id=145, 583.42969pt x 301.8778pt>
 LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
 213.
 (/usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
@@ -1193,7 +1194,7 @@ File: gl.png Graphic file (type png)
 <use gl.png>
 Package pdftex.def Info: gl.png  used on input line 213.
 (pdftex.def)             Requested size: 496.34488pt x 256.80922pt.
-<cat.png, id=231, 1025.33063pt x 189.70876pt>
+<cat.png, id=147, 1025.33063pt x 189.70876pt>
 File: cat.png Graphic file (type png)
 <use cat.png>
 Package pdftex.def Info: cat.png  used on input line 224.
@@ -1209,7 +1210,7 @@ LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <10> not available
 [3
 
 ]
-<web.png, id=259, 381.67593pt x 557.08125pt>
+<web.png, id=176, 381.67593pt x 557.08125pt>
 File: web.png Graphic file (type png)
 <use web.png>
 Package pdftex.def Info: web.png  used on input line 389.
@@ -1227,151 +1228,189 @@ File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 [7
 
 ]
-Underfull \vbox (badness 2326) detected at line 581
- []
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 5.
+[8
 
-[8]
-<1.png, id=297, 542.77782pt x 234.1247pt>
+]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 6.
+[9
+
+]
+<1.png, id=216, 542.77782pt x 234.1247pt>
 File: 1.png Graphic file (type png)
 <use 1.png>
-Package pdftex.def Info: 1.png  used on input line 596.
+Package pdftex.def Info: 1.png  used on input line 601.
 (pdftex.def)             Requested size: 496.34697pt x 214.10052pt.
-<2.png, id=298, 660.21657pt x 381.67593pt>
+ [10 <./1.png (PNG copy)>]
+<2.png, id=222, 660.21657pt x 381.67593pt>
 File: 2.png Graphic file (type png)
 <use 2.png>
-Package pdftex.def Info: 2.png  used on input line 607.
+Package pdftex.def Info: 2.png  used on input line 612.
 (pdftex.def)             Requested size: 496.34995pt x 286.94347pt.
- [9 <./1.png (PNG copy)>] [10 <./2.png (PNG copy)>] [11]
-<key.jpg, id=333, 596.98032pt x 631.60968pt>
+ [11 <./2.png (PNG copy)>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 7.
+<tip.png, id=227, 573.64313pt x 383.93437pt>
+File: tip.png Graphic file (type png)
+<use tip.png>
+Package pdftex.def Info: tip.png  used on input line 645.
+(pdftex.def)             Requested size: 496.34328pt x 332.20996pt.
+<load.png, id=228, 551.05875pt x 483.30562pt>
+File: load.png Graphic file (type png)
+<use load.png>
+Package pdftex.def Info: load.png  used on input line 655.
+(pdftex.def)             Requested size: 496.35188pt x 435.32503pt.
+<set4.png, id=229, 1270.7475pt x 568.37344pt>
+File: set4.png Graphic file (type png)
+<use set4.png>
+Package pdftex.def Info: set4.png  used on input line 673.
+(pdftex.def)             Requested size: 496.32635pt x 221.99431pt.
+[12
+
+ <./tip.png>] [13 <./load.png> <./set4.png (PNG copy)>]
+<set1.png, id=240, 458.46281pt x 303.38344pt>
+File: set1.png Graphic file (type png)
+<use set1.png>
+Package pdftex.def Info: set1.png  used on input line 683.
+(pdftex.def)             Requested size: 458.46169pt x 303.38269pt.
+<set2.png, id=241, 457.71pt x 303.38344pt>
+File: set2.png Graphic file (type png)
+<use set2.png>
+Package pdftex.def Info: set2.png  used on input line 692.
+(pdftex.def)             Requested size: 457.7089pt x 303.38269pt.
+<set3.png, id=242, 302.63063pt x 337.26pt>
+File: set3.png Graphic file (type png)
+<use set3.png>
+Package pdftex.def Info: set3.png  used on input line 701.
+(pdftex.def)             Requested size: 302.62988pt x 337.25917pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 715--720
+[]\T2A/cmr/bx/n/10 Внимание:  \T2A/cmr/m/n/10 При ука-за-нии пра-вил раз-бо-ра 
+штрих-кода в кон-фи-гу-ра-ци-он-ном фай-ле
+ []
+
+[14 <./set1.png (PNG copy)>] [15 <./set2.png (PNG copy)> <./set3.png (PNG copy)
+>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 8.
+[16
+
+]
+<key.jpg, id=275, 596.98032pt x 631.60968pt>
 File: key.jpg Graphic file (type jpg)
 <use key.jpg>
-Package pdftex.def Info: key.jpg  used on input line 800.
+Package pdftex.def Info: key.jpg  used on input line 893.
 (pdftex.def)             Requested size: 496.33157pt x 525.15147pt.
- [12 <./key.jpg>]
+ [17] [18 <./key.jpg>]
 LaTeX Font Info:    Trying to load font information for T2A+cmss on input line 
-915.
+1008.
 
 (/usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmss.fd
 File: t2acmss.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-Underfull \hbox (badness 7486) in paragraph at lines 919--921
+Underfull \hbox (badness 7486) in paragraph at lines 1012--1014
 []|\T2A/cmss/m/n/10 Тип дан-
  []
 
 
-Overfull \hbox (60.21246pt too wide) in paragraph at lines 933--935
+Overfull \hbox (60.21246pt too wide) in paragraph at lines 1026--1028
 []|\T2A/cmr/m/n/10 distributeReceiptDiscountFully| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 936--938
+Underfull \hbox (badness 10000) in paragraph at lines 1029--1031
 []|\T2A/cmr/m/n/10 ло-ги-че-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 945--948
+Underfull \hbox (badness 10000) in paragraph at lines 1038--1041
 []|\T2A/cmr/m/n/10 По умол-ча-нию
  []
 
 
-Overfull \hbox (38.91211pt too wide) in paragraph at lines 949--951
+Overfull \hbox (38.91211pt too wide) in paragraph at lines 1042--1044
 []|\T2A/cmr/m/n/10 ignoreMinimalPriceForKit| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 952--954
+Underfull \hbox (badness 10000) in paragraph at lines 1045--1047
 []|\T2A/cmr/m/n/10 ло-ги-че-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 961--964
+Underfull \hbox (badness 10000) in paragraph at lines 1054--1057
 []|\T2A/cmr/m/n/10 По умол-ча-нию
  []
 
 
-Overfull \hbox (38.10675pt too wide) in paragraph at lines 965--967
+Overfull \hbox (38.10675pt too wide) in paragraph at lines 1058--1060
 []|\T2A/cmr/m/n/10 recalcDiscInFormingMode| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 968--970
+Underfull \hbox (badness 10000) in paragraph at lines 1061--1063
 []|\T2A/cmr/m/n/10 ло-ги-че-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 977--980
+Underfull \hbox (badness 10000) in paragraph at lines 1070--1073
 []|\T2A/cmr/m/n/10 По умол-ча-нию
  []
 
 
-Overfull \hbox (49.71503pt too wide) in paragraph at lines 981--983
+Overfull \hbox (49.71503pt too wide) in paragraph at lines 1074--1076
 []|\T2A/cmr/m/n/10 saveNullDiscountForPosition| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 984--986
+Underfull \hbox (badness 10000) in paragraph at lines 1077--1079
 []|\T2A/cmr/m/n/10 ло-ги-че-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 993--996
+Underfull \hbox (badness 10000) in paragraph at lines 1086--1089
 []|\T2A/cmr/m/n/10 По умол-ча-нию
  []
 
-[13] [14]
-{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 5.
-[15
-
-] [16] [17] [18]
-{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 6.
-[19
-
-] [20] [21]
-{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 7.
-[22
-
-]
-{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 8.
+[19] [20]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 9.
 No file main.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1645.
-[23
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1156.
+[21
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1645.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1156.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1645.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1645.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1156.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1156.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D77D147F852FFAA141BF8F33982741F5;10292.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1645.
+(rerunfilecheck)             Checksum: 1FCDC8C2A1302ECFEF878176605F3585;6507.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1156.
  ) 
 Here is how much of TeX's memory you used:
- 17554 strings out of 481239
- 264866 string characters out of 5920377
- 698238 words of memory out of 5000000
- 32208 multiletter control sequences out of 15000+600000
- 550685 words of font info for 56 fonts, out of 8000000 for 9000
+ 17495 strings out of 481239
+ 264064 string characters out of 5920377
+ 696234 words of memory out of 5000000
+ 32193 multiletter control sequences out of 15000+600000
+ 547796 words of font info for 52 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 39i,11n,51p,1633b,756s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,11n,51p,1633b,754s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc}{/usr/share/texmf
 /fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy5.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi
-1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share
-/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/p
-ublic/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2
-074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/
-texmf/fonts/type1/public/cm-super/sfit1000.pfb></usr/share/texmf/fonts/type1/pu
-blic/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm09
-00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/t
-exmf/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf/fonts/type1/pub
-lic/cm-super/sfti0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti100
-0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (28 pages, 845291 bytes).
+public/amsfonts/cm/cmsy5.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx
+1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share
+/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/p
+ublic/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit1
+000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss10
+00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sftt1000.pfb>
+Output written on main.pdf (25 pages, 979890 bytes).
 PDF statistics:
- 506 PDF objects out of 1000 (max. 8388607)
- 442 compressed objects within 5 object streams
- 129 named destinations out of 1000 (max. 500000)
- 359 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 377 PDF objects out of 1000 (max. 8388607)
+ 311 compressed objects within 4 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 261 words of extra memory for PDF output out of 10000 (max. 10000000)
 
