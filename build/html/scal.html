@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Работа с весами &#8212; документация Интеграция Artix-УНФ 0.9</title>
+    <title>Работа с весами &#8212; документация Интеграция Artix-УНФ 0.91</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="prox.html" title="Внешняя программма"
              accesskey="P">назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.9</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.91</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Работа с весами</a></li> 
       </ul>
     </div>  
@@ -81,6 +81,20 @@
 <figure class="align-default">
 <img alt="_images/set3.png" src="_images/set3.png" />
 </figure>
+<p class="rubric">Настройка весов</p>
+<p>Необходимо в весах установить префикс весового товара в <strong>«20»</strong>.</p>
+<p class="rubric">Настройки штрихкодирования на весах:</p>
+<p>Правила разбора штрих-кода фиксируются в конфигурационном файле <cite>/linuxcash/cash/conf/bcode.ini</cite>
+и применяются в заданном порядке. Также осуществляется считывание конфигурации bcodeparser из директории
+<cite>/linuxcash/cash/conf/bcode.ini.d/</cite> (считывание файлов происходит в алфавитном порядке).
+Итоговая конфигурация выводится в основной лог программы <cite>/linuxcash/logs/current/terminal.log.</cite></p>
+<div class="admonition attention">
+<p class="admonition-title">Внимание</p>
+<p>При указании правил разбора штрих-кода в конфигурационном файле <cite>/linuxcash/cash/conf/bcode.ini</cite>
+и в файлах директории <cite>/linuxcash/cash/conf/bcode.ini.d/</cite>
+сначала происходит считывание файла <cite>/linuxcash/cash/conf/bcode.ini.</cite></p>
+</div>
+<p>Ссылка на сайт с <a class="reference external" href="https://docs.artix.su/pages/viewpage.action?pageId=27532556">документацией</a> (рус.)</p>
 </section>
 
 
@@ -129,7 +143,7 @@
         <li class="right" >
           <a href="prox.html" title="Внешняя программма"
              >назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.9</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.91</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Работа с весами</a></li> 
       </ul>
     </div>
