@@ -52,7 +52,7 @@
 % Set up styles of URL: it should be placed after hyperref.
 \urlstyle{same}
 
-\addto\captionsrussian{\renewcommand{\contentsname}{Содержание:}}
+\addto\captionsrussian{\renewcommand{\contentsname}{Описание:}}
 
 \usepackage{sphinxmessages}
 \setcounter{tocdepth}{0}
@@ -140,8 +140,8 @@
     
 
 \title{Sphinx format for Latex and HTML}
-\date{мая 22, 2023}
-\release{0.85}
+\date{мая 24, 2023}
+\release{1.0}
 \author{Meher Krishna Patel}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{ }
@@ -438,15 +438,20 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0\sphinxhyphen{}69\sphinxhyphen{}generic x86\
 \sphinxstepscope
 
 
-\chapter{Настройки}
-\label{\detokenize{setting:id1}}\label{\detokenize{setting::doc}}
+\chapter{Файлы}
+\label{\detokenize{files:id1}}\label{\detokenize{files::doc}}\begin{quote}
+
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{Скачать эту документацию в pdf}}.
+\end{quote}
+
 \sphinxstepscope
 
 
-\section{Порядок внедрения касс в работу с Артикс:}
+\chapter{Порядок внедрения касс в работу с Артикс:}
 \label{\detokenize{kass:id1}}\label{\detokenize{kass::doc}}
 
-\subsection{1. Создать магазин + касса на сервере.}
+\section{1. Создать магазин + касса на сервере.}
 \label{\detokenize{kass:id2}}\begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
@@ -466,7 +471,7 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0\sphinxhyphen{}69\sphinxhyphen{}generic x86\
 \end{enumerate}
 
 
-\subsection{2. Настройка ПОС}
+\section{2. Настройка ПОС}
 \label{\detokenize{kass:id3}}
 \sphinxAtStartPar
 Полуручной:
@@ -495,7 +500,7 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0\sphinxhyphen{}69\sphinxhyphen{}generic x86\
 \sphinxstepscope
 
 
-\section{Добавление группы сертификатов со сроком действия через REST API.}
+\chapter{Добавление группы сертификатов со сроком действия через REST API.}
 \label{\detokenize{sert:rest-api}}\label{\detokenize{sert::doc}}
 \sphinxAtStartPar
 \sphinxstylestrong{1. Добавление группы сертификатов со сроком действия через REST API.}
@@ -632,10 +637,98 @@ Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0\sphinxhyphen{}69\sphinxhyphen{}generic x86\
 \sphinxstepscope
 
 
-\section{Дополнительные материалы:}
+\chapter{Работа с весами}
+\label{\detokenize{scal:id1}}\label{\detokenize{scal::doc}}
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{tip}.png}
+\end{figure}
+
+
+\bigskip\hrule\bigskip
+
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{load}.png}
+\end{figure}
+
+\sphinxAtStartPar
+Пример файла выгрузки формируемый из 1С
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+m+mi}{82}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\PYG{l+m+mi}{2082}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{0.006}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\PYG{l+m+mi}{3082}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{0.008}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\PYG{l+m+mi}{4082}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{0.012}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\PYG{l+m+mi}{5082}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{0.02}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\PYG{l+m+mi}{6082}\PYG{p}{;}\PYG{n}{Шейки} \PYG{n}{цыплят} \PYG{n}{в}\PYG{o}{/}\PYG{n}{к}\PYG{p}{;}\PYG{p}{;}\PYG{l+m+mi}{550}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{0.014}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{10007}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{l+m+mf}{01.01}\PYG{l+m+mf}{.01}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{set4}.png}
+\end{figure}
+\subsubsection*{Настройка автоматического загрузчика}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Указываем путь до файлов лога, включаем автоматический режим и устанавливаем интервал запуска.}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{set1}.png}
+\end{figure}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Формируем список весов для загрузки}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{set2}.png}
+\end{figure}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Настройка весов}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{set3}.png}
+\end{figure}
+\subsubsection*{Настройка весов}
+
+\sphinxAtStartPar
+Необходимо в весах установить префикс весового товара в \sphinxstylestrong{«20»}.
+\subsubsection*{Настройки штрихкодирования на весах:}
+
+\sphinxAtStartPar
+Правила разбора штрих\sphinxhyphen{}кода фиксируются в конфигурационном файле \sphinxtitleref{/linuxcash/cash/conf/bcode.ini}
+и применяются в заданном порядке. Также осуществляется считывание конфигурации bcodeparser из директории
+\sphinxtitleref{/linuxcash/cash/conf/bcode.ini.d/} (считывание файлов происходит в алфавитном порядке).
+Итоговая конфигурация выводится в основной лог программы \sphinxtitleref{/linuxcash/logs/current/terminal.log.}
+
+\begin{sphinxadmonition}{attention}{Внимание:}
+\sphinxAtStartPar
+При указании правил разбора штрих\sphinxhyphen{}кода в конфигурационном файле \sphinxtitleref{/linuxcash/cash/conf/bcode.ini}
+и в файлах директории \sphinxtitleref{/linuxcash/cash/conf/bcode.ini.d/}
+сначала происходит считывание файла \sphinxtitleref{/linuxcash/cash/conf/bcode.ini.}
+\end{sphinxadmonition}
+
+\sphinxAtStartPar
+Ссылка на сайт с \sphinxhref{https://docs.artix.su/pages/viewpage.action?pageId=27532556}{документацией} (рус.)
+
+\sphinxstepscope
+
+
+\chapter{Дополнительные материалы:}
 \label{\detokenize{additional:id1}}\label{\detokenize{additional::doc}}
 
-\subsection{1. Список директорий и файлов  основных настроек.}
+\section{1. Список директорий и файлов  основных настроек.}
 \label{\detokenize{additional:id2}}\begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} \begin{description}
@@ -711,7 +804,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 включая “Подключаемое оборудование”, проверяем и при необходимости вносим правки.
 
 
-\subsection{2. Особенности настройки “Сбербанк”}
+\section{2. Особенности настройки “Сбербанк”}
 \label{\detokenize{additional:id3}}
 \sphinxAtStartPar
 Для работы с процессингом сбербанк необходимо установить пакет \sphinxhyphen{} \sphinxstyleemphasis{artix45\sphinxhyphen{}plugin\sphinxhyphen{}sb}.
@@ -725,7 +818,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 Для работы с терминалом PAX SP30 \sphinxhyphen{} дополнительно установить пакет \sphinxstyleemphasis{ttypos}
 
 
-\subsection{3. Ссылка на скачивание дистрибутива yuki}
+\section{3. Ссылка на скачивание дистрибутива yuki}
 \label{\detokenize{additional:yuki}}\begin{quote}
 
 \sphinxAtStartPar
@@ -733,7 +826,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 \end{quote}
 
 
-\subsection{4. Остатки}
+\section{4. Остатки}
 \label{\detokenize{additional:id4}}
 \sphinxAtStartPar
 в конфигурационном файле /linuxcash/cash/conf/ncash.ini
@@ -763,7 +856,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 оставляем \sphinxstylestrong{пустым!!!} (не «0»!!!).
 
 
-\subsection{5. Дисконтные карты (создание)}
+\section{5. Дисконтные карты (создание)}
 \label{\detokenize{additional:id5}}\begin{quote}
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
@@ -792,7 +885,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 \end{quote}
 
 
-\subsection{6. Настройка действий и контекста клавиш}
+\section{6. Настройка действий и контекста клавиш}
 \label{\detokenize{additional:id6}}
 \begin{figure}[htbp]
 \centering
@@ -801,7 +894,7 @@ markedgoods.ini \sphinxhyphen{} другая маркировка
 \end{figure}
 
 
-\subsection{7. Конфигурирование дистконтной системы}
+\section{7. Конфигурирование дистконтной системы}
 \label{\detokenize{additional:id7}}
 \sphinxAtStartPar
 Ссылка на сайт с полной \sphinxhref{https://docs.artix.su/pages/viewpage.action?pageId=27531279\#id-Встроеннаядисконтнаяподсистема-Конфигурирование}{инструкцией}
@@ -1027,588 +1120,6 @@ S
 \PYG{c+c1}{; Пересчитывать скидки в режиме формирования чека, по\PYGZhy{}умолчанию true.}
 \PYG{n+na}{recalcDiscInFormingMode}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{true}
 \end{sphinxVerbatim}
-
-\sphinxstepscope
-
-
-\chapter{Сайт с документацией}
-\label{\detokenize{docs:id1}}\label{\detokenize{docs::doc}}
-
-\section{Разворачивание сайта:}
-\label{\detokenize{docs:id2}}
-\sphinxAtStartPar
-Git должен уже быть установлен в системе \sphinxhyphen{}  \DUrole{xref,std,std-ref}{gitinst}
-
-
-\subsection{1. Копирование Git репозитория.}
-\label{\detokenize{docs:git}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }mkdir\PYG{+w}{ }\PYGZti{}/Doc
-\PYGZdl{}\PYG{+w}{ }\PYG{n+nb}{cd}\PYG{+w}{ }Doc/
-\PYGZdl{}\PYG{+w}{ }git\PYG{+w}{ }clone\PYG{+w}{ }https://github.com/krugersu/Artix\PYGZus{}Global
-\end{sphinxVerbatim}
-
-
-\subsection{2. Установка Apache.}
-\label{\detokenize{docs:apache}}
-\sphinxAtStartPar
-Ссылка на сайт с полной \sphinxhref{https://www.8host.com/blog/ustanovka-veb-servera-apache-v-ubuntu-22-04/}{инструкцией}
-
-\sphinxAtStartPar
-Установка без настройки брандмауэра.
-
-
-\subsubsection{Установка:}
-\label{\detokenize{docs:id4}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }apt\PYG{+w}{ }update
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }apt\PYG{+w}{ }install\PYG{+w}{ }apache2
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }status\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Получаем вывод вида:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-apache2.service\PYG{+w}{ }\PYGZhy{}\PYG{+w}{ }The\PYG{+w}{ }Apache\PYG{+w}{ }HTTP\PYG{+w}{ }Server
-Loaded:\PYG{+w}{ }loaded\PYG{+w}{ }\PYG{o}{(}/lib/systemd/system/apache2.service\PYG{p}{;}\PYG{+w}{ }enabled\PYG{p}{;}\PYG{+w}{ }vendor\PYG{+w}{ }preset:\PYG{+w}{ }enabled\PYG{o}{)}
-Active:\PYG{+w}{ }active\PYG{+w}{ }\PYG{o}{(}running\PYG{o}{)}\PYG{+w}{ }since\PYG{+w}{ }Thu\PYG{+w}{ }\PYG{l+m}{2020}\PYGZhy{}04\PYGZhy{}23\PYG{+w}{ }\PYG{l+m}{22}:36:30\PYG{+w}{ }UTC\PYG{p}{;}\PYG{+w}{ }20h\PYG{+w}{ }ago
-\PYG{+w}{    }Docs:\PYG{+w}{ }https://httpd.apache.org/docs/2.4/
-Main\PYG{+w}{ }PID:\PYG{+w}{ }\PYG{l+m}{29435}\PYG{+w}{ }\PYG{o}{(}apache2\PYG{o}{)}
-\PYG{+w}{    }Tasks:\PYG{+w}{ }\PYG{l+m}{55}\PYG{+w}{ }\PYG{o}{(}limit:\PYG{+w}{ }\PYG{l+m}{1137}\PYG{o}{)}
-Memory:\PYG{+w}{ }\PYG{l+m}{8}.0M
-CGroup:\PYG{+w}{ }/system.slice/apache2.service
-\PYG{+w}{        }├─29435\PYG{+w}{ }/usr/sbin/apache2\PYG{+w}{ }\PYGZhy{}k\PYG{+w}{ }start
-\PYG{+w}{        }├─29437\PYG{+w}{ }/usr/sbin/apache2\PYG{+w}{ }\PYGZhy{}k\PYG{+w}{ }start
-\PYG{+w}{        }└─29438\PYG{+w}{ }/usr/sbin/apache2\PYG{+w}{ }\PYGZhy{}k\PYG{+w}{ }start
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Согласно этому выводу сервис успешно запустился. Но лучше ещё запросить страницу Apache, чтобы убедиться, что веб\sphinxhyphen{}сервер работает правильно.
-
-
-\subsection{3. Управление процессами Apache.}
-\label{\detokenize{docs:id5}}
-\sphinxAtStartPar
-Чтобы остановить веб\sphinxhyphen{}сервер, введите:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }stop\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Запустить:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }start\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Перезапуск:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }restart\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-По умолчанию Apache добавлен в автозагрузку.
-
-
-\subsection{4. Настройка виртуальных хостов.}
-\label{\detokenize{docs:id6}}
-\sphinxAtStartPar
-На веб\sphinxhyphen{}сервере Apache вы можете использовать виртуальные хосты (в Nginx это блоки server) для изоляции настроек и
-размещения нескольких доменов на одном сервере. Здесь используется условный домен example.com, который нужно заменить доменом вашего сайта.
-
-\sphinxAtStartPar
-В Ubuntu 22.04 веб\sphinxhyphen{}сервер Apache по умолчанию предоставляет один включенный виртуальный хост,
-который обслуживает каталог /var/www/html. Этого хватит для работы одного сайта, но если вы хотите
-разместить несколько сайтов, вам нужно создать новые виртуальные хосты. Создайте структуру каталогов
-в /var/www для сайта example.com, а /var/www/html оставьте как каталог по умолчанию, который будет
-обслуживаться, если запрос клиента не соответствует другим сайтам.
-
-\sphinxAtStartPar
-Создайте каталог для your\_domain:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }mkdir\PYG{+w}{ }/var/www/krudoc
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Затем укажите права на каталог с помощью переменной \$USER:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chown\PYG{+w}{ }\PYGZhy{}R\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}USER}:\PYG{n+nv}{\PYGZdl{}USER}\PYG{+w}{ }/var/www/krudoc
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Права должны быть предоставлены, если вы не меняли значение umask, которое устанавливает права файлов по умолчанию. Чтобы убедиться,
-что права предоставлены и пользователь может работать с файлами, нужно ввести команду:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYGZhy{}R\PYG{+w}{ }\PYG{l+m}{755}\PYG{+w}{ }/var/www/krudoc
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Далее копируем содержимое каталога  \sphinxtitleref{\textasciitilde{}/Doc/Artix\_Global/build/html} в  \sphinxtitleref{/var/www/krudoc}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }cp\PYG{+w}{ }\PYGZhy{}r\PYG{+w}{ }\PYGZti{}/Doc/Artix\PYGZus{}Global/build/html/.\PYG{+w}{  }/var/www/krudoc
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Нужно создать файл виртуального хоста с правильными директивами, чтобы Apache мог обслуживать этот контент.
-Чтобы напрямую не изменять файл конфигурации по умолчанию, расположенный
-в \sphinxtitleref{/etc/apache2/sites\sphinxhyphen{}available/000\sphinxhyphen{}default.conf}, мы создадим новый в \sphinxtitleref{/etc/apache2/sites\sphinxhyphen{}available/your\_domain.conf\textasciigrave{}}:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }nano\PYG{+w}{ }/etc/apache2/sites\PYGZhy{}available/krudoc.conf
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Вставьте в файл следующий блок настроек. Он похож на конфигурации по умолчанию, но содержит правильный домен и каталог:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZlt{}VirtualHost\PYG{+w}{ }*:80\PYGZgt{}
-\PYG{+w}{    }ServerAdmin\PYG{+w}{ }pk69@kruger.su
-\PYG{+w}{    }ServerName\PYG{+w}{ }krudoc
-\PYG{+w}{    }ServerAlias\PYG{+w}{ }www.krudoc
-\PYG{+w}{    }DocumentRoot\PYG{+w}{ }/var/www/krudoc
-\PYG{+w}{    }ErrorLog\PYG{+w}{ }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{APACHE\PYGZus{}LOG\PYGZus{}DIR}\PYG{l+s+si}{\PYGZcb{}}/error.log
-\PYG{+w}{    }CustomLog\PYG{+w}{ }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{APACHE\PYGZus{}LOG\PYGZus{}DIR}\PYG{l+s+si}{\PYGZcb{}}/access.log\PYG{+w}{ }combined
-\PYGZlt{}/VirtualHost\PYGZgt{}
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Обратите внимание, мы обновили DocumentRoot на наш новый каталог, а ServerAdmin на адрес электронной почты,
-к которому может получить доступ администратор сайта your\_domain. Также мы добавили две директивы: ServerName,
-которая устанавливает базовый домен, который должен соответствовать этому определению виртуального хоста,
-и ServerAlias \textendash{} определяет дополнительные имена, которые должны соответствовать базовому имени.
-
-\sphinxAtStartPar
-После того, как закончите, сохраните и закройте файл.
-
-\sphinxAtStartPar
-Включим файл с помощью a2ensite:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }a2ensite\PYG{+w}{ }krudoc.conf
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Отключите сайт по умолчанию, определенный в 000\sphinxhyphen{}default.conf:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }a2dissite\PYG{+w}{ }\PYG{l+m}{000}\PYGZhy{}default.conf
-\PYGZdl{}\PYG{+w}{ }systemctl\PYG{+w}{ }reload\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Далее проверим ошибки настроек:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }apache2ctl\PYG{+w}{ }configtest
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Вывод должен быть следующим:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }Syntax\PYG{+w}{ }OK
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Перезапустите Apache, чтобы изменения вступили в силу:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }restart\PYG{+w}{ }apache2
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Теперь Apache должен обслуживать ваше доменное имя. Для проверки перейдите по адресу \sphinxurl{http://krudoc}, вы должны увидеть что\sphinxhyphen{}то вроде этого:
-
-
-\subsection{5. Важные файлы и каталоги Apache.}
-\label{\detokenize{docs:id7}}
-\sphinxAtStartPar
-Контент
-
-\sphinxAtStartPar
-\#. \sphinxtitleref{/var/www/html}: Фактический веб\sphinxhyphen{}контент, который по умолчанию состоит только из стандартной
-страницы Apache (ранее вы её уже видели), обслуживается из каталога \sphinxtitleref{/var/www/html}. Это можно изменить,
-внеся корректировки в файлы конфигурации Apache.
-
-\sphinxAtStartPar
-Настройка сервера
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-\sphinxtitleref{/etc/apache2}: каталог конфигурации Apache. Все файлы настроек Apache находятся здесь.
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/apache2.conf}: основной файл настройки Apache. Его можно корректировать}
-\sphinxAtStartPar
-для внесения изменений в глобальную конфигурацию Apache. Этот файл отвечает за загрузку
-многих других файлов в каталоге конфигурации.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/ports.conf}: В этом файле указаны порты, которые прослушивает Apache.}
-\sphinxAtStartPar
-По умолчанию Apache прослушивает порт 80 и дополнительно порт 443, если включен SSL.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/sites\sphinxhyphen{}available/}: каталог, в котором могут храниться виртуальные хосты}
-\sphinxAtStartPar
-для каждого сайта. Apache не будет использовать файлы настроек из этого каталога,
-если они не связаны с каталогом sites\sphinxhyphen{}enabled. Обычно вся конфигурация блока выполняется
-в этом каталоге, а затем включается путем ссылки на другой каталог с помощью команды a2ensite.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/sites\sphinxhyphen{}enabled/}: каталог, в котором хранятся включенные виртуальные хосты}
-\sphinxAtStartPar
-для каждого сайта. Обычно они создаются по ссылке на файлы настроек из каталога sites\sphinxhyphen{}available
-с помощью команды \sphinxstyleemphasis{a2ensite}. Apache считывает конфигурационные файлы и ссылки, находящиеся
-в этом каталоге, при запуске или перезагрузке для компиляции полной настройки.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/conf\sphinxhyphen{}available/}, \sphinxtitleref{/etc/apache2/conf\sphinxhyphen{}enabled/}: Эти каталоги имеют те же отношения,}
-\sphinxAtStartPar
-что и каталоги \sphinxtitleref{sites\sphinxhyphen{}available\textasciigrave{}и \textasciigrave{}ites\sphinxhyphen{}enabled\textasciigrave{}} но используются для хранения фрагментов настроек,
-которые не принадлежат виртуальному хосту. Файлы в каталоге \sphinxtitleref{conf\sphinxhyphen{}available} можно включить
-с помощью команды \sphinxstyleemphasis{a2enconf}, а отключить \textendash{} \sphinxstyleemphasis{a2disconf}.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/etc/apache2/mods\sphinxhyphen{}available/}, \sphinxtitleref{/etc/apache2/mods\sphinxhyphen{}enabled/}: эти каталоги содержат доступные}
-\sphinxAtStartPar
-и включенные модули соответственно. Файлы, заканчивающиеся на .load, содержат фрагменты для
-загрузки определенных модулей, а которые заканчиваются на .conf, содержат настройки этих модулей.
-Модули можно включать и отключать с помощью команд \sphinxstyleemphasis{a2enmod} и \sphinxstyleemphasis{a2dismod}.
-
-\end{description}
-
-\end{enumerate}
-
-\sphinxAtStartPar
-Логи сервера
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/var/log/apache2/access.log}: каждый запрос к вашему веб\sphinxhyphen{}серверу записывается в этот лог по умолчанию,}
-\sphinxAtStartPar
-если Apache не настроен иначе.
-
-\end{description}
-
-\item {} \begin{description}
-\sphinxlineitem{\sphinxtitleref{/var/log/apache2/error.log}: по умолчанию все ошибки записываются в этот файл.}
-\sphinxAtStartPar
-Директива LogLevel в конфигурации Apache определяет, насколько подробную информацию будут содержать журналы ошибок.
-
-\end{description}
-
-\end{enumerate}
-
-\sphinxstepscope
-
-
-\chapter{Установка и настройка Gitea}
-\label{\detokenize{git:gitea}}\label{\detokenize{git::doc}}
-\sphinxAtStartPar
-Git должен уже быть установлен в системе \sphinxhyphen{}  \DUrole{xref,std,std-ref}{gitinst}
-
-\sphinxAtStartPar
-Ссылка на сайт с полной \sphinxhref{https://routerus.com/how-to-install-gitea-on-ubuntu-18-04/\#Настроить\_Gitea}{инструкцией}
-
-
-\section{1. Подготовка}
-\label{\detokenize{git:id2}}
-\sphinxAtStartPar
-Gitea поддерживает SQLite, PostgreSQL и MySQL / MariaDB в качестве серверной части базы данных.
-
-\sphinxAtStartPar
-Мы будем использовать SQLite в качестве базы данных для Gitea. Если SQLite не установлен в вашей
-системе Ubuntu, вы можете установить его, введя следующие команды от имени пользователя sudo :
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }apt\PYG{+w}{ }update
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }apt\PYG{+w}{ }install\PYG{+w}{ }sqlite3
-\end{sphinxVerbatim}
-
-
-\section{2. Установка Gitea}
-\label{\detokenize{git:id3}}
-\sphinxAtStartPar
-Проверьте установку, отобразив версию Git:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }git\PYG{+w}{ }\PYGZhy{}\PYGZhy{}version
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }git\PYG{+w}{ }version\PYG{+w}{ }\PYG{l+m}{2}.34.1
-\end{sphinxVerbatim}
-
-
-\section{3. Создайте пользователя Git}
-\label{\detokenize{git:git}}
-\sphinxAtStartPar
-Создайте нового системного пользователя, который будет запускать приложение Gitea, набрав:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }adduser\PYG{+w}{ }\PYGZhy{}\PYGZhy{}system\PYG{+w}{ }\PYGZhy{}\PYGZhy{}group\PYG{+w}{ }\PYGZhy{}\PYGZhy{}disabled\PYGZhy{}password\PYG{+w}{ }\PYGZhy{}\PYGZhy{}shell\PYG{+w}{ }/bin/bash\PYG{+w}{ }\PYGZhy{}\PYGZhy{}home\PYG{+w}{ }/home/git\PYG{+w}{ }\PYGZhy{}\PYGZhy{}gecos\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Git Version Control\PYGZsq{}}\PYG{+w}{ }git
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Команда создаст нового пользователя и группу с именем git и установит домашний каталог в /home/git . Результат будет выглядеть примерно так:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Adding system user `git\PYGZsq{} (UID 111) ...
-Adding new group `git\PYGZsq{} (GID 116) ...
-Adding new user `git\PYGZsq{} (UID 111) with group `git\PYGZsq{} ...
-Creating home directory `/home/git\PYGZsq{} ...
-\end{sphinxVerbatim}
-
-
-\section{4. Скачать бинарный файл Gitea}
-\label{\detokenize{git:id4}}
-\sphinxAtStartPar
-Посетите страницу загрузки Gitea и загрузите последнюю версию двоичного файла для вашей архитектуры.
-На момент написания последняя версия — 1.19.3. Если доступна новая версия, измените переменную VERSION в приведенной ниже команде.
-
-\sphinxAtStartPar
-Загрузите двоичный файл Gitea в каталог /tmp используя следующую команду wget :
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }wget\PYG{+w}{ }sudo\PYG{+w}{ }wget\PYG{+w}{ }\PYGZhy{}O\PYG{+w}{ }/tmp/gitea\PYG{+w}{ }https://dl.gitea.com/gitea/1.19.3/gitea\PYGZhy{}1.19.3\PYGZhy{}linux\PYGZhy{}amd64
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-gitea файл gitea можно запускать из любого места. Мы будем следовать соглашению и переместим двоичный файл в каталог \sphinxtitleref{/usr/local/bin} :
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }mv\PYG{+w}{ }/tmp/gitea\PYG{+w}{ }/usr/local/bin
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Сделайте двоичный исполняемый файл:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }+x\PYG{+w}{ }/usr/local/bin/gitea
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Выполните следующие команды, чтобы создать каталоги и установить необходимые разрешения и владение :
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }mkdir\PYG{+w}{ }\PYGZhy{}p\PYG{+w}{ }/var/lib/gitea/\PYG{o}{\PYGZob{}}custom,data,indexers,public,log\PYG{o}{\PYGZcb{}}
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chown\PYG{+w}{ }git:\PYG{+w}{ }/var/lib/gitea/\PYG{o}{\PYGZob{}}data,indexers,log\PYG{o}{\PYGZcb{}}
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYG{l+m}{750}\PYG{+w}{ }/var/lib/gitea/\PYG{o}{\PYGZob{}}data,indexers,log\PYG{o}{\PYGZcb{}}
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }mkdir\PYG{+w}{ }/etc/gitea
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chown\PYG{+w}{ }root:git\PYG{+w}{ }/etc/gitea
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYG{l+m}{770}\PYG{+w}{ }/etc/gitea
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Указанная выше структура каталогов рекомендована официальной документацией Gitea.
-Разрешения для каталога \sphinxtitleref{/etc/gitea} установлены на 770 чтобы мастер установки мог создать файл конфигурации.
-
-
-\section{5. Создайте файл модуля Systemd}
-\label{\detokenize{git:systemd}}
-\sphinxAtStartPar
-Gitea предоставляет файл модуля Systemd, который уже настроен в соответствии с нашей настройкой.
-Загрузите файл в каталог \sphinxtitleref{/etc/systemd/system/} , набрав:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }wget\PYG{+w}{ }https://raw.githubusercontent.com/go\PYGZhy{}gitea/gitea/master/contrib/systemd/gitea.service\PYG{+w}{ }\PYGZhy{}P\PYG{+w}{ }/etc/systemd/system/
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-После этого включите и запустите службу Gitea:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }daemon\PYGZhy{}reload
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }\PYG{n+nb}{enable}\PYG{+w}{ }\PYGZhy{}\PYGZhy{}now\PYG{+w}{ }gitea
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Убедитесь, что служба запущена успешно:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }status\PYG{+w}{ }gitea
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }gitea.service\PYG{+w}{ }\PYGZhy{}\PYG{+w}{ }Gitea\PYG{+w}{ }\PYG{o}{(}Git\PYG{+w}{ }with\PYG{+w}{ }a\PYG{+w}{ }cup\PYG{+w}{ }of\PYG{+w}{ }tea\PYG{o}{)}
-\PYG{+w}{    }Loaded:\PYG{+w}{ }loaded\PYG{+w}{ }\PYG{o}{(}/etc/systemd/system/gitea.service\PYG{p}{;}\PYG{+w}{ }enabled\PYG{p}{;}\PYG{+w}{ }vendor\PYG{+w}{ }preset:\PYG{+w}{ }enabled\PYG{o}{)}
-\PYG{+w}{    }Active:\PYG{+w}{ }active\PYG{+w}{ }\PYG{o}{(}running\PYG{o}{)}\PYG{+w}{ }since\PYG{+w}{ }Sat\PYG{+w}{ }\PYG{l+m}{2020}\PYGZhy{}01\PYGZhy{}04\PYG{+w}{ }\PYG{l+m}{21}:27:23\PYG{+w}{ }UTC\PYG{p}{;}\PYG{+w}{ }3s\PYG{+w}{ }ago
-Main\PYG{+w}{ }PID:\PYG{+w}{ }\PYG{l+m}{14804}\PYG{+w}{ }\PYG{o}{(}gitea\PYG{o}{)}
-\PYG{+w}{    }Tasks:\PYG{+w}{ }\PYG{l+m}{9}\PYG{+w}{ }\PYG{o}{(}limit:\PYG{+w}{ }\PYG{l+m}{1152}\PYG{o}{)}
-\PYG{+w}{    }CGroup:\PYG{+w}{ }/system.slice/gitea.service
-\PYG{+w}{            }└─14804\PYG{+w}{ }/usr/local/bin/gitea\PYG{+w}{ }web\PYG{+w}{ }\PYGZhy{}\PYGZhy{}config\PYG{+w}{ }/etc/gitea/app.ini
-...
-\end{sphinxVerbatim}
-
-
-\section{6. Настроить Gitea}
-\label{\detokenize{git:id5}}
-\sphinxAtStartPar
-Теперь, когда Gitea загружена и запущена, пора завершить установку через веб\sphinxhyphen{}интерфейс.
-По умолчанию Gitea прослушивает подключения через порт 3000 на всех сетевых интерфейсах.
-Если на вашем сервере работает брандмауэр UFW , вам нужно открыть порт Gitea:
-
-\sphinxAtStartPar
-Откройте браузер, введите \sphinxurl{http://YOUR\_DOMAIN\_IR\_IP:3000}
-
-\sphinxAtStartPar
-Настройки базы данных:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Тип базы данных: SQLite3
-
-\item {} 
-\sphinxAtStartPar
-Путь: используйте абсолютный путь, \sphinxtitleref{/var/lib/gitea/data/gitea.db}
-
-\end{enumerate}
-
-\sphinxAtStartPar
-Общие настройки приложения:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Заголовок сайта: введите название вашей организации.
-
-\item {} 
-\sphinxAtStartPar
-Корневой путь репозитория: оставьте значение по умолчанию \sphinxtitleref{/home/git/gitea\sphinxhyphen{}repositories} .
-
-\item {} 
-\sphinxAtStartPar
-Корневой путь Git LFS: оставьте значение по умолчанию \sphinxtitleref{/var/lib/gitea/data/lfs} .
-
-\item {} 
-\sphinxAtStartPar
-Запуск от имени пользователя: git
-
-\item {} 
-\sphinxAtStartPar
-Домен SSH\sphinxhyphen{}сервера: введите IP\sphinxhyphen{}адрес вашего домена или сервера.
-
-\item {} 
-\sphinxAtStartPar
-Порт SSH: 22, измените его, если SSH прослушивает другой порт
-
-\item {} 
-\sphinxAtStartPar
-Порт прослушивания HTTP Gitea: 3000
-
-\item {} 
-\sphinxAtStartPar
-Базовый URL Gitea: используйте http и IP\sphinxhyphen{}адрес вашего домена или сервера.
-
-\item {} 
-\sphinxAtStartPar
-Путь к \sphinxtitleref{/var/lib/gitea/log} : оставьте значение по умолчанию \sphinxtitleref{/var/lib/gitea/log}
-
-\end{enumerate}
-
-\sphinxAtStartPar
-Вы можете изменить настройки в любое время, отредактировав файл конфигурации Gitea.
-После этого нажмите кнопку «Установить Gitea». Установка происходит мгновенно.
-По завершении вы будете перенаправлены на страницу входа.
-Щелкните ссылку «Зарегистрироваться сейчас». Первый зарегистрированный пользователь
-автоматически добавляется в группу администратора.
-
-\sphinxAtStartPar
-Измените разрешения файла конфигурации Gitea на доступ только для чтения, используя:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYG{l+m}{750}\PYG{+w}{ }/etc/gitea
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYG{l+m}{640}\PYG{+w}{ }/etc/gitea/app.ini
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Вот и все. Gitea установлена на вашем компьютере с Ubuntu.
-
-
-\section{7. Обновление Gitea}
-\label{\detokenize{git:id6}}
-\sphinxAtStartPar
-Чтобы обновить Gitea до последней версии, просто скачайте и замените двоичный файл.
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Остановите сервис Gitea:
-
-\end{enumerate}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }stop\PYG{+w}{ }gitea
-\end{sphinxVerbatim}
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\setcounter{enumi}{1}
-\item {} 
-\sphinxAtStartPar
-Загрузите последнюю версию Gitea и переместите ее в каталог /usr/local/bin :
-
-\end{enumerate}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }\PYG{n+nv}{VERSION}\PYG{o}{=}\PYGZlt{}THE\PYGZus{}LATEST\PYGZus{}GITEA\PYGZus{}VERSION\PYGZgt{}
-\PYGZdl{}\PYG{+w}{ }wget\PYG{+w}{ }\PYGZhy{}O\PYG{+w}{ }/tmp/gitea\PYG{+w}{ }https://dl.gitea.io/gitea/\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{VERSION}\PYG{l+s+si}{\PYGZcb{}}/gitea\PYGZhy{}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{VERSION}\PYG{l+s+si}{\PYGZcb{}}\PYGZhy{}linux\PYGZhy{}amd64
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }mv\PYG{+w}{ }/tmp/gitea\PYG{+w}{ }/usr/local/bin
-\end{sphinxVerbatim}
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\setcounter{enumi}{2}
-\item {} 
-\sphinxAtStartPar
-Сделайте двоичный исполняемый файл:
-
-\end{enumerate}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }chmod\PYG{+w}{ }+x\PYG{+w}{ }/usr/local/bin/gitea
-\end{sphinxVerbatim}
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\setcounter{enumi}{3}
-\item {} 
-\sphinxAtStartPar
-Перезапустите сервис Gitea:
-
-\end{enumerate}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYGZdl{}\PYG{+w}{ }sudo\PYG{+w}{ }systemctl\PYG{+w}{ }restart\PYG{+w}{ }gitea
-\end{sphinxVerbatim}
-
-\sphinxstepscope
-
-
-\chapter{Файлы}
-\label{\detokenize{files:id1}}\label{\detokenize{files::doc}}\begin{quote}
-
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Скачать эту документацию в pdf}}.
-\end{quote}
 
 
 \chapter{Индексы и таблицы}
