@@ -23,7 +23,7 @@ const initialiseBizStyle = () => {
 }
 
 window.addEventListener("resize",
-  () => (document.querySelector("li.nav-item-0 a").innerText = (window.innerWidth <= 776) ? "Top" : "документация Интеграция Artix-УНФ 0.91")
+  () => (document.querySelector("li.nav-item-0 a").innerText = (window.innerWidth <= 776) ? "Top" : "документация Интеграция Artix-УНФ 0.92")
 )
 
 if (document.readyState !== "loading") initialiseBizStyle()
