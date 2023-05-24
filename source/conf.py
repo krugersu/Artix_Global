@@ -9,7 +9,7 @@
 project = 'Интеграция Artix-УНФ'
 copyright = '2023, PashkovKV'
 author = 'PashkovKV'
-release = '1.05'
+release = '1.06'
 
 #
 # -- General configuration ---------------------------------------------------
