@@ -1,0 +1,140 @@
+
+
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Работа с весами &#8212; документация Интеграция Artix-УНФ 0.85</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Настройки" href="setting.html" />
+    <link rel="prev" title="Внешняя программма" href="prox.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="setting.html" title="Настройки"
+             accesskey="N">вперёд</a> |</li>
+        <li class="right" >
+          <a href="prox.html" title="Внешняя программма"
+             accesskey="P">назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.85</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Работа с весами</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>Работа с весами<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<figure class="align-default">
+<img alt="_images/tip.png" src="_images/tip.png" />
+</figure>
+<hr class="docutils" />
+<figure class="align-default">
+<img alt="_images/load.png" src="_images/load.png" />
+</figure>
+<p>Пример файла выгрузки формируемый из 1С</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="mi">82</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+<span class="mi">2082</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">0.006</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+<span class="mi">3082</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">0.008</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+<span class="mi">4082</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">0.012</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+<span class="mi">5082</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">0.02</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+<span class="mi">6082</span><span class="p">;</span><span class="n">Шейки</span> <span class="n">цыплят</span> <span class="n">в</span><span class="o">/</span><span class="n">к</span><span class="p">;;</span><span class="mi">550</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">0.014</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">10007</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">;</span><span class="mf">01.01.01</span>
+</pre></div>
+</div>
+<figure class="align-default" style="width: 150%">
+<img alt="_images/set4.png" src="_images/set4.png" />
+</figure>
+<p class="rubric">Настройка автоматического загрузчика</p>
+<p><em>Указываем путь до файлов лога, включаем автоматический режим и устанавливаем интервал запуска.</em></p>
+<figure class="align-default">
+<img alt="_images/set1.png" src="_images/set1.png" />
+</figure>
+<p><em>Формируем список весов для загрузки</em></p>
+<figure class="align-default">
+<img alt="_images/set2.png" src="_images/set2.png" />
+</figure>
+<p><em>Настройка весов</em></p>
+<figure class="align-default">
+<img alt="_images/set3.png" src="_images/set3.png" />
+</figure>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Оглавление</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Работа с весами</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Установка и настройка Gitea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="setting.html" title="Настройки"
+             >вперёд</a> |</li>
+        <li class="right" >
+          <a href="prox.html" title="Внешняя программма"
+             >назад</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.85</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Работа с весами</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, PashkovKV.
+    </div>
+  </body>
+</html>

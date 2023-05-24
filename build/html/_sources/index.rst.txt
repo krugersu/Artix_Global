@@ -14,6 +14,7 @@
    description
    unf
    prox
+   scal
    setting
    docs
    git
