@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Дополнительные материалы: &#8212; документация Интеграция Artix-УНФ 0.92</title>
+    <title>4. Дополнительные материалы: &#8212; документация Интеграция Artix-УНФ 1.0</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -19,7 +19,7 @@
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
     <link rel="next" title="Сайт с документацией" href="docs.html" />
-    <link rel="prev" title="Добавление группы сертификатов со сроком действия через REST API." href="sert.html" />
+    <link rel="prev" title="3. Работа с весами" href="scal.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
     <script src="_static/css3-mediaqueries.js"></script>
@@ -35,11 +35,10 @@
           <a href="docs.html" title="Сайт с документацией"
              accesskey="N">вперёд</a> |</li>
         <li class="right" >
-          <a href="sert.html" title="Добавление группы сертификатов со сроком действия через REST API."
+          <a href="scal.html" title="3. Работа с весами"
              accesskey="P">назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.92</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="setting.html" accesskey="U">Настройки</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Дополнительные материалы:</a></li> 
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">4. </span>Дополнительные материалы:</a></li> 
       </ul>
     </div>  
 
@@ -49,9 +48,9 @@
           <div class="body" role="main">
             
   <section id="id1">
-<h1>Дополнительные материалы:<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">4. </span>Дополнительные материалы:<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
 <section id="id2">
-<h2>1. Список директорий и файлов  основных настроек.<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.1. </span>1. Список директорий и файлов  основных настроек.<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><dl class="simple">
 <dt>/linuxcash/cash/conf/</dt><dd><ol class="arabic simple">
@@ -83,7 +82,7 @@
 включая “Подключаемое оборудование”, проверяем и при необходимости вносим правки.</p>
 </section>
 <section id="id3">
-<h2>2. Особенности настройки “Сбербанк”<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.2. </span>2. Особенности настройки “Сбербанк”<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
 <p>Для работы с процессингом сбербанк необходимо установить пакет - <em>artix45-plugin-sb</em>.
 В директорию <strong>”/linuxcash/cash/paysystems/sb/“</strong> разместить файлы приложения сбербанк полученного от сотрудников банка. Настроить подключение ПинПад согласно инструкции банка (pinpad.ini). Следует обратить внимание что при подключении пинпад через USB, необходимо правильно создать символьную ссылку на устройство:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">serial</span><span class="o">/</span><span class="n">by</span><span class="o">-</span><span class="nb">id</span><span class="o">/</span><span class="p">{</span><span class="n">Имя_Устройства</span><span class="p">}</span> <span class="o">/</span><span class="n">linuxcash</span><span class="o">/</span><span class="n">cash</span><span class="o">/</span><span class="n">paysystems</span><span class="o">/</span><span class="n">sb</span><span class="o">/</span><span class="n">ttyS99</span>
@@ -92,13 +91,13 @@
 <p>Для работы с терминалом PAX SP30 - дополнительно установить пакет <em>ttypos</em></p>
 </section>
 <section id="yuki">
-<h2>3. Ссылка на скачивание дистрибутива yuki<a class="headerlink" href="#yuki" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.3. </span>3. Ссылка на скачивание дистрибутива yuki<a class="headerlink" href="#yuki" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><p><a class="reference external" href="http://update.artix.su/static/yuki/">http://update.artix.su/static/yuki/</a></p>
 </div></blockquote>
 </section>
 <section id="id4">
-<h2>4. Остатки<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.4. </span>4. Остатки<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
 <p>в конфигурационном файле /linuxcash/cash/conf/ncash.ini
 Изменить:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">;</span><span class="n">calculateRemainsOfGoods</span> <span class="o">=</span> <span class="n">false</span>
@@ -118,7 +117,7 @@
 оставляем <strong>пустым!!!</strong> (не «0»!!!).</p>
 </section>
 <section id="id5">
-<h2>5. Дисконтные карты (создание)<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.5. </span>5. Дисконтные карты (создание)<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>создать счет на бонусном сервере</p></li>
@@ -131,13 +130,13 @@
 </div></blockquote>
 </section>
 <section id="id6">
-<h2>6. Настройка действий и контекста клавиш<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.6. </span>6. Настройка действий и контекста клавиш<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
 <figure class="align-default">
 <img alt="_images/key.jpg" src="_images/key.jpg" />
 </figure>
 </section>
 <section id="id7">
-<h2>7. Конфигурирование дистконтной системы<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.7. </span>7. Конфигурирование дистконтной системы<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
 <p>Ссылка на сайт с полной <a class="reference external" href="https://docs.artix.su/pages/viewpage.action?pageId=27531279#id-Встроеннаядисконтнаяподсистема-Конфигурирование">инструкцией</a></p>
 <p>Дисконтная система поставляется отдельным пакетом artix45-discountsystem.</p>
 <p>Наличие минимальной цены влияет на методы распределения скидок на чек и наборы.
@@ -262,16 +261,32 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h3><a href="index.html">Оглавление</a></h3>
-<p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
-<ul class="current">
+<p class="caption" role="heading"><span class="caption-text">Описание:</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="description.html">Общее описание</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unf.html">Реализация в УНФ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prox.html">Внешняя программма</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scal.html">Работа с весами</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="setting.html">Настройки</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs.html">Сайт с документацией</a></li>
-<li class="toctree-l1"><a class="reference internal" href="git.html">Установка и настройка Gitea</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files.html">Файлы</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Настройки</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="kass.html">1. Порядок внедрения касс в работу с Артикс:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id2">1.1. 1. Создать магазин + касса на сервере.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kass.html#id3">1.2. 2. Настройка ПОС</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sert.html">2. Добавление группы сертификатов со сроком действия через REST API.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scal.html">3. Работа с весами</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Дополнительные материалы:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.1. 1. Список директорий и файлов  основных настроек.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.2. 2. Особенности настройки “Сбербанк”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yuki">4.3. 3. Ссылка на скачивание дистрибутива yuki</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.4. 4. Остатки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4.5. 5. Дисконтные карты (создание)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4.6. 6. Настройка действий и контекста клавиш</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">4.7. 7. Конфигурирование дистконтной системы</a></li>
+</ul>
+</li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -298,11 +313,10 @@
           <a href="docs.html" title="Сайт с документацией"
              >вперёд</a> |</li>
         <li class="right" >
-          <a href="sert.html" title="Добавление группы сертификатов со сроком действия через REST API."
+          <a href="scal.html" title="3. Работа с весами"
              >назад</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 0.92</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="setting.html" >Настройки</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Дополнительные материалы:</a></li> 
+        <li class="nav-item nav-item-0"><a href="index.html">документация Интеграция Artix-УНФ 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">4. </span>Дополнительные материалы:</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

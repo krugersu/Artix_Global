@@ -8,16 +8,38 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: Содержание:
+   :numbered:
+   :caption: Описание:
 
 
    description
    unf
    prox
-   scal
-   setting
+   files
+   
+.. setting
+.. toctree::
+   :maxdepth: 2
+   :caption: Настройки
+
+
+   kass
+   sert
+   scal   
+   additional
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Настройки сервера
+
    docs
    git
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Прочее  
+
    files
 
 
